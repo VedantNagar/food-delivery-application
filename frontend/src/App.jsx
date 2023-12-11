@@ -1,19 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import Navbar from "./Homepage/Hero-section/Navbar";
+import "./index.css";
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <h1>Group Project</h1>
-        <h2>Araj Kshitij Vedant</h2>
-      </div>
-    </>
-  )
+    return (
+        <div className="wrapper">
+            <Navbar />
+        </div>
+    );
 }
 
-export default App
+export default App;
