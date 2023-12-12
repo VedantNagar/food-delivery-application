@@ -1,6 +1,9 @@
 import classes from "./Signin.module.css";
 import heroImg from "../../images/hero-section-landing.svg";
 import { Button } from "@mui/material";
+import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
+import GoogleIcon from "@mui/icons-material/Google";
+import AppleIcon from "@mui/icons-material/Apple";
 const Signin = () => {
     const submitHandler = (e) => {
         e.preventDefault();
@@ -34,13 +37,42 @@ const Signin = () => {
                         fontSize: "1.175rem",
                         textTransform: "none",
                         padding: "13px 110px",
-                        width: "19rem"
+                        width: "19rem",
                     }}
                     disableElevation
                     onClick={submitHandler}
                 >
                     Continue
                 </Button>
+                <div className={classes.icons}>
+                    <FacebookTwoToneIcon
+                        style={{
+                            width: "3rem",
+                            height: "3rem",
+                            border: "1px solid black",
+                            borderRadius: "100%",
+                        }}
+                    />
+                    <GoogleIcon
+                        style={{
+                            width: "3rem",
+                            height: "3rem",
+                            border: "1px solid black",
+                            borderRadius: "100%",
+                        }}
+                    />
+                    <AppleIcon
+                        style={{
+                            width: "3rem",
+                            height: "3rem",
+                            border: "1px solid black",
+                            borderRadius: "100%",
+                        }}
+                    />
+                </div>
+                    <p>
+                        Don't have an account? <a href="#">Sign up</a>
+                    </p>
             </div>
         </div>
     );
