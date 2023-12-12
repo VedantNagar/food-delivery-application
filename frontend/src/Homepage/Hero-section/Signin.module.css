@@ -1,0 +1,41 @@
+.hero {
+    /* border: 2px solid blue; */
+    margin-top: 6rem;
+    display: flex;
+}
+h1 {
+    font-size: 3.75rem;
+    font-family: "Roboto", sans-serif;
+    color: #2f2e41;
+}
+h3 {
+    font-size: 1.875rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+}
+.left {
+    border: 2px solid rgb(0, 128, 124);
+    flex: 1;
+}
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+    border: 2px solid pink;
+    align-items: center;
+    margin-top: 2rem;
+}
+.formAction {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+input{
+    width: 19rem;
+    padding: 1rem;
+    background-color: #7e7c7c57;
+    color: #7E7C7C;
+    border: 1px solid grey;
+    border-radius: 0.25rem;
+}
