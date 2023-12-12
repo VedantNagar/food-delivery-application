@@ -1,5 +1,5 @@
 .hero {
-    /* border: 2px solid blue; */
+    border: 2px solid blue;
     margin-top: 6rem;
     display: flex;
 }
@@ -34,8 +34,19 @@ h3 {
 input{
     width: 19rem;
     padding: 1rem;
-    background-color: #7e7c7c57;
+    background-color: #ECECEC;
     color: #7E7C7C;
-    border: 1px solid grey;
+    border: 1px solid #AFA9A9;
     border-radius: 0.25rem;
+}
+.icons{
+    display: flex;
+    gap: 2rem;
+}
+.right a{
+    color: #256CD7;
+    font-family: 'Roboto';
+}
+.right p{
+    font-family: 'Roboto';
 }
