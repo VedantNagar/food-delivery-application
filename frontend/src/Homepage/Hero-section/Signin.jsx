@@ -37,7 +37,6 @@ const Signin = () => {
                         fontSize: "1.175rem",
                         textTransform: "none",
                         padding: "13px 110px",
-                        // width: "19rem",
                         
                     }}
                     sx={{
