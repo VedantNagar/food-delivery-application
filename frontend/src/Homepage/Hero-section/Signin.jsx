@@ -13,7 +13,7 @@ const Signin = () => {
             <div className={classes.left}>
                 <h1>Welcome Back.</h1>
                 <h3>Let's sign you in.</h3>
-                <img src={heroImg} alt="not found" />
+                <img src={heroImg} alt="not found" className={classes.signInImg}/>
             </div>
             <div className={classes.right}>
                 <form action="#" className={classes.formAction}>
@@ -37,7 +37,17 @@ const Signin = () => {
                         fontSize: "1.175rem",
                         textTransform: "none",
                         padding: "13px 110px",
-                        width: "19rem",
+                        // width: "19rem",
+                        
+                    }}
+                    sx={{
+                        width:{
+                            xs:"17rem",
+                            sm:"17rem",
+                            md: "19rem",
+                            lg:"19rem",
+                            xl:"19rem"
+                        }
                     }}
                     disableElevation
                     onClick={submitHandler}
