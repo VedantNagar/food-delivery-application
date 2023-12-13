@@ -46,7 +46,9 @@ li {
 
 .navBtn {
     display: none;
+    cursor: pointer;
 }
+
 
 @media (max-width: 1024px) {
     .navBtn {
@@ -56,6 +58,7 @@ li {
         display: flex;
         flex-direction: column;
         align-items: center;
+        
     }
     nav {
         display: flex;
