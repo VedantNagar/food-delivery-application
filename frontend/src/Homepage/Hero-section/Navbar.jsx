@@ -1,12 +1,12 @@
 import classes from "./Navbar.module.css";
 import logo from "../../images/logo.svg";
-import MenuIcon from "@mui/icons-material/Menu";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { useState } from "react";
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
-    }
+    };
     return (
         <header>
             <nav>
@@ -19,12 +19,21 @@ const Navbar = () => {
                         />
                         <h2>Fudo</h2>
                     </div>
-                    <button className={classes.navBtn} onClick={toggleMenu}>
-                        <MenuIcon />
-                    </button>
+                    <div className={classes.navBtn} onClick={toggleMenu}>
+                        <MenuRoundedIcon
+                            size="large"
+                            style={{ borderRadius: "1.5rem" }}
+                        />
+                    </div>
                 </div>
                 <div className={classes.right}>
-                    <ul className={isMenuOpen ? `${classes.right}`: `${classes.right} ${classes.hide}`}>
+                    <ul
+                        className={
+                            isMenuOpen
+                                ? `${classes.right}`
+                                : `${classes.hide}`
+                        }
+                    >
                         <li>
                             <a href="#">Sign in</a>
                         </li>
