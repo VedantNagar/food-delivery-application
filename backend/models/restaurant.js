@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const restaurantSchema = new mongoose.model({
-    desription:{
+    desription:[{
         name:{
             type:string,
             required:true
@@ -18,9 +18,23 @@ const restaurantSchema = new mongoose.model({
             type:string,
             required:true
         },
-        menu:{
-
-        },
+        menu:[{
+            name:{
+                type:string,
+                required:true
+            },
+            about:{
+                type:String,
+                required:true
+            },
+            price:{
+                type:Number,
+                required:true
+            },
+            image:{
+                type:String,
+            }
+        }],
         rating:{
             type:Number,
             default:3
@@ -29,8 +43,11 @@ const restaurantSchema = new mongoose.model({
             type:string,
             default:''
         }
-    },
-    orderID:mongoose.Schema.Types.ObjectId
+    }],
+    orderID:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:false
+    }
 })
 
 mongoose.export = mongoose.model('restaurant',restaurantSchema)
