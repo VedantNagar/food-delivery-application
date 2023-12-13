@@ -31,7 +31,7 @@ const Navbar = () => {
                         className={
                             isMenuOpen
                                 ? `${classes.right}`
-                                : `${classes.right} ${classes.hide}`
+                                : `${classes.hide}`
                         }
                     >
                         <li>
