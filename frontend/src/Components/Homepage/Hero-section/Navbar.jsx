@@ -1,5 +1,5 @@
 import classes from "./Navbar.module.css";
-import logo from "../../images/logo.svg";
+import logo from "../../../images/logo.svg";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { useState } from "react";
 const Navbar = () => {
