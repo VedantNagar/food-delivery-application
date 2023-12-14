@@ -1,5 +1,5 @@
 import classes from "./Signin.module.css";
-import heroImg from "../../images/hero-section-landing.svg";
+import heroImg from "../../../images/hero-section-landing.svg";
 import { Button } from "@mui/material";
 import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
 import GoogleIcon from "@mui/icons-material/Google";
