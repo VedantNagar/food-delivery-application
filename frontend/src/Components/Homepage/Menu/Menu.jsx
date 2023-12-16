@@ -4,6 +4,7 @@ import pizzaIcon from "../../../images/pizza-vector.svg";
 import ramenIcon from "../../../images/ramen-vector.svg";
 import cupCakeIcon from "../../../images/muffin-vector.svg";
 import iceCreamIcon from "../../../images/iceCream-vector.svg";
+import Carousel from "./Carousel";
 const Menu = () => {
     return (
         <div className={classes.container}>
@@ -35,7 +36,9 @@ const Menu = () => {
                         <h3>Ice Cream</h3>
                     </div>
                 </div>
-                <div className={classes.right}></div>
+                <div className={classes.right}>
+                    <Carousel />
+                </div>
             </div>
         </div>
     );
