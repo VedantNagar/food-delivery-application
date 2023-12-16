@@ -1,7 +1,7 @@
 import classes from "./Services.module.css";
-import service1 from "../../images/service-1.svg";
-import service2 from "../../images/service-2.svg";
-import service3 from "../../images/service-3.svg";
+import service1 from "../../../images/service-1.svg"
+import service2 from "../../../images/service-2.svg";
+import service3 from "../../../images/service-3.svg";
 const Services = () => {
     return (
         <div className={classes.container}>

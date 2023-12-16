@@ -1,5 +1,6 @@
 .container {
-    margin-bottom: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 10rem;
     padding-bottom: 1rem;
 }
 .container .header {
@@ -44,6 +45,7 @@
 @media (max-width: 1024px){
     .container{
         margin-top: 2rem;
+        margin-bottom: 5rem;
     }
     .container .header {
         font-size: 1rem;
