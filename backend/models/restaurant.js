@@ -1,53 +1,52 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const restaurantSchema = new mongoose.model({
-    desription:[{
-        name:{
-            type:string,
-            required:true
+const restaurantSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    about: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: [String]
+    },
+    menu: [{
+        name: {
+            type: String,
         },
-        about:{
-            type:string,
-            required:true
+        about: {
+            type: String,
         },
-        address:{
-            type:string,
-            required:true
+        price: {
+            type: Number,
         },
-        phone:{
-            type:string,
-            required:true
-        },
-        menu:[{
-            name:{
-                type:string,
-                required:true
-            },
-            about:{
-                type:String,
-                required:true
-            },
-            price:{
-                type:Number,
-                required:true
-            },
-            image:{
-                type:String,
-            }
-        }],
-        rating:{
-            type:Number,
-            default:3
-        },
-        opening_hours:{
-            type:string,
-            default:''
+        image: {
+            type: String,
         }
     }],
-    orderID:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:false
+    rating: {
+        type: Number,
+        default: 3
+    },
+    opening_hours: {
+        type: String,
+        default: ''
+    },
+    orderID: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false
     }
-})
+});
 
-mongoose.export = mongoose.model('restaurant',restaurantSchema)
+// Use mongoose.model to create the model and export it
+module.exports = mongoose.model('restaurantModel', restaurantSchema);
