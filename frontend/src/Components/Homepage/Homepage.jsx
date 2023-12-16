@@ -1,5 +1,6 @@
 import Navbar from "./Hero-section/Navbar";
 import Signin from "./Hero-section/Signin";
+import Menu from "./Menu/Menu";
 import Services from "./Services/Services";
 
 const Homepage = () => {
@@ -8,6 +9,7 @@ const Homepage = () => {
             <Navbar />
             <Signin />
             <Services />
+            <Menu />
         </>
     );
 };
