@@ -12,7 +12,9 @@ const port = process.env.PORT || 8000;
 const start = async() => {
     try {
         //connect db
-        connectDB(process.env.MONGO_URI)
+        await connectDB(process.env.MONGO_URI)
+        
+        console.log("connected")
         //start server
         app.listen(port,() => {
             console.log("server is running on port 8000")
