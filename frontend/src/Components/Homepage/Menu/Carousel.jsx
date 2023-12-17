@@ -32,6 +32,7 @@ export default function Carousel() {
                 pagination={true}
                 modules={[EffectCoverflow, Pagination]}
                 className="mySwiper"
+                loop={true}
             >
                 <SwiperSlide>
                     <img src={food1} alt="not found"></img>
