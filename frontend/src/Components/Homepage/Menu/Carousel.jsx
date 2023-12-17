@@ -1,15 +1,13 @@
-import React, { useRef, useState } from "react";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/effect-cards";
 
-import "./styles.css";
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
 
-// import required modules
-import { EffectCards } from "swiper/modules";
+import './styles.css';
+
+import { EffectCoverflow, Pagination } from 'swiper/modules';
 import food1 from "../../../images/slider_images/food-1.jpg";
 import food2 from "../../../images/slider_images/food-2.jpg";
 import food3 from "../../../images/slider_images/food-3.jpg";
@@ -20,9 +18,19 @@ export default function Carousel() {
     return (
         <div>
             <Swiper
-                effect={"cards"}
+                effect={'coverflow'}
                 grabCursor={true}
-                modules={[EffectCards]}
+                centeredSlides={true}
+                slidesPerView={'auto'}
+                coverflowEffect={{
+                  rotate: 50,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: true,
+                }}
+                pagination={true}
+                modules={[EffectCoverflow, Pagination]}
                 className="mySwiper"
             >
                 <SwiperSlide>
