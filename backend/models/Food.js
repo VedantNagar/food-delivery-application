@@ -5,9 +5,6 @@ const foodSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    restarant:{
-        type:mongoose.Schema.Types.ObjectId
-    },
     about:{
         type:string,
         required:true
@@ -15,10 +12,13 @@ const foodSchema = new mongoose.Schema({
     image:{
         type:String
     },
+    category: {
+        type: String,
+    },
     price:{
         type:Number,
         required:true
     }
 })
 
-module.exports = mongoose.model('food',foodSchema)
+module.exports = mongoose.model('foodModal',foodSchema)
