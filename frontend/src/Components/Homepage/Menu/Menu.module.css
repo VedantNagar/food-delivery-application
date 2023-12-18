@@ -1,4 +1,6 @@
-
+.container{
+    margin-bottom: 15rem;
+}
 .container .header {
     font-family: 'Poppins';
     text-transform: uppercase;

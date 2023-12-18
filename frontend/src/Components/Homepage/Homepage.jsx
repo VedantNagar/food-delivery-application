@@ -1,3 +1,4 @@
+import Footer from "./Footer/Footer";
 import Navbar from "./Hero-section/Navbar";
 import Signin from "./Hero-section/Signin";
 import Menu from "./Menu/Menu";
@@ -10,6 +11,7 @@ const Homepage = () => {
             <Signin />
             <Services />
             <Menu />
+            <Footer/>
         </>
     );
 };
