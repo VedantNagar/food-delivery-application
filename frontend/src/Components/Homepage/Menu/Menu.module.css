@@ -81,3 +81,19 @@
     }
     
 }
+@media(max-width: 425px){
+    .container{
+        margin-bottom: 5rem;
+    }
+    .container .header h1{
+        font-size: 1.25rem;
+    }
+}
+@media(max-width: 768px){
+    .container{
+        margin-bottom: 8rem;
+    }
+    .container .header h1{
+        font-size: 1.25rem;
+    }
+}
