@@ -1,6 +1,8 @@
 footer{
     display: flex;
     font-family: 'Poppins';
+    width: 85vw;
+    margin: 0 auto;
 }
 .left{
     display: flex;
