@@ -2,7 +2,7 @@ import classes from "./Navbar.module.css";
 import logo from "../../../images/logo.svg";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { useState } from "react";
-const Navbar = () => {
+const Navbar = ({ list }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -29,23 +29,16 @@ const Navbar = () => {
                 <div className={classes.right}>
                     <ul
                         className={
-                            isMenuOpen
-                                ? `${classes.right}`
-                                : `${classes.hide}`
+                            isMenuOpen ? `${classes.right}` : `${classes.hide}`
                         }
                     >
-                        <li>
-                            <a href="#">Sign in</a>
-                        </li>
-                        <li>
-                            <a href="#">Services</a>
-                        </li>
-                        <li>
-                            <a href="#">Menu</a>
-                        </li>
-                        <li>
-                            <a href="#">Contact</a>
-                        </li>
+                        {list.map((item) => {
+                            return (
+                                <li key={item.title}>
+                                    <a href="#">{item.title}</a>
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div>
             </nav>

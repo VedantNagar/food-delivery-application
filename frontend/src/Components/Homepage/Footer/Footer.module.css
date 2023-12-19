@@ -1,6 +1,10 @@
 footer{
     display: flex;
     font-family: 'Poppins';
+    width: 85vw;
+    margin: 0 auto;
+    padding: 1rem;
+    color: white;
 }
 .left{
     display: flex;
@@ -13,6 +17,7 @@ footer{
     width: 20rem;
 }
 .logo .img{
+    border-radius:0 0.5rem 0 0.5rem ;
     width: 2rem;
     height: 2rem;
 }

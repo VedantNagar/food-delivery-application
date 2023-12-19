@@ -5,6 +5,14 @@ import ramenIcon from "../../../images/ramen-vector.svg";
 import cupCakeIcon from "../../../images/muffin-vector.svg";
 import iceCreamIcon from "../../../images/iceCream-vector.svg";
 import Carousel from "./Carousel";
+import MenuBtn from "./MenuBtn"
+const btnItem = [
+    { img: burgerIcon, title: "Burger" },
+    { img: pizzaIcon, title: "Pizza" },
+    { img: ramenIcon, title: "Ramen" },
+    { img: cupCakeIcon, title: "Cupcake" },
+    { img: iceCreamIcon, title: "Ice Cream" },
+];
 const Menu = () => {
     return (
         <div className={classes.container}>
@@ -15,26 +23,9 @@ const Menu = () => {
             </h1>
             <div className={classes.innerContainer}>
                 <div className={classes.left}>
-                    <div className={`${classes.menuBtn}`}>
-                        <img src={burgerIcon} alt="not found" />
-                        <h3>Burger</h3>
-                    </div>
-                    <div className={`${classes.menuBtn}`}>
-                        <img src={pizzaIcon} alt="not found" />
-                        <h3>Pizza</h3>
-                    </div>
-                    <div className={`${classes.menuBtn}`}>
-                        <img src={cupCakeIcon} alt="not found" />
-                        <h3>Cupcake</h3>
-                    </div>
-                    <div className={`${classes.menuBtn}`}>
-                        <img src={ramenIcon} alt="not found" />
-                        <h3>Ramen</h3>
-                    </div>
-                    <div className={`${classes.menuBtn}`}>
-                        <img src={iceCreamIcon} alt="not found" />
-                        <h3>Ice Cream</h3>
-                    </div>
+                    {btnItem.map((item)=>{
+                        return <MenuBtn img={item.img} title={item.title} key={item.title}/>
+                    })}
                 </div>
                 <div className={classes.right}>
                     <Carousel />
