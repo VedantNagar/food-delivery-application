@@ -34,7 +34,7 @@ const Navbar = ({ list }) => {
                     >
                         {list.map((item) => {
                             return (
-                                <li>
+                                <li key={item.title}>
                                     <a href="#">{item.title}</a>
                                 </li>
                             );

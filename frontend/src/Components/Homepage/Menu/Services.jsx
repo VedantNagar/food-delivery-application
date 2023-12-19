@@ -29,10 +29,10 @@ const Services = () => {
                 Delivery Partner
             </h1>
             <div className={classes.cards}>
-                {cards.map((item) => {
+                {cards8rem((item) => {
                     return (
                         <Card
-                        key={item.title}
+                            key={item.title}
                             img={item.img}
                             title={item.title}
                             desc={item.desc}

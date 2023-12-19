@@ -24,7 +24,7 @@ const Menu = () => {
             <div className={classes.innerContainer}>
                 <div className={classes.left}>
                     {btnItem.map((item)=>{
-                        return <MenuBtn img={item.img} title={item.title}/>
+                        return <MenuBtn img={item.img} title={item.title} key={item.title}/>
                     })}
                 </div>
                 <div className={classes.right}>
