@@ -85,8 +85,12 @@
     .container{
         margin-bottom: 5rem;
     }
-    .container .header h1{
+    .container .header{
         font-size: 1.25rem;
+    }
+    .container h1 {
+        font-size: 2.25rem;
+        margin-bottom: 1rem;
     }
 }
 @media(max-width: 768px){
@@ -94,6 +98,22 @@
         margin-bottom: 8rem;
     }
     .container .header h1{
+        font-size: 1.25rem;
+    }
+    .menuBtn{
+        padding: 0.25rem 0.75rem;
+        font-size: 0.5rem;
+    }
+}
+@media(max-width: 375px){
+    .menuBtn{
+        padding: 0.25rem 0.75rem;
+        font-size: 0.5rem;
+    }
+    .container .header{
+        font-size: 0.75rem;
+    }
+    .container h1{
         font-size: 1.25rem;
     }
 }
