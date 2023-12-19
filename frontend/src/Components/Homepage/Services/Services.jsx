@@ -1,7 +1,25 @@
 import classes from "./Services.module.css";
-import service1 from "../../../images/service-1.svg"
-import service2 from "../../../images/service-2.svg";
-import service3 from "../../../images/service-3.svg";
+import card1 from "../../../images/service-1.svg";
+import card2 from "../../../images/service-2.svg";
+import card3 from "../../../images/service-3.svg";
+import Card from "./Card";
+const cards = [
+    {
+        img: card1,
+        title: "Easy to Order",
+        desc: "You only need a few steps in ordering food",
+    },
+    {
+        img: card2,
+        title: "Fastest Delivery",
+        desc: " Delivery that is always ontime even faster",
+    },
+    {
+        img: card3,
+        title: "Best Quality",
+        desc: "Not only fast for us quality is also number one",
+    },
+];
 const Services = () => {
     return (
         <div className={classes.container}>
@@ -11,30 +29,15 @@ const Services = () => {
                 Delivery Partner
             </h1>
             <div className={classes.cards}>
-                <div className={classes.card}>
-                    <img src={service1} alt="not found" />
-                    <h3>Easy to Order</h3>
-                    <p>
-                        You only need a few steps in <br />
-                        ordering food
-                    </p>
-                </div>
-                <div className={classes.card}>
-                    <img src={service2} alt="not found" />
-                    <h3>Fastest Delivery</h3>
-                    <p>
-                        Delivery that is always ontime
-                        <br /> even faster
-                    </p>
-                </div>
-                <div className={classes.card}>
-                    <img src={service3} alt="not found" />
-                    <h3>Best Quality</h3>
-                    <p>
-                        Not only fast for us quality is also <br />
-                        number one
-                    </p>
-                </div>
+                {cards.map((item) => {
+                    return (
+                        <Card
+                            img={item.img}
+                            title={item.title}
+                            desc={item.desc}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
