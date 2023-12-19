@@ -5,27 +5,26 @@ const router = express.Router();
 
 // CRUD operations for restaurants
 
-//create rest
 
 //get rest(id) 
-router.get('/getRestaurant', restaurantController.getRestaurant);//id
+router.get('/getRestaurant/:id', restaurantController.getRestaurant);//id
 
 //get all rest
 router.get('/getAllRestaurant', restaurantController.getAllRestaurant);
 
 //delete rest(id)
+router.delete('/deleteRestaurant/:id', restaurantController.deleteRestaurant); 
+
+
 
 //edit rest(id) -> menu,add image,description
+router.patch('/editRestaurant/:id', restaurantController.editRestaurant);
 
-
-
+//create rest
 
 router.post('/create', restaurantController.createRestaurant);
 
-
- //allows creation of new restaurant profile
-// router.get('/restaurants/:restaurantId', RestaurantController.getRestaurantById); //retrieves restaurant info based on ID
-// router.put('/restaurants/:restaurantId', RestaurantController.updateRestaurant); //updates details of restaurant
-// router.delete('/restaurants/:restaurantId', RestaurantController.deleteRestaurant); //allows deletion of restaurant profile
+// add food
+router.post('/addFood/:id', restaurantController.addFood);
 
 module.exports = router;
