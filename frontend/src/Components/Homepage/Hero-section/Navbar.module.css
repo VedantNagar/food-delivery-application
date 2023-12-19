@@ -100,3 +100,16 @@ nav {
         overflow: hidden;
     }
 }
+@media(max-width: 375px){
+    .left .logo img{
+        height: 1.5rem;
+        width: 1.5rem;
+        border-radius:0 0.5rem 0 0.5rem ;
+    }
+    .left .logo h2{
+        font-size: 1.25rem;
+    }
+    .right ul li{
+        font-size: 0.75rem;
+    }
+}
