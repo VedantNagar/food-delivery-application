@@ -59,7 +59,19 @@ footer{
 .right h3{
     font-weight: 700;
 }
-
+hr{
+    width: 85vw;
+    margin: 0 auto;
+}
+.outerDiv{
+    width: 85vw;
+    margin: 0 auto;
+}
+.outerDiv p:last-child{
+    color: #fff;
+    font-family: "Poppins";
+    padding: 2rem 0;
+}
 @media (max-width: 425px){
     .logo .img{
         width: 1.5rem;
