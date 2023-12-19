@@ -20,20 +20,27 @@ const restaurantSchema = new mongoose.Schema({
     image: {
         type: [String]
     },
-    menu: [{
-        name: {
-            type: String,
-        },
-        about: {
-            type: String,
-        },
-        price: {
-            type: Number,
-        },
-        image: {
-            type: String,
-        }
-    }],
+    menu: {
+        type:
+            [{
+                name: {
+                    type: String,
+                },
+                about: {
+                    type: String,
+                },
+                price: {
+                    type: Number,
+                },
+                image: {
+                    type: String,
+                },
+                category: {
+                    type: String
+                }
+            }],
+        default: []
+    },
     rating: {
         type: Number,
         default: 3

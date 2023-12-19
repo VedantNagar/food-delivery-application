@@ -1,18 +1,18 @@
 const restaurantModel = require('../models/restaurant');
+const FoodModal = require('../models/Food')
 
-// post restaurant details
 
+
+// const getRestaurant = async (req,res) => {
+    //     const { id: restaurantID } = req.params;
+    //     const restaurant = await restaurantModel.findOne({_id: restaurantID})
+    //   if (!restaurant) {
+//     res.status(404).json("Restaurant not found")
+//   }
+//   res.status(200).json({ restaurant })
+// }
 
 //get rest(id) 
-const getRestaurant = async (req,res) => {
-    const { id: restaurantID } = req.params;
-    const restaurant = await restaurantModel.findOne({_id: restaurantID})
-  if (!restaurant) {
-    res.status(404).json("Restaurant not found")
-  }
-  res.status(200).json({ restaurant })
-}
-/*
 const getRestaurant = async (req, res) => {
     const {id: restaurantID} = req.params;
     try {
@@ -23,9 +23,9 @@ const getRestaurant = async (req, res) => {
         res.status(200).json({restaurant});
     } catch (error) {
         console.error(error);
-        res.status(500).json({error:Internal Server Error});
+        res.status(404).json({error: 'Internal server error'})
     }
-};*/ 
+};
 
 //get all rest
 const getAllRestaurant = async (req,res) => {
@@ -40,7 +40,7 @@ const getAllRestaurant = async (req,res) => {
 
 //delete rest(id)
 
-/*const deleteRestaurant = async (req, res) => {
+const deleteRestaurant = async (req, res) => {
     const {id: restaurantID} = req.params;
     try{
         const deletedRestaurant = await restaurantModel.findOneAndDelete({ _id:restaurantID});
@@ -52,10 +52,10 @@ const getAllRestaurant = async (req,res) => {
         console.error(error);
         res.status(500).json({error:'Internal server error'});
     }
-};*/
+};
 
 //edit rest(id) -> menu,add image,description
-/*const editRestaurant = async(req, res)=>{
+const editRestaurant = async(req, res)=>{
     const {id:restaurantID}=req.params;
     try {
         const updatedRestaurant= await restaurantModel.findByIdAndUpdate(restaurantID, req.body,{new:true});
@@ -68,9 +68,10 @@ const getAllRestaurant = async (req,res) => {
         console.log(error);
         res.status(500).json({error:'Internal server error'});
     }
-};*/
+};
 
-//create
+//create restaurant 
+
 const createRestaurant = async (req, res) => {
     try {
         const { name, about, address, phone, opening_hours } = req.body;
@@ -85,6 +86,23 @@ const createRestaurant = async (req, res) => {
     }
 };
 
-// post menu
+// add food in menu and update in food model
+const addFood = async(req,res) => {
+    const {id:restaurantID} = req.params;
+    const items = req.body;
+    
+    const menuItem = {}
+    menuItem.name = items.name
+    menuItem.about = items.about
+    menuItem.image = items.image
+    menuItem.category = items.category
+    menuItem.price = items.price
+    const food = await FoodModal.create({...menuItem,restaurantID})
+    const restaurant = await restaurantModel.findById(restaurantID);
+    restaurant.menu.push(menuItem)
+    await restaurant.save()
+    res.status(200).json(food)
+}
 
-module.exports = { createRestaurant ,getRestaurant,getAllRestaurant,deleteRestaurant,editRestaurant};
+
+module.exports = { createRestaurant ,getRestaurant,getAllRestaurant,deleteRestaurant,editRestaurant,addFood};
