@@ -34,3 +34,7 @@ const userSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model('user',userSchema)
+
+//role -> rest -> form -> create rest
+
+//role -> user -> 
