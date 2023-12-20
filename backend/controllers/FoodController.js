@@ -17,7 +17,7 @@ const singleFood = async(req,res) => {
 
 //sort(price,name) (id) -filter
 
-/*
+
 
 const getAllProducts = async (req, res) => {
   const { featured, company, name, sort, fields, numericFilters } = req.query;
@@ -79,9 +79,52 @@ const getAllProducts = async (req, res) => {
   res.status(200).json({ products, nbHits: products.length });
 };
 
+
+/*
+// Sort food items by price range in increasing order and filter by name, including restaurant information
+const sortFoodsByPriceRange = async (req,res) => {
+  try {
+    const { minPrice, maxPrice, sort = 'price', name } = req.query;
+
+    // Basic input validation for price range
+    if (!minPrice || !maxPrice || isNaN(minPrice) || isNaN(maxPrice)) {
+      return res.json({ error: 'Please provide valid minPrice and maxPrice as numbers' });
+    }
+
+    let query = {
+      price: {
+        $gte: parseInt(minPrice),
+        $lte: parseInt(maxPrice),
+      },
+    };
+
+    // Add optional name filter
+    if (name) {
+      query.name = { $regex: name, $options: 'i' };
+    }
+
+    let result = Food.find(query)
+      .populate({
+        path: 'restaurant', // Assuming the reference field is named 'restaurant'
+        select: 'name rating', // Select the fields you want to include
+      })
+      .sort(sort);
+
+    const foods = await result;
+
+    res.json(foods);
+  } catch (error) {
+    console.error(error);
+    res.json({ error: 'Internal server error' });
+  }
+};
+
+example request
+GET /api/foods/sortByPriceRange?minPrice=100&maxPrice=200&sort=price&name=pizza
+
 */
 
  //range - (l - r)
 
 
-module.exports = {allFood,singleFood}
+module.exports = {allFood,singleFood,sortFoodsByPriceRange}
