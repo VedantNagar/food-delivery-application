@@ -3,6 +3,7 @@ const NotFoundMIddleware = require('./middleware/notFound')
 const connectDB = require('./database/connect')
 const restRouter = require('./routes/restaurantRoutes')
 const foodRouter = require('./routes/foodRoutes')
+const orderRouter = require('./routes/orderRoutes')
 const bodyParser = require('body-parser')
 const errorMiddleware = require('./middleware/errorMiddleware');
 require('express-async-errors')
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 
 app.use('/api/v1/restaurant',restRouter)
 app.use('/api/v1/food',foodRouter)
+app.use('/api/v1/order',orderRouter)
 app.use(NotFoundMIddleware)
 app.use(errorMiddleware)
 
