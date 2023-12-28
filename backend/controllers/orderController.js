@@ -1,5 +1,7 @@
 // const Order = require('../models/Orders');
 
+
+
 // // Create a new order
 // const createOrder = async (req, res) => {
 //     try {
@@ -22,6 +24,9 @@
 //     }
 //   };
   
+
+
+
 //   // Get order by ID
 //   const getOrderById = async (req, res) => {
 //     try {
@@ -48,7 +53,11 @@
 //   };
 
 
+
+
 // //change status and payment (id)
+
+
 
 
 // module.exports = {getOrderById,createOrder}

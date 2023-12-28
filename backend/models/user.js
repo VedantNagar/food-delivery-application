@@ -6,15 +6,15 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     last_name:{
-        type:string
+        type:String
     },
     email:{
-        type:string,
+        type:String,
         required:true,
         unique:true
     },
     password:{
-        type:stirng,
+        type:String,
         required:true
     },
     contact:{
@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     address:{
-        type:string,
+        type:String,
         default:'Rohini'
     },
     role:{
