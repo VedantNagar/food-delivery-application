@@ -1,6 +1,6 @@
-const cart = require('../models/cart');
-const cartModel = require('../models/cart')
-const User = require('../models/user')
+const cartModel = require('../models/cart');
+const User = require('../models/user');
+const Food = require('../models/Food');
 // get cart
 /* const getCart = async(req,res)=>{
     const {id:user_ID} = req.params
@@ -54,6 +54,63 @@ const getCart = async(req,res)=>{
 }
 //add to cart
 // -> same item count++
+const addToCart = async(req,res)=>{
+    try {
+        const {userID, foodID, quantityToAdd} = req.body;
+
+        //input validation
+        if (!userID||!foodID||!quantityToAdd||quantityToAdd <= 0){
+            return res.json({error:'Invalid Input.Provide all details'});
+        }
+        //find user by ID
+        const user = await User.findByID(userID);
+
+        //check if user exists
+        if (!user){
+            return res.json({ error: 'User not found' });
+        }
+        //finding food item by ID
+        const foodItem = await Food.findByID(foodID);
+
+        // Check if the food item exists
+        if (!foodItem) {
+        return res.json({ error: 'Food item not found' });
+        }
+
+        // Find the user's cart by user ID
+        let userCart = await cartModel.findOne({user: userID });
+
+        //creating a new cart if it doesn't exist
+        if(!userCart){
+            userCart = new cartModel({
+                user:userID,
+                items:[],
+            });
+        }
+        // Find the index of the item in the cart's items array
+        const itemIndex = userCart.items.findIndex(item => item.food.equals(foodID));
+
+        //if item is in the cart, incrementing its quantity , else adding the new element
+
+        if(itemIndex !==1){ /* Item found, proceed with the logic */
+            userCart.items[itemIndex].quantity += quantityToAdd;
+        }
+        else{
+            userCart.items.push({
+                food:foodID,
+                quantity:quantityToAdd,
+            });
+        }
+
+        //saving the updated cart
+        await userCart.save();
+        res.json(userCart);
+
+    } catch (error) {
+        console.error(error);
+        res.json({ error: 'Internal server error' });
+    }
+}
 
 //delete from cart
 
@@ -73,7 +130,7 @@ const removeFromCart = async(req,res)=>{
             return res.json({error:'User not found'});
         }
         //finding user's cart by user ID
-        const userCart = await cart.findOne({userID:userID});
+        const userCart = await cartModel.findOne({userID:userID});
         
         //checking if the cart exists or not
         if(!userCart){
@@ -81,14 +138,17 @@ const removeFromCart = async(req,res)=>{
         }
         //find the index of item from array
         const itemIndex = userCart.items.findIndex(item => item.food.equals(foodID));
+
         //check if item exists or not
-        if(itemIndex!==1){
+
+        if(itemIndex!==1){ /* Item found, proceed with the logic */
             const existingCartItem = userCart.items[itemIndex];
         
         // If the quantityToRemove is >= the existing quantity, remove the entire item
         if (quantityToRemove >= existingCartItem.quantity) {
         userCart.items.splice(itemIndex, 1);
-      } else {
+      } 
+       else {
         // Reduce the quantity of the existing item
         existingCartItem.quantity -= quantityToRemove;
       }
@@ -109,5 +169,5 @@ const removeFromCart = async(req,res)=>{
 
 
 module.exports ={
-    getCart,removeFromCart
+    getCart,removeFromCart,addToCart
 }
