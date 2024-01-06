@@ -1,16 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const {getCart,removeFromCart,addToCart} = require('../controllers/cartController');
-const authMiddleware = require('../middleware/auth')
+const {
+  getCart,
+  removeFromCart,
+  addToCart,
+} = require('../controllers/cartController');
+const authMiddleware = require('../middleware/auth');
 
 //middleware
 router.use(authMiddleware);
 
-
 // CRUD operations for carts
-router.get('/getAllItems',getCart)
-router.post('/addToCart',addToCart)
-router.post('/removeFromCart',removeFromCart)
+router.get('/getAllItems', getCart);
+router.post('/addToCart', addToCart);
+router.post('/removeFromCart', removeFromCart);
 
 // router.post('/carts', CartController.createCart);//allows creation of new cart
 // router.get('/carts/:cartId', CartController.getCartById);//retrieves cart details based on ID
