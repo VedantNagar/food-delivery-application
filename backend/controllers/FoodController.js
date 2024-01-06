@@ -1,23 +1,19 @@
-const foodModal = require('../models/Food')
-const restModal = require('../models/restaurant')
+const foodModal = require('../models/Food');
+const restModal = require('../models/restaurant');
 
 // all items
-const allFood = async (req,res) => {
-    const foods = await foodModal.find({})
-    res.status(200).json([foods])
-}
+const allFood = async (req, res) => {
+  const foods = await foodModal.find({});
+  res.status(200).json([foods]);
+};
 
-
-const singleFood = async(req,res) => {
-    const {id:foodID} = req.params
-    const item = await foodModal.findById(foodID)
-    res.status(200).json(item)
-}
-
+const singleFood = async (req, res) => {
+  const { id: foodID } = req.params;
+  const item = await foodModal.findById(foodID);
+  res.status(200).json(item);
+};
 
 //sort(price,name) (id) -filter
-
-
 
 // const getAllProducts = async (req, res) => {
 //   const { featured, company, name, sort, fields, numericFilters } = req.query;
@@ -79,16 +75,16 @@ const singleFood = async(req,res) => {
 //   res.status(200).json({ products, nbHits: products.length });
 // };
 
-
-
 // Sort food items by price range in increasing order and filter by name, including restaurant information
-const sortFoodsByPriceRange = async (req,res) => {
+const sortFoodsByPriceRange = async (req, res) => {
   try {
     const { minPrice, maxPrice, sort = 'price', name } = req.query;
 
     // Basic input validation for price range
     if (!minPrice || !maxPrice || isNaN(minPrice) || isNaN(maxPrice)) {
-      return res.json({ error: 'Please provide valid minPrice and maxPrice as numbers' });
+      return res.json({
+        error: 'Please provide valid minPrice and maxPrice as numbers',
+      });
     }
 
     let query = {
@@ -103,7 +99,8 @@ const sortFoodsByPriceRange = async (req,res) => {
       query.name = { $regex: name, $options: 'i' };
     }
 
-    let result = foodModal.find(query)
+    let result = foodModal
+      .find(query)
       .populate({
         path: 'restaurant', // Assuming the reference field is named 'restaurant'
         select: 'name rating', // Select the fields you want to include
@@ -122,9 +119,6 @@ const sortFoodsByPriceRange = async (req,res) => {
 // example request
 // GET /api/foods/sortByPriceRange?minPrice=100&maxPrice=200&sort=price&name=pizza
 
+//range - (l - r)
 
-
- //range - (l - r)
-
-
-module.exports = {allFood,singleFood,sortFoodsByPriceRange}
+module.exports = { allFood, singleFood, sortFoodsByPriceRange };
