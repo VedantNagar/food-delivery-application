@@ -12,7 +12,7 @@ const cartSchema = mongoose.Schema({
             }
         }
     ],
-    userID:{
+    user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"user",
         required:true

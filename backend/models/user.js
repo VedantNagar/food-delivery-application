@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
     role:{
         type:String,
         required:true
+    },
+    cartID:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'cart'
     }
 },{
     timestamps: true
