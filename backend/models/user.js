@@ -1,44 +1,45 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
-    first_name:{
-        type: String,
-        required:true
+const userSchema = new mongoose.Schema(
+  {
+    first_name: {
+      type: String,
+      required: true,
     },
-    last_name:{
-        type:String
+    last_name: {
+      type: String,
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true
+    email: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    password:{
-        type:String,
-        required:true
+    password: {
+      type: String,
+      required: true,
     },
-    contact:{
-        type:Number,
-        required:true
+    contact: {
+      type: Number,
+      required: true,
     },
-    address:{
-        type:String,
-        default:'Rohini'
+    address: {
+      type: String,
+      default: 'Rohini',
     },
-    role:{
-        type:String,
-        required:true
-    },
-    cartID:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'cart'
-    }
-},{
-    timestamps: true
-})
 
-module.exports = mongoose.model('user',userSchema)
+    role: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+
+module.exports = mongoose.model('user', userSchema);
 
 //role -> rest -> form -> create rest
 
-//role -> user -> 
+//role -> user ->

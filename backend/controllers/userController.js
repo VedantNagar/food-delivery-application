@@ -10,41 +10,56 @@ exports.createUser = async (req, res) => {
 
     // Basic input validation
     if (!username && !email && !password) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ error: 'Please provide username, email, and password'});
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: 'Please provide username, email, and password' });
     }
 
     if (!username) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ error: 'Please provide a username'});
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: 'Please provide a username' });
     }
 
     if (!email) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ error: 'Please provide an email address'});
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: 'Please provide an email address' });
     }
 
     if (!password) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ error: 'Please provide a password'});
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: 'Please provide a password' });
     }
 
     // Check if the email is already registered
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ error: 'Email is already registered' });
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: 'Email is already registered' });
     }
     //creating a hash for the password
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, email, password: hashedPassword });
     await user.save();
 
-    // For security, avoid sending the password in the response
     const sanitizedUser = { _id: user._id, username, email };
-    
+
     // Generate a JWT token for authentication
-    const token = jwt.sign({ userId: user._id, email: user.email }, 'your_secret_key', { expiresIn: '1h' });
+    const token = jwt.sign(
+      { userId: user._id, email: user.email },
+      'your_secret_key',
+      { expiresIn: '1h' }
+    );
 
     res.status(StatusCodes.CREATED).json({ user: sanitizedUser, token });
   } catch (error) {
     console.error(error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: 'Internal server error' });
   }
 };
 
@@ -54,33 +69,52 @@ exports.getUserById = async (req, res) => {
     const user = await User.findById(req.params.userId);
 
     if (!user) {
-      return res.status(StatusCodes.NOT_FOUND).json({ error: 'User not found' });
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ error: 'User not found' });
     }
 
     // For security, avoid sending the password in the response
-     const sanitizedUser = { _id: user._id, username: user.username, email: user.email };
-    res.status(StatusCodes.OK).json(sanitizedUser); 
+    const sanitizedUser = {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+    };
+    res.status(StatusCodes.OK).json(sanitizedUser);
   } catch (error) {
     console.error(error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: 'Internal server error' });
   }
 };
 
 // Update user by ID
 exports.updateUser = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.userId,
+      req.body,
+      { new: true }
+    );
 
     if (!updatedUser) {
-      return res.status(StatusCodes.NOT_FOUND).json({ error: 'User not found' });
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ error: 'User not found' });
     }
 
-    // For security, avoid sending the password in the response
-     const sanitizedUser = { _id: updatedUser._id, username: updatedUser.username, email: updatedUser.email };
-    res.status(StatusCodes.OK).json(sanitizedUser); 
+    const sanitizedUser = {
+      _id: updatedUser._id,
+      username: updatedUser.username,
+      email: updatedUser.email,
+    };
+    res.status(StatusCodes.OK).json(sanitizedUser);
   } catch (error) {
     console.error(error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: 'Internal server error' });
   }
 };
 
@@ -90,14 +124,22 @@ exports.deleteUser = async (req, res) => {
     const deletedUser = await User.findByIdAndDelete(req.params.userId);
 
     if (!deletedUser) {
-      return res.status(StatusCodes.NOT_FOUND).json({ error: 'User not found' });
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ error: 'User not found' });
     }
     res.status(StatusCodes.OK).send();
-    // For security, avoid sending the password in the response
-    const sanitizedUser = { _id: deletedUser._id, username: deletedUser.username, email: deletedUser.email };
-    res.status(StatusCodes.OK).json(sanitizedUser); 
+
+    const sanitizedUser = {
+      _id: deletedUser._id,
+      username: deletedUser.username,
+      email: deletedUser.email,
+    };
+    res.status(StatusCodes.OK).json(sanitizedUser);
   } catch (error) {
     console.error(error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: 'Internal server error' });
   }
 };

@@ -1,33 +1,33 @@
-const mongoose = require('mongoose')
-const food = require('./Food')
+const mongoose = require('mongoose');
+const food = require('./Food');
 export const OrderItemSchema = new Schema({
-  items:[
+  items: [
     {
-      food:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'food'
+      food: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'food',
       },
-      quantity:{
-        type:Number,
-        min:1
-      }
-    }
+      quantity: {
+        type: Number,
+        min: 1,
+      },
+    },
   ],
-  totalAmount:{
-    type:Number,
-    required:true
+  totalAmount: {
+    type: Number,
+    required: true,
   },
-  orderDate:{
-    type:Date
+  orderDate: {
+    type: Date,
   },
-  payementMethod:{
+  payementMethod: {
     // COD// CARD // Net Banking // Google Pay
-    type:String
+    type: String,
   },
   orderStatus: {
     // waiting // preparing // onway // delivered // cancelled // failed
     type: String,
-  }
+  },
 });
 
-module.exports  = mongoose.model('order',orderSchema)
+module.exports = mongoose.model('order', orderSchema);
