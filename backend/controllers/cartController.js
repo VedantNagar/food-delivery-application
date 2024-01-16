@@ -1,6 +1,6 @@
-const cartModel = require('../models/cart');
 const User = require('../models/user');
 const Food = require('../models/Food');
+const cart = require('../models/cart');
 // get cart
 /* const getCart = async(req,res)=>{
     const {id:user_ID} = req.params
@@ -21,6 +21,9 @@ const Food = require('../models/Food');
     })
 } */
 const getCart = async (req, res) => {
+
+
+
   try {
     //getting userID
     const userID = req.params.userID;
@@ -114,6 +117,7 @@ const addToCart = async (req, res) => {
   }
 };
 
+
 //delete from cart
 
 const removeFromCart = async (req, res) => {
@@ -126,6 +130,7 @@ const removeFromCart = async (req, res) => {
     }
     //finding user
     const user = await User.findByID(userID);
+
 
     //checking if user exists
     if (!user) {
@@ -166,6 +171,7 @@ const removeFromCart = async (req, res) => {
     console.log(error);
     res.json({ error: 'Internal Server Error' });
   }
+
 };
 
 //edit cart

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const cartSchema = mongoose.Schema({
+
   items: [
     {
       food: {
@@ -18,5 +19,6 @@ const cartSchema = mongoose.Schema({
     required: true,
   },
 });
+
 
 module.exports = mongoose.model('cart', cartSchema);
