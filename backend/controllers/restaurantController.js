@@ -1,5 +1,7 @@
 const restaurantModel = require('../models/restaurant');
 const FoodModal = require('../models/Food');
+const Order = require('../models/Orders');
+const User = require('../models/user');
 
 // const getRestaurant = async (req,res) => {
 //     const { id: restaurantID } = req.params;
@@ -110,7 +112,25 @@ const addFood = async (req, res) => {
 
 // change Orderstatus(by restaurant) by orderId
 
+/* const changeOrderStatus = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { orderStatus } = req.body;
 
+    //checking user role ; validate sahi status then update the status
+
+    //find order by id
+    const order = await Order.findById(orderId);
+
+    //check if order exists
+    if (!order) {
+      return res.status(404).json({ error: 'Order does not exist' });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}; */
 
 module.exports = {
   createRestaurant,
