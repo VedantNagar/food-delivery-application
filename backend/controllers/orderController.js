@@ -4,36 +4,33 @@ const User = require('../models/user');
 
 //  Create a new order
 const createOrder = async (req, res) => {
-  try {
-    const { items, payment, status, address, totalPrice, user } = req.body;
 
-    // Basic input validation
-    if (!items || !address || !totalPrice || !user) {
-      return res.json({
-        error: 'Please provide items, address, totalPrice, and user',
-      });
-    }
+  const { items, totalAmount, paymentMethod, orderStatus, userId } = req.body;
+
+    // Create an array of order items with the required structure
+    const orderItems = items.map((item) => ({
+      food: item.food,
+      quantity: item.quantity,
+    }));
 
     // Create a new order
-    const order = new Order({
-      items,
-      payment,
-      status,
-      address,
-      totalPrice,
-      user,
+    const newOrder = new Order({
+      items: orderItems,
+      totalAmount,
+      paymentMethod,
+      orderStatus,
+      user: userId, // Assuming you have a user ID from the request
+      orderDate: new Date(),
     });
-    await order.save();
-    res.json(order);
-  } catch (error) {
-    console.error(error);
-    res.json({ error: 'Internal server error' });
-  }
+
+    // Save the order to the database
+    const savedOrder = await newOrder.save();
+    res.json(savedOrder)
 };
 
 // Get order by ID
 const getOrderById = async (req, res) => {
-  const orderId = req.params.orderId;
+  const { id: orderId } = req.params;
 
   // Basic input validation for orderId
   if (!orderId) {
@@ -50,6 +47,9 @@ const getOrderById = async (req, res) => {
   res.json({ order });
 };
 
-// change status and payment (id)
+//delete order - orderstatus(cancelled) by Orderid
+
+
+
 
 module.exports = { getOrderById, createOrder };
