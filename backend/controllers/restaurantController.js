@@ -23,7 +23,7 @@ const getRestaurant = async (req, res) => {
     res.status(200).json({ restaurant });
   } catch (error) {
     console.error(error);
-    res.status(404).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -112,13 +112,31 @@ const addFood = async (req, res) => {
 
 // change Orderstatus(by restaurant) by orderId
 
-/* const changeOrderStatus = async (req, res) => {
+const changeOrderStatus = async (req, res) => {
   try {
     const { orderId } = req.params;
     const { orderStatus } = req.body;
 
-    //checking user role ; validate sahi status then update the status
+    //checking user role
+    const userId = req.user.Id; //!! CHECK THIS !!
+    const user = await User.findById(userId);
 
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({ error: 'Cannot access' });
+    }
+
+    //validating order status
+    const possibleOrderStatus = [
+      'preparing',
+      'on the way',
+      'delivered',
+      'cancelled ',
+    ];
+
+    //checking possibleOrderStatus with orderStatus
+    if (!possibleOrderStatus.includes(orderStatus)) {
+      return res.status(400).json({ error: 'Invalid order status' });
+    }
     //find order by id
     const order = await Order.findById(orderId);
 
@@ -126,11 +144,20 @@ const addFood = async (req, res) => {
     if (!order) {
       return res.status(404).json({ error: 'Order does not exist' });
     }
+
+    //updating order status
+    order.orderStatus = orderStatus;
+    await order.save();
+
+    //displaying successful
+    res.status(200).json({
+      message: `Order status changed to ${orderStatus} for ${orderId}`,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-}; */
+};
 
 module.exports = {
   createRestaurant,
@@ -139,4 +166,5 @@ module.exports = {
   deleteRestaurant,
   editRestaurant,
   addFood,
+  changeOrderStatus,
 };
