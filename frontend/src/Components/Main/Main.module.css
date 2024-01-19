@@ -1,0 +1,12 @@
+.wrapper{
+    width: 85vw;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .footer{
+    width: 100vw;
+    overflow: hidden;
+    background-color: #EB5757;
+  
+  }
