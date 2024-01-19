@@ -1,0 +1,9 @@
+.hero{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.hero img{
+    z-index: -10;
+}

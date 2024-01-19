@@ -1,5 +1,5 @@
-import Footer from "./Footer/Footer";
-import Navbar from "./Hero-section/Navbar";
+import Footer from "../Utils/Footer/Footer";
+import Navbar from "../Utils/Navbar/Navbar";
 import Signin from "./Hero-section/Signin";
 import Menu from "./Menu/Menu";
 import Services from "./Services/Services";

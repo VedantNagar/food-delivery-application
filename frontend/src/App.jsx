@@ -6,7 +6,6 @@ function App() {
         <div className="wrapper">
             {/* <Homepage /> */}
             <Main/>
-            
         </div>
     );
 }
