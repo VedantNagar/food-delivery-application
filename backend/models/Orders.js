@@ -1,55 +1,44 @@
-const mongoose = require('mongoose')
-const food = require('./Food')
-export const OrderItemSchema = new Schema(
+const mongoose = require('mongoose');
+const food = require('./Food');
+const OrderItemSchema = new mongoose.Schema({
+  items: [
     {
-      food: { type: food.schema, required: true },
-      price: { type: Number, required: true },
-      quantity: { type: Number, required: true },
-    },
-    {
-      _id: false,
-    }
-  );
-
-
-
-  OrderItemSchema.pre('validate', function (next) {
-    this.price = this.food.price * this.quantity;
-    next();
-  });
-
-const orderSchema = new mongoose.Schema({
-    items:{
-        type:[OrderItemSchema],
-        required:true
-    },
-    payment:{
-        type:String,
-    },
-    status:{
-        type:String,
-        default:"NEW"
-    },
-    address:{
-        type:String,
-        required:true
-    },
-    totalPrice:{
-        type:Number,
-        required:true
-    },
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:true
-    }
-},{
-    timestamps:true,
-    toJSON: {
-        virtuals: true,
+      food: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'food',
       },
-      toObject: {
-        virtuals: true,
-      }
+      quantity: {
+        type: Number,
+        min: 1,
+      },
+    },
+  ],
+  totalAmount: {
+    type: Number,
+    required: true,
+  },
+  orderDate: {
+    type: Date,
+  },
+  paymentMethod: {
+    // COD// CARD // Net Banking // Google Pay
+    type: String,
+  },
+  orderStatus: {
+     // preparing // onway // delivered // cancelled 
+    type: String,
+  },
+  //add user
+  user:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'user',
+    required:true
+  }
+
+  // {{abcd,2},{},{}}
+},
+{
+  timestamps: true,
 });
 
-module.exports  = mongoose.model('order',orderSchema)
+module.exports = mongoose.model('order', OrderItemSchema);
