@@ -1,0 +1,19 @@
+:root {
+    --swiper-theme-color: #EB5757;
+}
+.wrapper {
+    width: 85vw;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.outerDiv {
+    background-color: #f8f8f8;
+    height: 20rem;
+    padding: 0.5rem;
+}
+.carousel{
+    border: 2px solid red;
+    height: 15rem;
+    display: flex;
+    flex-wrap: wrap;
+}
