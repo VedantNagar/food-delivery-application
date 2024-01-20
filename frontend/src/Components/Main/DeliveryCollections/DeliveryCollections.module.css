@@ -11,10 +11,7 @@
     height: 20rem;
     padding: 0.5rem;
 }
-.carousel{
-    border: 2px solid red;
 
-}
 
 @media(max-width: 375px){
     .wrapper h2{
