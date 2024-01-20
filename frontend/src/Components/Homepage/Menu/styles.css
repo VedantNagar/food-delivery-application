@@ -29,19 +29,25 @@
 @media (max-width: 1024px) {
     .swiper {
         width: 45rem;
-        height: 22rem;
+        height: 9rem;
     }
 }
 @media (max-width: 768px) {
     .swiper {
         width: 40rem;
-        height: 22rem;
+        height: 12rem;
     }
 }
-@media (max-width: 460px) {
+@media (max-width: 425px) {
     .swiper {
-        width: 25rem;
-        height: 25rem;
+        width: 22rem;
+        height: 14rem;
+    }
+}
+@media (max-width: 375px) {
+    .swiper {
+        width: 14rem;
+        height: 16rem;
     }
 }
 @media (min-width: 458px) and (max-width: 526px) {
@@ -50,5 +56,3 @@
         height: 22rem;
     }
 }
-
-

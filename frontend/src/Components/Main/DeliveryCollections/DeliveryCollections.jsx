@@ -39,6 +39,23 @@ const DeliveryCollections = () => {
                         navigation={true}
                         modules={[Navigation]}
                         className="mySwiper"
+                        breakpoints={{
+                            375: {
+                                slidesPerView: 1,
+                              },
+                            425: {
+                                slidesPerView: 2,
+                              },
+                            640: {
+                              slidesPerView: 2,
+                            },
+                            768: {
+                              slidesPerView: 4,
+                            },
+                            1024: {
+                              slidesPerView: 6,
+                            },
+                          }}
                     >
                         {deliveryItems.map((item) => {
                             return (

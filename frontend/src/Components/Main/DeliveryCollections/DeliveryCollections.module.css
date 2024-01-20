@@ -13,7 +13,11 @@
 }
 .carousel{
     border: 2px solid red;
-    height: 15rem;
-    display: flex;
-    flex-wrap: wrap;
+
+}
+
+@media(max-width: 375px){
+    .wrapper h2{
+        font-size: 1rem;
+    }
 }
