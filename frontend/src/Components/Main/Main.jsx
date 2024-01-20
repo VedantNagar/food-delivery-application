@@ -4,6 +4,8 @@ import dropdown from "./images/dropdown.svg";
 import cart from "./images/cart.svg";
 import user from "./images/user.svg";
 import Hero from "./Hero/Hero";
+import DeliveryCollections from "./DeliveryCollections/DeliveryCollections";
+import TopBrands from "./DeliveryCollections/TopBrands";
 const navbarMain = [
     { title: "Order Now", imgfwd: "", imgbwd: "" },
     { title: "Top Brands", imgfwd: dropdown, imgbwd: "" },
@@ -16,6 +18,10 @@ const Main = () => {
             <div className={classes.wrapper}>
                 <Navbar list={navbarMain} />
                 <Hero />
+            </div>
+            <DeliveryCollections />
+            <div className={classes.wrapper}>
+                <TopBrands />
             </div>
         </>
     );

@@ -1,0 +1,21 @@
+:root {
+    --swiper-theme-color: black;
+}
+
+.wrapper {
+    width: 85vw;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.outerDiv {
+    background-color: #f8f8f8;
+    height: 100%;
+    padding: 0.5rem;
+}
+
+
+@media(max-width: 375px){
+    .wrapper h2{
+        font-size: 1rem;
+    }
+}
