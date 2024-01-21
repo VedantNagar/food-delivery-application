@@ -23,6 +23,7 @@
     border-radius: 1rem;
     
 }
+
 .secondRow,.firstRow{
     display: flex;
     justify-content: space-between;

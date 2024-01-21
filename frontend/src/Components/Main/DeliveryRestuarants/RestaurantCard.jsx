@@ -36,12 +36,21 @@ const RestaurantCard = ({ restaurant }) => {
                     </div>
                 </div>
                 <div className={classes.secondRow}>
-                    <span className={classes.cuisine}>{cuisines}</span>
+                    <div className={classes.cuisinesContainer}>
+                        {cuisines.map((cuisine,i) => {
+                            return (
+                                <span className={classes.cuisine}>
+                                    {cuisine}{i !== cuisines.length-1?", ":"..."}
+                                </span>
+                            );
+                        })}
+                    </div>
                     <span className={classes.cfo}>{approxPrice}</span>
                 </div>
-                {deliveryTime && <div className={classes.deliveryTime}>{deliveryTime}</div>}
+                {deliveryTime && (
+                    <div className={classes.deliveryTime}>{deliveryTime}</div>
+                )}
             </div>
-            
         </div>
     );
 };
