@@ -4,7 +4,7 @@ footer{
     width: 85vw;
     margin: 0 auto;
     padding: 1rem;
-    color: white;
+    color: black;
 }
 .left{
     display: flex;
@@ -32,10 +32,11 @@ footer{
 .social{
     display: flex;
     gap: 0.5rem;
+    width: 12rem;
 }
-.social img{
-    width: 2rem;
-    height: 2rem;
+.social a img{
+    width: 100%;
+    height: 100%;
 }
 .right{
     display: flex;
@@ -68,7 +69,7 @@ hr{
     margin: 0 auto;
 }
 .outerDiv p:last-child{
-    color: #fff;
+    color: black;
     font-family: "Poppins";
     padding: 2rem 0;
 }

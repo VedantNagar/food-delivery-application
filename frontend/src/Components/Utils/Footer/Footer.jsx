@@ -1,5 +1,5 @@
 import classes from "./Footer.module.css";
-import logo from "../../../images/footer-logo.svg";
+import logo from "../../../images/logo.svg"
 import insta from "../../../images/instagram.svg";
 import fb from "../../../images/facebook.svg";
 import x from "../../../images/x.svg";
