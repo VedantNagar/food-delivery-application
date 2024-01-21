@@ -1,0 +1,19 @@
+.deliveryRestaurants {
+    margin: 4rem 0rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.deliveryItems{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    gap: 3rem;
+    justify-content: space-between;
+}
+@media(max-width: 768px){
+    .deliveryItems{
+        justify-content: center;
+    }
+}
