@@ -1,0 +1,49 @@
+.navForm{
+    width: 22.5rem;
+}
+.navInput{
+    position: absolute;
+    background-color: white;
+    width: 22.5rem;
+}
+.navBtn{
+    position:relative;
+    top: 0.5rem;
+    left: 20rem;
+    cursor: pointer;
+}
+.navBtn img{
+    width: 2rem !important;
+    height: 2rem !important;
+}
+@media(max-width: 1024px){
+    .navForm{
+        position:relative;
+        margin: 1rem;
+    }
+}
+@media(max-width: 425px){
+    .navForm{
+        width: 20rem;
+    }
+    .navInput{
+        width: 20rem;
+    }
+    .navBtn{
+        left: 18rem;
+    }
+}
+@media(max-width: 375px){
+    .navForm{
+        width: 18rem;
+    }
+    .navInput{
+        width: 18rem;
+    }
+    .navBtn{
+        left: 16rem;
+    }
+    .navInput::placeholder {
+        font-size: 0.75rem; 
+      }
+}

@@ -36,8 +36,9 @@ const Navbar = ({ list }) => {
                             return (
                                 <li key={item.title}>
                                     {item.imgbwd && <img src={item.imgbwd} alt=""/>}
-                                    <a href="#">{item.title}</a>
+                                    {item.title && <a href="#">{item.title}</a>}
                                     {item.imgfwd && <img src={item.imgfwd} alt="" />}
+                                    {item.component && item.component}
                                 </li>
                             );
                         })}
