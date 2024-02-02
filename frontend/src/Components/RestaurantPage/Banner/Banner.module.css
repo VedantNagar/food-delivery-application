@@ -5,6 +5,9 @@
     overflow: hidden;
     color: white;
     padding: 2rem 0;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 .banner {
     background-color: #202020;
@@ -21,7 +24,9 @@
 .wrapper .left {
     display: flex;
     gap: 1rem;
-    flex-wrap: wrap;
+}
+.left h3:first-child{
+    font-size: 1.75rem;
 }
 .desc {
     display: flex;
@@ -52,4 +57,47 @@
 .info {
     display: flex;
     gap: 1.5rem;
+}
+.right .offer{
+    display: flex;
+    gap: 0.5rem;
+}
+.right{
+    display: flex;
+    align-items: center;
+}
+.right h2:first-child{
+    color: #EB5757;
+    margin-bottom: 1rem;
+}
+.offers{
+    border: 2px dashed #EB5757;
+    padding: 1.5rem;
+    border-radius: 1rem;
+}
+@media(max-width: 425px){
+    .left{
+        flex-wrap: wrap;
+    }
+}
+@media((min-width: 425px )and (max-width: 768px)){
+    .wrapper{
+        align-items: center;
+        justify-content: center;
+    }
+    .left{
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+}
+@media((min-width: 320px )and (max-width: 425px)){
+    .left{
+        font-size: 0.75rem;
+
+    }
+    .wrapper{
+       font-size: 0.75rem;
+    }
+    
 }
