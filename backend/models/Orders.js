@@ -33,6 +33,11 @@ const OrderItemSchema = new mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:'user',
     required:true
+  },
+  restaurant:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'restaurantModel',
+    required:true
   }
 
   // {{abcd,2},{},{}}
@@ -41,4 +46,11 @@ const OrderItemSchema = new mongoose.Schema({
   timestamps: true,
 });
 
+OrderItemSchema.pre('find', function(next) {
+  this.populate('items.food');
+  next();
+});
+
 module.exports = mongoose.model('order', OrderItemSchema);
+
+// order(many rest) -> food -> [restaurantId]

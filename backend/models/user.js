@@ -26,11 +26,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: 'Rohini',
     },
-
+    //role -> customer || owner
     role: {
       type: String,
       required: true,
     },
+    orderID: [{
+      type: mongoose.Schema.Types.ObjectId,
+      required: false,
+    }],
   },
   {
     timestamps: true,
@@ -40,6 +44,4 @@ const userSchema = new mongoose.Schema(
 
 module.exports = mongoose.model('user', userSchema);
 
-//role -> rest -> form -> create rest
 
-//role -> user ->
