@@ -1,5 +1,5 @@
 import classes from "./Footer.module.css";
-import logo from "../../../images/logo.svg"
+import logo from "../../../images/logo.svg";
 import insta from "../../../images/instagram.svg";
 import fb from "../../../images/facebook.svg";
 import x from "../../../images/x.svg";
@@ -9,18 +9,20 @@ const Footer = () => {
         <div className={classes.outerDiv}>
             <footer>
                 <div className={classes.left}>
-                    <div className={classes.logo}>
-                        <img
-                            src={logo}
-                            alt="not found"
-                            className={classes.img}
-                        />
-                        <h2>Fudo</h2>
+                    <div>
+                        <div className={classes.logo}>
+                            <img
+                                src={logo}
+                                alt="not found"
+                                className={classes.img}
+                            />
+                            <h2>Fudo</h2>
+                        </div>
+                        <p>
+                            Our job is to filling your tummy with delicious food
+                            and with fast and free delivery.
+                        </p>
                     </div>
-                    <p>
-                        Our job is to filling your tummy with delicious food and
-                        with fast and free delivery.
-                    </p>
                     <div className={classes.social}>
                         <a
                             href="https://www.instagram.com/kxhxtij/"
