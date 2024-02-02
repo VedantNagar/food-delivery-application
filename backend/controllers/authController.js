@@ -49,7 +49,17 @@ const register = async (req, res) => {
     address,
     role,
   });
-  res.json({ user });
+  jwt.sign(
+    { email: user.email, id: user._id, name: user.first_name ,role:user.role},
+    process.env.JWT_SECRET,
+    {},
+    (err, token) => {
+      if (err) {
+        throw err;
+      }
+      return res.cookie('token', token).json(user);
+    }
+  );
 };
 
 const login = async (req, res) => {
@@ -67,7 +77,7 @@ const login = async (req, res) => {
     });
   } else {
     jwt.sign(
-      { email: user.email, id: user._id, name: user.first_name },
+      { email: user.email, id: user._id, name: user.first_name ,role:user.role},
       process.env.JWT_SECRET,
       {},
       (err, token) => {

@@ -2,6 +2,7 @@ const restaurantModel = require('../models/restaurant');
 const FoodModal = require('../models/Food');
 const Order = require('../models/Orders');
 const User = require('../models/user');
+const restaurant = require('../models/restaurant');
 
 // const getRestaurant = async (req,res) => {
 //     const { id: restaurantID } = req.params;
@@ -59,10 +60,42 @@ const deleteRestaurant = async (req, res) => {
 //edit rest(id) -> menu,add image,description
 const editRestaurant = async (req, res) => {
   const { id: restaurantID } = req.params;
+  const { name, image, description } = req.body;
   try {
+    //checking if the restaurant exists or not
+    const existingRestaurant = await restaurantModel.findById(restaurantID);
+
+    if (!existingRestaurant) {
+      return res.status(404).json('Restaurant not found');
+    }
+    //passing and checking the updated fields
+    const updatedFields = {};
+
+    //checking the name
+    if (name !== undefined) {
+      updatedFields.name = name;
+    } else {
+      updatedFields.name = existingRestaurant.name;
+    }
+
+    //checking the image
+    if (image !== undefined) {
+      updatedFields.image = image;
+    } else {
+      updatedFields.image = existingRestaurant.image;
+    }
+
+    //checking the description
+    if (description !== undefined) {
+      updatedFields.description = description;
+    } else {
+      updatedFields.description = existingRestaurant.description;
+    }
+
+    //updating the restaurant
     const updatedRestaurant = await restaurantModel.findByIdAndUpdate(
       restaurantID,
-      req.body,
+      updatedFields,
       { new: true }
     );
 
@@ -113,51 +146,65 @@ const addFood = async (req, res) => {
 // change Orderstatus(by restaurant) by orderId
 
 const changeOrderStatus = async (req, res) => {
-  try {
-    const { orderId } = req.params;
-    const { orderStatus } = req.body;
 
-    //checking user role
-    const userId = req.user.Id; //!! CHECK THIS !!
-    const user = await User.findById(userId);
+  const { id: orderId } = req.params;
+  const { orderStatus } = req.body;
 
-    if (!user || user.role !== 'admin') {
-      return res.status(403).json({ error: 'Cannot access' });
-    }
+  //checking user role
+  const userId = req.user.Id; //!! CHECK THIS !!
+  const user = await User.findById(userId);
 
-    //validating order status
-    const possibleOrderStatus = [
-      'preparing',
-      'on the way',
-      'delivered',
-      'cancelled ',
-    ];
-
-    //checking possibleOrderStatus with orderStatus
-    if (!possibleOrderStatus.includes(orderStatus)) {
-      return res.status(400).json({ error: 'Invalid order status' });
-    }
-    //find order by id
-    const order = await Order.findById(orderId);
-
-    //check if order exists
-    if (!order) {
-      return res.status(404).json({ error: 'Order does not exist' });
-    }
-
-    //updating order status
-    order.orderStatus = orderStatus;
-    await order.save();
-
-    //displaying successful
-    res.status(200).json({
-      message: `Order status changed to ${orderStatus} for ${orderId}`,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+  //user = true
+  //user -> role = customer
+  if (!user && user.role !== 'rest_owner') {
+    return res.status(403).json({ error: 'Cannot access' });
   }
+
+  //validating order status
+  const possibleOrderStatus = [
+    'preparing',
+    'on the way',
+    'delivered',
+    'cancelled ',
+  ];
+
+  //checking possibleOrderStatus with orderStatus
+  if (!possibleOrderStatus.includes(orderStatus)) {
+    return res.status(400).json({ error: 'Invalid order status' });
+  }
+  //find order by id
+  const order = await Order.findById(orderId);
+
+  //check if order exists
+  if (!order) {
+    return res.status(404).json({ error: 'Order does not exist' });
+  }
+
+  //updating order status
+  order.orderStatus = orderStatus;
+  await order.save();
+
+  //displaying successful
+  res.status(200).json({
+    message: `Order status changed to ${orderStatus} for ${orderId}`,
+  });
+
+
 };
+
+//get all orders from restaurants
+const getorders = async(req,res) => {
+  const {id:restId} = req.params
+
+  const orders = await restaurant.findById({restId}).populate("orderID")
+  if(!restId){
+    return res.status(404).json({
+      msg:"restaurant does not exist"
+    })
+  }
+  return res.status(200).json({orders})
+}
+
 
 module.exports = {
   createRestaurant,
@@ -167,4 +214,5 @@ module.exports = {
   editRestaurant,
   addFood,
   changeOrderStatus,
+  getorders
 };

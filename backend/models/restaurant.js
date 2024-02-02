@@ -50,10 +50,10 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  orderID: {
+  orderID: [{
     type: mongoose.Schema.Types.ObjectId,
     required: false,
-  },
+  }],
 });
 
 // Use mongoose.model to create the model and export it

@@ -19,7 +19,7 @@ const authenticationMiddleware = async (req, res, next) => {
         msg:"Not a customer"
       })
     }
-    req.user = { email, id, name,role };
+    req.user = { email, id,name,role };
     next();
   } catch (error) {
     return res.status(404).json({
