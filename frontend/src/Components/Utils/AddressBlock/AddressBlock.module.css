@@ -1,0 +1,6 @@
+.addrsBlock {
+    border: 2px dashed red;
+    max-width: 16.875rem;
+    border-radius: 0.625rem;
+    padding: 1.5625rem 0rem 1.5625rem 1.5625rem;
+}

@@ -1,0 +1,9 @@
+.proceedBtn {
+    border-radius: 0.625rem;
+    background: #eb5757;
+    color: white;
+    padding: 0.9375rem 1.5625rem;
+}
+button{
+    border: none;
+}

@@ -1,0 +1,22 @@
+.from span{
+    color: #EB5757;
+}
+.item{
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+.item  .left .price{
+    font-size: 1rem;
+    color: #808080;
+}
+
+.item .right{
+    display: flex;
+    gap: 1rem;
+    font-size: 1.25rem;
+}
+
+.item .right a{
+    cursor: pointer;
+}
