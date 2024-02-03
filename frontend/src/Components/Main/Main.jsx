@@ -12,7 +12,7 @@ import Footer from "../Utils/Footer/Footer.jsx"
 const navbarMain = [
     { title: "Order Now", imgfwd: "", imgbwd: "" },
     { title: "Top Brands", imgfwd: dropdown, imgbwd: "" },
-    { title: "Cart", imgfwd: cart, imgbwd: "" },
+    { title: "Cart", imgfwd: cart, imgbwd: "",to:"cart" },
     { title: "Kshitij", imgfwd: dropdown, imgbwd: user },
 ];
 

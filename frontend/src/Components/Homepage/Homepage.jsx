@@ -5,7 +5,7 @@ import Menu from "./Menu/Menu";
 import Services from "./Services/Services";
 import classes from "./Homepage.module.css";
 const navbarHomepage = [
-    { title: "Sign In" },
+    { title: "Sign In" ,to: "signin"},
     { title: "Services" },
     { title: "Menu" },
     { title: "Contact" },

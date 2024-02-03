@@ -11,7 +11,7 @@ import Button from "../Utils/Button/Button";
 import Footer from "../Utils/Footer/Footer"
 const navbarRestaurantPage = [
     { title: "", imgfwd: "", imgbwd: "", component: <NavSearchBar /> },
-    { title: "Cart", imgfwd: cart, imgbwd: "" },
+    { title: "Cart", imgfwd: cart, imgbwd: "" ,to: "cart"},
     { title: "Kshitij", imgfwd: dropdown, imgbwd: user },
 ];
 const Cart = () => {
