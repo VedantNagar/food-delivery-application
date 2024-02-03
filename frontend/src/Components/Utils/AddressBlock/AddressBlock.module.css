@@ -4,3 +4,28 @@
     border-radius: 0.625rem;
     padding: 1.5625rem 0rem 1.5625rem 1.5625rem;
 }
+@media(max-width: 1024px){
+    .addrsBlock{
+        width: 13rem;
+    }
+}
+@media(max-width: 768px){
+    .addrsBlock{
+        width: 11rem;
+    }
+}
+@media(max-width: 425px){
+    .addrsBlock{
+        width: 10rem;
+    }
+}
+@media(max-width: 375px){
+    .addrsBlock{
+        width: 9.5rem;
+    }
+}
+@media(max-width: 320px){
+    .addrsBlock{
+        width: 7.875rem;
+    }
+}
