@@ -1,17 +1,17 @@
 import classes from "./Cart.module.css";
 import Navbar from "../Utils/Navbar/Navbar";
-import dropdown from "../Main/images/dropdown.svg";
-import cart from "../Main/images/cart.svg";
-import user from "../Main/images/user.svg";
+import dropdown from "../HomePage/images/dropdown.svg";
+import cart from "../HomePage/images/cart.svg";
+import user from "../HomePage/images/user.svg";
 import NavSearchBar from "../Utils/NavSearchBar/NavSearchBar";
 import location from "./images/location.svg";
 import AddressBlock from "../Utils/AddressBlock/AddressBlock";
 import CartItem from "./CartItem/CartItem";
 import Button from "../Utils/Button/Button";
-import Footer from "../Utils/Footer/Footer"
+import Footer from "../Utils/Footer/Footer";
 const navbarRestaurantPage = [
     { title: "", imgfwd: "", imgbwd: "", component: <NavSearchBar /> },
-    { title: "Cart", imgfwd: cart, imgbwd: "" ,to: "cart"},
+    { title: "Cart", imgfwd: cart, imgbwd: "", to: "cart" },
     { title: "Kshitij", imgfwd: dropdown, imgbwd: user },
 ];
 const Cart = () => {
@@ -101,7 +101,9 @@ const Cart = () => {
                     </div>
                 </div>
             </div>
-            <div className={classes.footer}><Footer/></div>
+            <div className={classes.footer}>
+                <Footer />
+            </div>
         </>
     );
 };

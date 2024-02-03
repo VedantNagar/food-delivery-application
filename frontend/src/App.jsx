@@ -1,18 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Cart from "./Components/Cart/Cart";
-import Homepage from "./Components/Homepage/Homepage";
-import Main from "./Components/Main/Main";
+import SignIn from "./Components/Signin/Signin";
+import HomePage from "./Components/Homepage/Homepage";
 import RestaurantPage from "./Components/RestaurantPage/RestaurantPage";
-import AddressBlock from "./Components/Utils/AddressBlock/AddressBlock";
 import "./index.css";
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <Homepage />,
+        path: "/homepage",
+        element: <HomePage />,
     },
     {
         path: "/signin",
-        element: <Main />,
+        element: <SignIn />,
     },
     {
         path: "/restaurant-page",
