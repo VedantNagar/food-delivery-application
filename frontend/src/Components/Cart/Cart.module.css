@@ -6,6 +6,9 @@
     font-family: Poppins;
     margin-bottom: 4rem;
 }
+hr{
+    width: 100% !important;
+}
 .footer {
     width: 100vw;
     overflow: hidden;
@@ -27,6 +30,7 @@
     display: flex;
     gap: 1rem;
     margin: 1rem 0;
+    flex-wrap: wrap;
 }
 .notes {
     display: flex;
@@ -46,7 +50,7 @@
     justify-content: space-between;
 }
 .cart {
-    width: 25rem;
+    max-width: 25rem;
     padding: 1.5625rem;
     border-radius: 0.625rem;
     background: #f8f8f8;
@@ -55,6 +59,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 2rem;
+    overflow: hidden;
 }
 .items {
     height: 13.5rem;
@@ -63,6 +68,8 @@
 }
 .bill {
     color: #808080;
+    margin: 1rem 0;
+    font-size: 0.875rem;
 }
 .billInfo {
     display: flex;
@@ -72,4 +79,37 @@
 .btn {
     display: flex;
     justify-content: center;
+}
+@media(max-width: 1024px){
+    .cart{
+        width: 20rem;
+    }
+}
+@media(max-width: 768px){
+    .wrapper{
+        font-size: 0.75rem;
+    }
+    .notes form input {
+        width: 15rem;
+        height: 6.25rem;
+    }
+}
+@media(max-width: 652px){
+    .content{
+        flex-wrap: wrap;
+    }
+    .addresses{
+        flex-wrap: nowrap;
+    }
+}
+@media(max-width: 425px){
+    .right{
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media(max-width: 320px){
+    .topBottom{
+        justify-content:end;
+    }
 }

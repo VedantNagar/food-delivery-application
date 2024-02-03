@@ -1,3 +1,6 @@
+.cartItem{
+    width: 100%;
+}
 .from span{
     color: #EB5757;
 }
@@ -19,4 +22,14 @@
 
 .item .right a{
     cursor: pointer;
+}
+@media(max-width: 768px){
+    .cartItem .right{
+        font-size: 1rem;
+    }
+}
+@media(max-width: 320px){
+    .cartItem .right{
+        font-size: 0.75rem;
+    }
 }

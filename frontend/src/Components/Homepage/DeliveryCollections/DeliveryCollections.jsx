@@ -42,20 +42,20 @@ const DeliveryCollections = () => {
                         breakpoints={{
                             375: {
                                 slidesPerView: 1,
-                              },
+                            },
                             425: {
                                 slidesPerView: 2,
-                              },
+                            },
                             640: {
-                              slidesPerView: 2,
+                                slidesPerView: 2,
                             },
                             768: {
-                              slidesPerView: 4,
+                                slidesPerView: 4,
                             },
                             1024: {
-                              slidesPerView: 6,
+                                slidesPerView: 6,
                             },
-                          }}
+                        }}
                     >
                         {deliveryItems.map((item) => {
                             return (

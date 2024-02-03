@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import classes from "./Navbar.module.css";
 import logo from "../../../images/logo.svg";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
@@ -35,10 +36,18 @@ const Navbar = ({ list }) => {
                         {list.map((item) => {
                             return (
                                 <li key={item.title}>
-                                    {item.imgbwd && <img src={item.imgbwd} alt=""/>}
-                                    {item.title && <a href="#">{item.title}</a>}
-                                    {item.imgfwd && <img src={item.imgfwd} alt="" />}
-                                    {item.component && item.component}
+                                    <NavLink to={`/${item.to || "#"}`}>
+                                        {item.imgbwd && (
+                                            <img src={item.imgbwd} alt="" />
+                                        )}
+                                        {item.title && (
+                                            <a href="#">{item.title}</a>
+                                        )}
+                                        {item.imgfwd && (
+                                            <img src={item.imgfwd} alt="" />
+                                        )}
+                                        {item.component && item.component}
+                                    </NavLink>
                                 </li>
                             );
                         })}
