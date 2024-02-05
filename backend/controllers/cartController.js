@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const Food = require('../models/Food');
-const cart = require('../models/cart');
+const cartModel = require('../models/cart');
 // get cart
 /* const getCart = async(req,res)=>{
     const {id:user_ID} = req.params
@@ -21,9 +21,6 @@ const cart = require('../models/cart');
     })
 } */
 const getCart = async (req, res) => {
-
-
-
   try {
     //getting userID
     const userID = req.params.userID;
@@ -67,14 +64,15 @@ const addToCart = async (req, res) => {
       return res.json({ error: 'Invalid Input.Provide all details' });
     }
     //find user by ID
-    const user = await User.findByID(userID);
+    const user = await User.findById(userID);
+    /* console.log(user); */
 
     //check if user exists
     if (!user) {
       return res.json({ error: 'User not found' });
     }
     //finding food item by ID
-    const foodItem = await Food.findByID(foodID);
+    const foodItem = await Food.findById(foodID);
 
     // Check if the food item exists
     if (!foodItem) {
@@ -87,7 +85,7 @@ const addToCart = async (req, res) => {
     //creating a new cart if it doesn't exist
     if (!userCart) {
       userCart = new cartModel({
-        user: userID,
+        userID: userID,
         items: [],
       });
     }
@@ -97,8 +95,8 @@ const addToCart = async (req, res) => {
     );
 
     //if item is in the cart, incrementing its quantity , else adding the new element
-
-    if (itemIndex !== 1) {
+    /* console.log('Before Update:', userCart); */
+    if (itemIndex !== -1) {
       /* Item found, proceed with the logic */
       userCart.items[itemIndex].quantity += quantityToAdd;
     } else {
@@ -107,16 +105,23 @@ const addToCart = async (req, res) => {
         quantity: quantityToAdd,
       });
     }
+    /* console.log('After Update:', userCart); */
 
     //saving the updated cart
     await userCart.save();
-    res.json(userCart);
+
+    //calculating total quantity
+    /* const totalQuantity = userCart.items
+      .map((item) => item.quantity)
+      .reduce((total, quantity) => total + quantity, 0); */
+
+    //sending cart and quantity
+    res.json(userCart /* totalQuantity */);
   } catch (error) {
     console.error(error);
     res.json({ error: 'Internal server error' });
   }
 };
-
 
 //delete from cart
 
@@ -130,7 +135,6 @@ const removeFromCart = async (req, res) => {
     }
     //finding user
     const user = await User.findByID(userID);
-
 
     //checking if user exists
     if (!user) {
@@ -150,7 +154,7 @@ const removeFromCart = async (req, res) => {
 
     //check if item exists or not
 
-    if (itemIndex !== 1) {
+    if (itemIndex !== -1) {
       /* Item found, proceed with the logic */
       const existingCartItem = userCart.items[itemIndex];
 
@@ -171,7 +175,6 @@ const removeFromCart = async (req, res) => {
     console.log(error);
     res.json({ error: 'Internal Server Error' });
   }
-
 };
 
 //edit cart

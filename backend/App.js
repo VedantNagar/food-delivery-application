@@ -2,6 +2,7 @@ const express = require('express');
 const NotFoundMIddleware = require('./middleware/notFound');
 const connectDB = require('./database/connect');
 const morgan = require('morgan');
+const cors = require('cors')
 
 //routes
 const restRouter = require('./routes/restaurantRoutes');
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors())
 
 app.use('/api/v1/restaurant', restRouter);
 app.use('/api/v1/food', foodRouter);
