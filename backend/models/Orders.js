@@ -1,52 +1,55 @@
 const mongoose = require('mongoose');
 const food = require('./Food');
-const OrderItemSchema = new mongoose.Schema({
-  items: [
-    {
-      food: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'food',
+const OrderItemSchema = new mongoose.Schema(
+  {
+    items: [
+      {
+        food: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'food',
+        },
+        quantity: {
+          type: Number,
+          min: 1,
+        },
       },
-      quantity: {
-        type: Number,
-        min: 1,
-      },
+    ],
+    totalAmount: {
+      type: Number,
+      required: true,
     },
-  ],
-  totalAmount: {
-    type: Number,
-    required: true,
+    orderDate: {
+      type: Date,
+    },
+    paymentMethod: {
+      // COD// CARD // Net Banking // Google Pay
+      type: String,
+    },
+    orderStatus: {
+      // preparing // onway // delivered // cancelled
+      type: String,
+      default: 'preparing',
+    },
+    //add user
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+      required: true,
+    },
+    restaurant: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'restaurantModel',
+      required: true,
+    },
+
+    // {{abcd,2},{},{}}
   },
-  orderDate: {
-    type: Date,
-  },
-  paymentMethod: {
-    // COD// CARD // Net Banking // Google Pay
-    type: String,
-  },
-  orderStatus: {
-     // preparing // onway // delivered // cancelled 
-    type: String,
-  },
-  //add user
-  user:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'user',
-    required:true
-  },
-  restaurant:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'restaurantModel',
-    required:true
+  {
+    timestamps: true,
   }
+);
 
-  // {{abcd,2},{},{}}
-},
-{
-  timestamps: true,
-});
-
-OrderItemSchema.pre('find', function(next) {
+OrderItemSchema.pre('find', function (next) {
   this.populate('items.food');
   next();
 });
