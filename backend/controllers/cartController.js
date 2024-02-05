@@ -23,14 +23,14 @@ const cartModel = require('../models/cart');
 const getCart = async (req, res) => {
   try {
     //getting userID
-    const userID = req.params.userID;
+    const userID = req.body.userID;
 
     //checking userID
     if (!userID) {
       return res.json({ error: 'Provide userID' });
     }
     //finding the user
-    const user = await User.findByID(userID);
+    const user = await User.findById(userID);
 
     //checking if user exists
     if (!user) {
@@ -39,7 +39,7 @@ const getCart = async (req, res) => {
     const userName = `${user.first_name} ${user.last_name || ''}`;
 
     //finding user's cart using userID
-    const userCart = await cartModel.findOne({ user: userID });
+    const userCart = await cartModel.findOne({ userID: userID });
 
     //checking if the cart exists
     if (!userCart) {
@@ -80,7 +80,7 @@ const addToCart = async (req, res) => {
     }
 
     // Find the user's cart by user ID
-    let userCart = await cartModel.findOne({ user: userID });
+    let userCart = await cartModel.findOne({ userID: userID });
 
     //creating a new cart if it doesn't exist
     if (!userCart) {
@@ -89,20 +89,20 @@ const addToCart = async (req, res) => {
         items: [],
       });
     }
+
     // Find the index of the item in the cart's items array
     const itemIndex = userCart.items.findIndex((item) =>
       item.food.equals(foodID)
     );
 
     //if item is in the cart, incrementing its quantity , else adding the new element
-    /* console.log('Before Update:', userCart); */
     if (itemIndex !== -1) {
       /* Item found, proceed with the logic */
-      userCart.items[itemIndex].quantity += quantityToAdd;
+      userCart.items[itemIndex].quantity += parseInt(quantityToAdd);
     } else {
       userCart.items.push({
         food: foodID,
-        quantity: quantityToAdd,
+        quantity: parseInt(quantityToAdd),
       });
     }
     /* console.log('After Update:', userCart); */
@@ -110,13 +110,8 @@ const addToCart = async (req, res) => {
     //saving the updated cart
     await userCart.save();
 
-    //calculating total quantity
-    /* const totalQuantity = userCart.items
-      .map((item) => item.quantity)
-      .reduce((total, quantity) => total + quantity, 0); */
-
     //sending cart and quantity
-    res.json(userCart /* totalQuantity */);
+    res.json(userCart);
   } catch (error) {
     console.error(error);
     res.json({ error: 'Internal server error' });
@@ -134,7 +129,7 @@ const removeFromCart = async (req, res) => {
       return res.json({ error: 'Invalid action. Provide all details' });
     }
     //finding user
-    const user = await User.findByID(userID);
+    const user = await User.findById(userID);
 
     //checking if user exists
     if (!user) {
