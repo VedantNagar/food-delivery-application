@@ -12,14 +12,16 @@ const Navbar = ({ list }) => {
         <header>
             <nav>
                 <div className={classes.left}>
-                    <div className={classes.logo}>
-                        <img
-                            src={logo}
-                            alt="not found"
-                            className={classes.img}
-                        />
-                        <h2>Fudo</h2>
-                    </div>
+                    <NavLink to="/">
+                        <div className={classes.logo}>
+                            <img
+                                src={logo}
+                                alt="not found"
+                                className={classes.img}
+                            />
+                            <h2>Fudo</h2>
+                        </div>
+                    </NavLink>
                     <div className={classes.navBtn} onClick={toggleMenu}>
                         <MenuRoundedIcon
                             size="large"
