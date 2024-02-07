@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { userContext } from "../../../userContext/context";
 import classes from "./Signin.module.css";
 import { loginUrl } from "../../../../urls/userUrl";
-import Register from "../Register/Register";
+import Register from "../register/Register";
 import { Link, useSearchParams } from "react-router-dom";
 
 import Login from "../Login/Login";

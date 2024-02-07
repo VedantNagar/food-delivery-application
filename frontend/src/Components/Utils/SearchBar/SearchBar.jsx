@@ -1,8 +1,8 @@
 import classes from "./SearchBar.module.css";
-import location from "../../HomePage/images/location.svg";
+import location from "../../Homepage/images/location.svg";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import search from "../../HomePage/images/Search.svg";
+import search from "../../Homepage/images/Search.svg";
 const area = [
     { label: "Janakpuri" },
     { label: "Patel Nagar" },
