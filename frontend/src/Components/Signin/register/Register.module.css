@@ -51,7 +51,9 @@ input{
 .right p{
     font-family: 'Roboto';
 }
-
+.mode{
+    margin: 1rem 0;
+}
 @media (max-width: 1024px) {
     .left{
         display: flex;
