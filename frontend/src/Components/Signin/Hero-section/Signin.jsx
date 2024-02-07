@@ -9,7 +9,8 @@ import classes from "./Signin.module.css";
 import { loginUrl } from "../../../../urls/userUrl";
 import Register from "../Register/Register";
 import { Link, useSearchParams } from "react-router-dom";
-import Button from "../../Utils/Button/Button";
+
+import Login from "../Login/Login";
 const Signin = () => {
     const [searchParams] = useSearchParams();
     const login = searchParams.get("mode") === "login";
@@ -49,8 +50,8 @@ const Signin = () => {
     return (
         <div className={classes.hero}>
             <div className={classes.left}>
-                <h1>Welcome Back.</h1>
-                <h3>Let's sign you in.</h3>
+                <h1>{login ? "Welcome Back." : "Hey there, "}</h1>
+                <h3>Let's {login ? "log" : "sign"} you in.</h3>
                 <img
                     src={heroImg}
                     alt="not found"
@@ -60,43 +61,7 @@ const Signin = () => {
             <div className={classes.right}>
                 <div>
                     <div>
-                        {login ? (
-                            <form
-                                onSubmit={registerUser}
-                                className={classes.formAction}
-                            >
-                                <h1>Login</h1>
-                                <div className={classes.input}>
-                                    <input
-                                        type="email"
-                                        placeholder="Enter email"
-                                        value={data.email}
-                                        onChange={(e) =>
-                                            setData({
-                                                ...data,
-                                                email: e.target.value,
-                                            })
-                                        }
-                                    />
-                                </div>
-                                <div className={classes.input}>
-                                    <input
-                                        type="password"
-                                        placeholder="Enter password"
-                                        value={data.password}
-                                        onChange={(e) =>
-                                            setData({
-                                                ...data,
-                                                password: e.target.value,
-                                            })
-                                        }
-                                    />
-                                </div>
-                                <Button type="submit" title={"Continue"}/>
-                            </form>
-                        ) : (
-                            <Register />
-                        )}
+                        {login ? <Login /> : <Register />}
                         <p className={classes.mode}>
                             Want to
                             <Link to={`?mode=${login ? "signup" : "login"}`}>
