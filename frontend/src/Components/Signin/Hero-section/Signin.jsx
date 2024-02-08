@@ -1,27 +1,52 @@
-import classes from "./Signin.module.css";
+import React, { useState } from "react";
 import heroImg from "../../../images/hero-section-landing.svg";
-import { Button } from "@mui/material";
-import { Link, Form, useSearchParams } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { userContext } from "../../../userContext/context";
+import classes from "./Signin.module.css";
+import { loginUrl } from "../../../../urls/userUrl";
+import Register from "../register/Register";
+import { Link, useSearchParams } from "react-router-dom";
+
+import Login from "../Login/Login";
 const Signin = () => {
-    const [searchParams] = useSearchParams();
-    const isLogin = searchParams.get("mode") === "login";
     const submitHandler = (e) => {
         e.preventDefault();
+        // console.log(data)
+        const { email, password } = data;
+        try {
+            const { data } = await axios.post(loginUrl, {
+                email,
+                password,
+            });
+            if (data.error) {
+                toast.error(data.error, {
+                    duration: 2000,
+                });
+            } else {
+                setData({});
+                toast.success("Logged in", {
+                    duration: 2000,
+                });
+                setIsLogin(true);
+                navigate("/dashboard");
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
+
     return (
         <div className={classes.hero}>
             <div className={classes.left}>
                 <h1>Welcome Back.</h1>
                 <h3>Let's sign you in.</h3>
-                <img
-                    src={heroImg}
-                    alt="not found"
-                    className={classes.signInImg}
-                />
+                <img src={heroImg} alt="not found" className={classes.signInImg}/>
             </div>
             <div className={classes.right}>
-                <Form method="post" className={classes.formAction}>
-                    <h1>{isLogin ? "Log in" : "Create a new user"}</h1>
+                <form action="#" className={classes.formAction}>
                     <input
                         type="email"
                         name="email"
@@ -34,40 +59,62 @@ const Signin = () => {
                         id="password"
                         placeholder="Password"
                     />
-
-                    <Button
-                        variant="contained"
+                </form>
+                <Button
+                    variant="contained"
+                    style={{
+                        backgroundColor: "#FF4040",
+                        fontSize: "1.175rem",
+                        textTransform: "none",
+                        padding: "13px 110px",
+                        
+                    }}
+                    sx={{
+                        width:{
+                            xs:"17rem",
+                            sm:"17rem",
+                            md: "19rem",
+                            lg:"19rem",
+                            xl:"19rem"
+                        }
+                    }}
+                    disableElevation
+                    onClick={submitHandler}
+                >
+                    Continue
+                </Button>
+                <div className={classes.icons}>
+                    <FacebookTwoToneIcon
                         style={{
-                            backgroundColor: "#FF4040",
-                            fontSize: "1.175rem",
-                            textTransform: "none",
-                            padding: "13px 110px",
+                            width: "3rem",
+                            height: "3rem",
+                            border: "1px solid black",
+                            borderRadius: "100%",
                         }}
-                        sx={{
-                            width: {
-                                xs: "17rem",
-                                sm: "17rem",
-                                md: "19rem",
-                                lg: "19rem",
-                                xl: "19rem",
-                            },
+                    />
+                    <GoogleIcon
+                        style={{
+                            width: "3rem",
+                            height: "3rem",
+                            border: "1px solid black",
+                            borderRadius: "100%",
                         }}
-                        disableElevation
-                        onClick={submitHandler}
-                    >
-                        Continue
-                    </Button>
+                    />
+                    <AppleIcon
+                        style={{
+                            width: "3rem",
+                            height: "3rem",
+                            border: "1px solid black",
+                            borderRadius: "100%",
+                        }}
+                    />
+                </div>
                     <p>
-                        Want to
-                        <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
-                            {isLogin ? " Create new user " : " Login "}
-                        </Link>
-                        ?
+                        Don't have an account? <a href="#">Sign up</a>
                     </p>
-                </Form>
-                
             </div>
         </div>
     );
 };
+
 export default Signin;

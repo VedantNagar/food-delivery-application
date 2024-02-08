@@ -10,17 +10,17 @@ const register = async (req, res) => {
     req.body;
   if (!first_name) {
     return res.json({
-      error: 'PLease provide name',
+      error: 'Please provide name',
     });
   }
   if (!password) {
     return res.json({
-      error: 'PLease provide Email',
+      error: 'Please provide Email',
     });
   }
   if (!role) {
     return res.json({
-      error: 'please provide role',
+      error: 'Please provide role',
     });
   }
   if (!contact) {
@@ -30,7 +30,7 @@ const register = async (req, res) => {
   }
   if (!email) {
     return res.json({
-      error: 'PLease provide email',
+      error: 'Please provide email',
     });
   }
   const exist = await User.findOne({ email });
@@ -49,8 +49,9 @@ const register = async (req, res) => {
     address,
     role,
   });
+  user.password = undefined;
   jwt.sign(
-    { email: user.email, id: user._id, name: user.first_name ,role:user.role},
+    { email: user.email, id: user._id, name: user.first_name, role: user.role },
     process.env.JWT_SECRET,
     {},
     (err, token) => {
@@ -77,13 +78,19 @@ const login = async (req, res) => {
     });
   } else {
     jwt.sign(
-      { email: user.email, id: user._id, name: user.first_name ,role:user.role},
+      {
+        email: user.email,
+        id: user._id,
+        name: user.first_name,
+        role: user.role,
+      },
       process.env.JWT_SECRET,
       {},
       (err, token) => {
         if (err) {
           throw err;
         }
+        user.password = undefined;
         res.cookie('token', token).json(user);
       }
     );

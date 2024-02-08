@@ -11,9 +11,9 @@ const authMiddleware = require('../middleware/auth');
 router.use(authMiddleware);
 
 // CRUD operations for carts
-router.get('/getAllItems', getCart);
+router.get('/getAllFood', getCart);
 router.post('/addToCart', addToCart);
-router.post('/removeFromCart', removeFromCart);
+router.delete('/removeFromCart', removeFromCart);
 
 // router.post('/carts', CartController.createCart);//allows creation of new cart
 // router.get('/carts/:cartId', CartController.getCartById);//retrieves cart details based on ID
