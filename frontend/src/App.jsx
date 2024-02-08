@@ -6,7 +6,6 @@ import RestaurantPage from './Components/RestaurantPage/RestaurantPage';
 import { UserContextProvider } from './userContext/context.jsx';
 import './index.css';
 const router = createBrowserRouter([
-
   {
     index: true,
     element: <SignIn />,

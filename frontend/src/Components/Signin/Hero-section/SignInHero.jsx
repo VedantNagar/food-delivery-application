@@ -5,13 +5,13 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { userContext } from "../../../userContext/context";
-import classes from "./Signin.module.css";
+import classes from "./SignInHero.module.css";
 import { loginUrl } from "../../../../urls/userUrl";
 import Register from "../register/Register";
 import { Link, useSearchParams } from "react-router-dom";
 
 import Login from "../Login/Login";
-const Signin = () => {
+const SignInHero = () => {
     const [searchParams] = useSearchParams();
     const login = searchParams.get("mode") === "login";
     const { setIsLogin } = useContext(userContext);
@@ -76,4 +76,4 @@ const Signin = () => {
     );
 };
 
-export default Signin;
+export default SignInHero;
