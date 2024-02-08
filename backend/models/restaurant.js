@@ -50,8 +50,14 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  owner:{
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref:"users"
+  },
   orderID: [{
     type: mongoose.Schema.Types.ObjectId,
+    ref:"orders",
     required: false,
   }],
 });

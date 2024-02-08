@@ -38,6 +38,12 @@ const createOrder = async (req, res) => {
   try {
     const { items, totalAmount, paymentMethod, orderStatus, userId } = req.body;
 
+    const user = User.findById({userId})
+    if(!user){
+      res.status(400).json({
+        msg:"user not found"
+      })
+    }
     // Create an itemsay of order items with the required structure
     // Create a new order for each restaurant
     const orders = [];
@@ -128,14 +134,14 @@ const getOrderById = async (req, res) => {
 
   // Find the order by ID
   const order = await Order.findById(orderId)
-    .populate({
-      path: 'items.food',
+    // .populate({
+    //   path: 'items.food',
 
-      select: 'name price', // Specify the fields you want to select from the populated model
-    })
-    .select(
-      'items totalAmount paymentMethod orderStatus user orderDate restaurant'
-    );
+    //   select: 'name price', // Specify the fields you want to select from the populated model
+    // })
+    // .select(
+    //   'items totalAmount paymentMethod orderStatus user orderDate restaurant'
+    // );
 
   // Check if the order exists
   if (!order) {
