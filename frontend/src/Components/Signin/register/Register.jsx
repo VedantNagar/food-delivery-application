@@ -16,7 +16,7 @@ const Register = () => {
         email: "",
         password: "",
     });
-    console.log(data);
+    // console.log(data);
     const registerUser = async (e) => {
         e.preventDefault();
         console.log(data);

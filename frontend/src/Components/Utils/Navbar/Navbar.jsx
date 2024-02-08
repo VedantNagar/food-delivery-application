@@ -43,7 +43,7 @@ const Navbar = ({ list }) => {
                                             <img src={item.imgbwd} alt="" />
                                         )}
                                         {item.title && (
-                                            <a href="#">{item.title}</a>
+                                            <p href="#">{item.title}</p>
                                         )}
                                         {item.imgfwd && (
                                             <img src={item.imgfwd} alt="" />
