@@ -1,13 +1,13 @@
 import Footer from "../Utils/Footer/Footer";
 import Navbar from "../Utils/Navbar/Navbar";
-import Signin from "./Hero-section/Signin";
+import SignInHero from "./Hero-section/SignInHero";
 import Menu from "./Menu/Menu";
 import Services from "./Services/Services";
 import classes from "./Signin.module.css";
 const navbarSignIn = [
     { title: "Sign In", to: "signin" },
     { title: "Services" },
-    { title: "Menu" , to: "homepage"},
+    { title: "Menu", to: "homepage" },
     { title: "Contact" },
 ];
 
@@ -16,7 +16,7 @@ const SignIn = () => {
         <>
             <div className={classes.wrapper}>
                 <Navbar list={navbarSignIn} />
-                <Signin />             
+                <SignInHero />
                 <Services />
                 <Menu />
             </div>
