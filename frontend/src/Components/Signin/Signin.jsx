@@ -3,7 +3,7 @@ import Navbar from "../Utils/Navbar/Navbar";
 import Signin from "./Hero-section/Signin";
 import Menu from "./Menu/Menu";
 import Services from "./Services/Services";
-import classes from "./SignIn.module.css";
+import classes from "./Signin.module.css";
 const navbarSignIn = [
     { title: "Sign In", to: "signin" },
     { title: "Services" },
@@ -16,7 +16,7 @@ const SignIn = () => {
         <>
             <div className={classes.wrapper}>
                 <Navbar list={navbarSignIn} />
-                <Signin />
+                <Signin />             
                 <Services />
                 <Menu />
             </div>

@@ -13,15 +13,20 @@ const singleFood = async (req, res) => {
   res.status(200).json(item);
 };
 
-
 // Sort food items by price range in increasing order and filter by name, including restaurant information
 const sortFoodsByPriceRange = async (req, res) => {
   try {
     const { minPrice, maxPrice, sort = 'price', name } = req.query;
 
     // Basic input validation for price range
-    if (!minPrice || !maxPrice || isNaN(minPrice) || isNaN(maxPrice)) {
-      return res.json({
+    if (
+      !minPrice ||
+      !maxPrice ||
+      isNaN(minPrice) ||
+      isNaN(maxPrice) ||
+      maxPrice < minPrice
+    ) {
+      return res.status(400).json({
         error: 'Please provide valid minPrice and maxPrice as numbers',
       });
     }
@@ -41,7 +46,7 @@ const sortFoodsByPriceRange = async (req, res) => {
     let result = foodModal
       .find(query)
       .populate({
-        path: 'restaurant', // Assuming the reference field is named 'restaurant'
+        path: 'restaurantID', // Assuming the reference field is named 'restaurant'
         select: 'name rating', // Select the fields you want to include
       })
       .sort(sort);

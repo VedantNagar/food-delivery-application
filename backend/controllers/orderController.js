@@ -1,7 +1,7 @@
 const Order = require('../models/Orders');
-const Food = require('../models/Food')
+const Food = require('../models/Food');
 const Restaurant = require('../models/restaurant');
-const User = require('../models/user')
+const User = require('../models/user');
 //  Create a new order
 // const createOrder = async (req, res) => {
 //   const { items, totalAmount, paymentMethod, orderStatus, userId } = req.body;
@@ -36,7 +36,6 @@ const User = require('../models/user')
 
 const createOrder = async (req, res) => {
   try {
-
     const { items, totalAmount, paymentMethod, orderStatus, userId } = req.body;
 
     // Create an itemsay of order items with the required structure
@@ -45,7 +44,7 @@ const createOrder = async (req, res) => {
 
     // Group order items by restaurantID
     const groupedItems = await groupByRestaurant(items);
-    console.log(groupedItems)
+    console.log(groupedItems);
 
     // Iterate through each restaurant's items and create a separate order
     for (const restaurantID in groupedItems) {
@@ -61,22 +60,24 @@ const createOrder = async (req, res) => {
         restaurant: restaurantID,
       });
 
-
       const savedOrder = await newOrder.save();
 
       //add order in restaurant datanase
-      await Restaurant.findByIdAndUpdate(restaurantID,{$push: { orderID:savedOrder._id }})
+      await Restaurant.findByIdAndUpdate(restaurantID, {
+        $push: { orderID: savedOrder._id },
+      });
 
-      orders.push(savedOrder._id);
+      orders.push(savedOrder);
     }
     //update order in  user
-    await User.findByIdAndUpdate(userId, { $push: { orderID: { $each: orders } } });
-    
+    await User.findByIdAndUpdate(userId, {
+      $push: { orderID: { $each: orders } },
+    });
 
     res.json(orders);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -84,20 +85,24 @@ const createOrder = async (req, res) => {
 async function groupByRestaurant(items) {
   try {
     // Fetch all unique restaurant IDs from the food items
-    const restaurantIds = Array.from(new Set(items.map(item => item.food)));
+    const restaurantIds = Array.from(new Set(items.map((item) => item.food)));
 
     // Fetch the restaurant ID for each food item from the Food model
-    const restaurantIdMap = await Promise.all(restaurantIds.map(async (foodId) => {
-      const foodDoc = await Food.findById(foodId);
-      if (!foodDoc) {
-        throw new Error(`Food with ID ${foodId} not found`);
-      }
-      return { foodId, restaurantId: foodDoc.restaurantID };
-    }));
+    const restaurantIdMap = await Promise.all(
+      restaurantIds.map(async (foodId) => {
+        const foodDoc = await Food.findById(foodId);
+        if (!foodDoc) {
+          throw new Error(`Food with ID ${foodId} not found`);
+        }
+        return { foodId, restaurantId: foodDoc.restaurantID };
+      })
+    );
 
     // Create a mapping of restaurant IDs to their corresponding food items
     const groupedItems = items.reduce((acc, item) => {
-      const { restaurantId } = restaurantIdMap.find(mapItem => mapItem.foodId === item.food);
+      const { restaurantId } = restaurantIdMap.find(
+        (mapItem) => mapItem.foodId === item.food
+      );
       if (!acc[restaurantId]) {
         acc[restaurantId] = [];
       }
@@ -125,10 +130,12 @@ const getOrderById = async (req, res) => {
   const order = await Order.findById(orderId)
     .populate({
       path: 'items.food',
-     
+
       select: 'name price', // Specify the fields you want to select from the populated model
     })
-    .select('items totalAmount paymentMethod orderStatus user orderDate restaurant');
+    .select(
+      'items totalAmount paymentMethod orderStatus user orderDate restaurant'
+    );
 
   // Check if the order exists
   if (!order) {
@@ -140,8 +147,8 @@ const getOrderById = async (req, res) => {
 //delete order - orderstatus(cancelled) by Orderid
 
 const deleteOrder = async (req, res) => {
-  const { id:orderId } = req.params;
-  const { userId} = req.body
+  const { id: orderId } = req.params;
+  const { userId } = req.body;
   //input validation for orderID
   if (!orderId || !userId) {
     return res.status(400).json({ error: 'Provide valid orderId and userId' });
@@ -195,4 +202,4 @@ const deleteOrder = async (req, res) => {
 
 module.exports = { getOrderById, createOrder, deleteOrder };
 
-//user -> order -> many rest (id) 
+//user -> order -> many rest (id)

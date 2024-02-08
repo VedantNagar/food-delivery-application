@@ -1,0 +1,38 @@
+
+.formAction {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+input{
+    width: 19rem;
+    padding: 1rem;
+    background-color: #ECECEC;
+    color: #7E7C7C;
+    border: 1px solid #AFA9A9;
+    border-radius: 0.25rem;
+}
+
+.right a{
+    color: #256CD7;
+    font-family: 'Roboto';
+}
+.right p{
+    font-family: 'Roboto';
+}
+.mode{
+    margin: 1rem 0;
+}
+
+@media (max-width: 820px) {
+    
+    input{
+        width: 17rem;
+        padding: 1rem;
+        background-color: #ECECEC;
+        color: #7E7C7C;
+        border: 1px solid #AFA9A9;
+        border-radius: 0.25rem;
+    }
+    
+}
