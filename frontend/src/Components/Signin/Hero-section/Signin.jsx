@@ -12,7 +12,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import Login from "../Login/Login";
 const Signin = () => {
-    const submitHandler = (e) => {
+    const submitHandler = async(e) => {
         e.preventDefault();
         // console.log(data)
         const { email, password } = data;
