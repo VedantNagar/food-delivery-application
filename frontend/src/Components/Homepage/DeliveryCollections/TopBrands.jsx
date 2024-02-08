@@ -1,9 +1,9 @@
-import mcd from "../../HomePage/images/mcd.svg";
-import dominos from "../../HomePage/images/dominos.svg";
-import kfc from "../../HomePage/images/kfc.svg";
-import bk from "../../HomePage/images/bk.svg";
-import subway from "../../HomePage/images/subway.svg";
-import lpp from "../../HomePage/images/lpp.svg";
+import mcd from "../../Homepage/images/mcd.svg";
+import dominos from "../../Homepage/images/dominos.svg";
+import kfc from "../../Homepage/images/kfc.svg";
+import bk from "../../Homepage/images/bk.svg";
+import subway from "../../Homepage/images/subway.svg";
+import lpp from "../../Homepage/images/lpp.svg";
 import classes from "./DeliveryCollections.module.css";
 import styles from "../../Utils/CommonStyles/commonStyles.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
