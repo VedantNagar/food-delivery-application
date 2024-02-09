@@ -6,6 +6,7 @@ import RestaurantPage from "./Components/RestaurantPage/RestaurantPage";
 import { UserContextProvider } from "./userContext/context.jsx";
 import "./index.css";
 import Dashboard from "./Components/Dashboard/Dashboard.jsx";
+import Test from "./Test";
 const router = createBrowserRouter([
     {
         index: true,
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <Dashboard />,
+    },
+    {
+        path: "/test",
+        element: <Test />,
     },
 ]);
 function App() {
