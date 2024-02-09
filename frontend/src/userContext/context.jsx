@@ -28,6 +28,7 @@ export function UserContextProvider({ children }) {
     if (isLogin && token) {
       fetchData();
     }
+    
   }, [isLogin]);
 
   const logOut = () => {
