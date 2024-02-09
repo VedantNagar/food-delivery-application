@@ -55,7 +55,7 @@ const Register = () => {
                     password: "",
                 });
                 toast.success("Login Successful. Welcome!");
-                navigate("/");
+                navigate("/homepage");
             }
         } catch (error) {
             console.log(error);
@@ -133,7 +133,7 @@ const Register = () => {
                     }
                 />
             </div>
-            <Button type="submit" title={"Continue"}/>
+            <Button type="submit" title={"Continue"} />
         </form>
     );
 };

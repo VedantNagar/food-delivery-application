@@ -40,7 +40,7 @@ const SignInHero = () => {
                     duration: 2000,
                 });
                 setIsLogin(true);
-                navigate("/dashboard");
+                navigate("/homepage");
             }
         } catch (error) {
             console.log(error);
