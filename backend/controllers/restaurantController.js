@@ -3,6 +3,7 @@ const FoodModal = require('../models/Food');
 const Order = require('../models/Orders');
 const User = require('../models/user');
 const restaurant = require('../models/restaurant');
+const user = require('../models/user');
 
 // const getRestaurant = async (req,res) => {
 //     const { id: restaurantID } = req.params;
@@ -113,7 +114,8 @@ const editRestaurant = async (req, res) => {
 
 const createRestaurant = async (req, res) => {
   try {
-    const { name, about, address, phone, opening_hours } = req.body;
+    const { name, about, address, phone, opening_hours ,owner} = req.body;
+    
     const restaurant = await restaurantModel.create(req.body);
 
     // Send the created restaurant object in the response
@@ -152,13 +154,11 @@ const changeOrderStatus = async (req, res) => {
 
   //checking user role
   const userId = req.user.Id; //!! CHECK THIS !!
-  const user = await User.findById(userId);
+  
 
   //user = true
   //user -> role = customer
-  if (!user && user.role !== 'rest_owner') {
-    return res.status(403).json({ error: 'Cannot access' });
-  }
+  
 
   //validating order status
   const possibleOrderStatus = [
@@ -196,12 +196,15 @@ const changeOrderStatus = async (req, res) => {
 const getorders = async(req,res) => {
   const {id:restId} = req.params
 
-  const orders = await restaurant.findById({restId}).populate("orderID")
-  if(!restId){
+  const rest = await restaurant.findById(restId)
+  if(!rest){
     return res.status(404).json({
       msg:"restaurant does not exist"
     })
   }
+
+  const orders = rest.orderID
+  
   return res.status(200).json({orders})
 }
 
