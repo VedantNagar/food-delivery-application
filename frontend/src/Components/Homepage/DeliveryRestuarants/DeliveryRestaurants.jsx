@@ -8,9 +8,14 @@ const DeliveryRestaurants = ({ list }) => {
                 Delivery Restaurants in Delhi NCR
             </h2>
             <div className={classes.deliveryItems}>
-                {list.map((restaurant)=>{
-                    return <RestaurantCard restaurant={restaurant} key={restaurant?.info?.resId}/>
-                } )}
+                {list.map((restaurant) => {
+                    return (
+                        <RestaurantCard
+                            restaurant={restaurant}
+                            key={restaurant?._id}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
