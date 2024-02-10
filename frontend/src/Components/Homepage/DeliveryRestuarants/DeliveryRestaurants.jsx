@@ -9,7 +9,7 @@ const DeliveryRestaurants = ({ list }) => {
             </h2>
             <div className={classes.deliveryItems}>
                 {list.map((restaurant)=>{
-                    return <RestaurantCard restaurant={restaurant}/>
+                    return <RestaurantCard restaurant={restaurant} key={restaurant?.info?.resId}/>
                 } )}
             </div>
         </div>

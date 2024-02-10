@@ -45,7 +45,7 @@ const RestaurantCard = ({ restaurant }) => {
                         <div className={classes.cuisinesContainer}>
                             {cuisines.map((cuisine, i) => {
                                 return (
-                                    <span className={classes.cuisine}>
+                                    <span className={classes.cuisine} key={cuisine}>
                                         {cuisine}
                                         {i !== cuisines.length - 1
                                             ? ", "

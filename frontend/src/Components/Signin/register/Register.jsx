@@ -65,25 +65,29 @@ const Register = () => {
     return (
         <form onSubmit={registerUser} className={classes.formAction}>
             <h1>Register</h1>
-            <div className={classes.input}>
-                <input
-                    type="text"
-                    placeholder="Enter First Name"
-                    value={data.first_name}
-                    onChange={(e) =>
-                        setData({ ...data, first_name: e.target.value })
-                    }
-                />
-            </div>
-            <div className={classes.input}>
-                <input
-                    type="text"
-                    placeholder="Enter Last Name"
-                    value={data.last_name}
-                    onChange={(e) =>
-                        setData({ ...data, last_name: e.target.value })
-                    }
-                />
+            <div className={classes.cover}>
+                <div className={`${classes.input}`}>
+                    <input
+                        className={classes.inline}
+                        type="text"
+                        placeholder="First Name"
+                        value={data.first_name}
+                        onChange={(e) =>
+                            setData({ ...data, first_name: e.target.value })
+                        }
+                    />
+                </div>
+                <div className={`${classes.input}`}>
+                    <input
+                        className={classes.inline}
+                        type="text"
+                        placeholder="Last Name"
+                        value={data.last_name}
+                        onChange={(e) =>
+                            setData({ ...data, last_name: e.target.value })
+                        }
+                    />
+                </div>
             </div>
             <div className={classes.input}>
                 <input
@@ -106,12 +110,13 @@ const Register = () => {
                 />
             </div>
             <div className={classes.input}>
-                <input
-                    type="text"
-                    placeholder="Enter Role"
+                <select
                     value={data.role}
                     onChange={(e) => setData({ ...data, role: e.target.value })}
-                />
+                >
+                    <option defaultValue>Customer</option>
+                    <option>Owner</option>
+                </select>
             </div>
             <div className={classes.input}>
                 <input
