@@ -25,9 +25,9 @@ const HomePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             const allFoodData = await axios.get(allFoodUrl);
-            // const allRestaurantData = await axios.get(getAllRestaurantUrl)
+            const allRestaurantData = await axios.get(getAllRestaurantUrl)
             console.log(allFoodData);
-            // console.log(allRestaurantData)
+            console.log(allRestaurantData)
         };
         fetchData();
     }, []);
