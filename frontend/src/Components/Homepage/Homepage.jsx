@@ -10,7 +10,7 @@ import DeliveryRestuarants from "./DeliveryRestuarants/DeliveryRestaurants.jsx";
 import { restaurants } from "../../data/restaurants.js";
 import Footer from "../Utils/Footer/Footer.jsx";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { allFoodUrl } from "../../../urls/foodUrl.js";
 import { getAllRestaurantUrl } from "../../../urls/restaurantUrl.js";
 const navbarHomePage = [
@@ -20,17 +20,23 @@ const navbarHomePage = [
     { title: "Kshitij", imgfwd: dropdown, imgbwd: user },
 ];
 
-const restaurantList = restaurants;
 const HomePage = () => {
+    const [restaurantData, setRestaurantData] = useState([]);
+    const restaurantList = restaurantData;
     useEffect(() => {
         const fetchData = async () => {
-            const allFoodData = await axios.get(allFoodUrl);
-            const allRestaurantData = await axios.get(getAllRestaurantUrl)
-            console.log(allFoodData);
-            console.log(allRestaurantData)
+            try {
+                const response = await axios.get(getAllRestaurantUrl);
+                console.log(response.data); // Verify the structure of the response
+                setRestaurantData(response.data.restaurants);
+            } catch (error) {
+                console.error("Error fetching restaurant data:", error);
+            }
         };
         fetchData();
     }, []);
+    
+    console.log(restaurantData);
     return (
         <>
             <div className={classes.wrapper}>

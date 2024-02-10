@@ -3,11 +3,11 @@ import { FaStar } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { NavLink } from "react-router-dom";
 const RestaurantCard = ({ restaurant }) => {
-    const name = restaurant?.info?.name ?? "";
-    const coverImg = restaurant?.info?.image?.url;
-    const deliveryTime = restaurant?.order?.deliveryTime;
-    const rating = restaurant?.info?.rating?.rating_text;
-    const approxPrice = restaurant?.info?.cfo?.text;
+    const name = restaurant?.name ?? "";
+    const coverImg = restaurant?.image ?? "";
+    const deliveryTime = restaurant?.order?.deliveryTime ?? "";
+    const rating = restaurant?.rating;
+    const approxPrice = restaurant?.phone;
     const offers = restaurant?.bulkOffers ?? [];
     const discount =
         offers.length > 1
@@ -15,9 +15,7 @@ const RestaurantCard = ({ restaurant }) => {
             : offers.length === 1
             ? offers[0].text
             : null;
-    const cuisines = restaurant?.info?.cuisine
-        ?.map((item) => item.name)
-        .slice(0, 3);
+    const cuisines = restaurant?.about;
     return (
         <NavLink to="/restaurant-page">
             <div className={classes.card}>
@@ -43,16 +41,7 @@ const RestaurantCard = ({ restaurant }) => {
                     </div>
                     <div className={classes.secondRow}>
                         <div className={classes.cuisinesContainer}>
-                            {cuisines.map((cuisine, i) => {
-                                return (
-                                    <span className={classes.cuisine} key={cuisine}>
-                                        {cuisine}
-                                        {i !== cuisines.length - 1
-                                            ? ", "
-                                            : "..."}
-                                    </span>
-                                );
-                            })}
+                            <span className={classes.cuisine}>{cuisines}</span>
                         </div>
                         <span className={classes.cfo}>{approxPrice}</span>
                     </div>
