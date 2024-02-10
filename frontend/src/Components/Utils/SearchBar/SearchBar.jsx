@@ -16,17 +16,17 @@ const area = [
     { label: "Paschim Vihar" },
 ];
 const SearchBar = () => {
-    const [name,setName] = useState("")
-    const [minPrice,setMinPrice] = useState(null)
-    const [maxPrice,setMaxPrice] = useState(null)
-    useEffect(() => {
-        const fetchData = async() => {
+    // const [name,setName] = useState("")
+    // const [minPrice,setMinPrice] = useState(null)
+    // const [maxPrice,setMaxPrice] = useState(null)
+    // useEffect(() => {
+    //     const fetchData = async() => {
 
-            const allFood = await axios.get(allFoodUrl)
-            console.log(allFood)
-        }
-        fetchData()
-    },[name,minPrice,maxPrice])
+    //         const allFood = await axios.get(allFoodUrl)
+    //         console.log(allFood)
+    //     }
+    //     fetchData()
+    // },[name,minPrice,maxPrice])
     return (
         <div className={classes.searchBar}>
             <div className={classes.left}>

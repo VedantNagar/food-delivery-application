@@ -5,7 +5,6 @@ import axios from 'axios'
 const Test = () => {
     useEffect(() => {
         const fetchData = async() => {
-
             const data = await axios.get(allFoodUrl)
             console.log(data)
         }
