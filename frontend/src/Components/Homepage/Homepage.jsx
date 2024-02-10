@@ -7,11 +7,10 @@ import Hero from "./Hero/Hero.jsx";
 import DeliveryCollections from "./DeliveryCollections/DeliveryCollections.jsx";
 import TopBrands from "./DeliveryCollections/TopBrands.jsx";
 import DeliveryRestuarants from "./DeliveryRestuarants/DeliveryRestaurants.jsx";
-import { restaurants } from "../../data/restaurants.js";
 import Footer from "../Utils/Footer/Footer.jsx";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { allFoodUrl } from "../../../urls/foodUrl.js";
+
 import { getAllRestaurantUrl } from "../../../urls/restaurantUrl.js";
 const navbarHomePage = [
     { title: "Order Now", imgfwd: "", imgbwd: "" },
@@ -27,7 +26,6 @@ const HomePage = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(getAllRestaurantUrl);
-                console.log(response.data); // Verify the structure of the response
                 setRestaurantData(response.data.restaurants);
             } catch (error) {
                 console.error("Error fetching restaurant data:", error);
