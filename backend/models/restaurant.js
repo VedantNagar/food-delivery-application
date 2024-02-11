@@ -20,6 +20,14 @@ const restaurantSchema = new mongoose.Schema({
   image: {
     type: [String],
   },
+  cft:{
+    type:String,
+    required:false
+  },
+  discount:{
+    type:String,
+    required:false
+  },
   menu: {
     type: [
       {
@@ -33,7 +41,7 @@ const restaurantSchema = new mongoose.Schema({
           type: Number,
         },
         image: {
-          type: String,
+          type: [String],
         },
         category: {
           type: String,
