@@ -5,22 +5,45 @@ import cart from "../Homepage/images/cart.svg";
 import user from "../Homepage/images/user.svg";
 import NavSearchBar from "../Utils/NavSearchBar/NavSearchBar";
 import Banner from "./Banner/Banner";
-import Menu from "./Menu/Menu";
 import Footer from "../Utils/Footer/Footer";
+import { useEffect } from "react";
+import { getSingleRestaurantUrl } from "../../../urls/restaurantUrl";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import MenuCard from "./Menu/MenuCard";
 const navbarRestaurantPage = [
     { title: "", imgfwd: "", imgbwd: "", component: <NavSearchBar /> },
     { title: "Cart", imgfwd: cart, imgbwd: "", to: "cart" },
     { title: "Kshitij", imgfwd: dropdown, imgbwd: user },
 ];
 const RestaurantPage = () => {
+    const params = useParams();
+    const [fetchedData, setFetchData] = useState([]);
+    useEffect(() => {
+        const fetchRestaurantInfo = async () => {
+            try {
+                const response = await axios.get(
+                    `${getSingleRestaurantUrl}/${params.restaurantId}`
+                );
+                setFetchData(response.data.restaurant);
+            } catch (error) {
+                console.error("Error fetching restaurant data:", error);
+            }
+        };
+        fetchRestaurantInfo();
+    }, []);
+    console.log(fetchedData);
     return (
         <>
             <div className={classes.wrapper}>
                 <Navbar list={navbarRestaurantPage} />
             </div>
-            <Banner />
-            <div className={classes.wrapper}>
-                <Menu />
+            <Banner restaurantData={fetchedData} />
+            <div className={`${classes.wrapper} ${classes.scrollMenu}`}>
+                <MenuCard />
+                <MenuCard />
+                <MenuCard />
             </div>
             <div className={classes.footer}>
                 <Footer />

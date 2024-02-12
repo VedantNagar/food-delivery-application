@@ -21,7 +21,11 @@ const router = createBrowserRouter([
         element: <SignIn />,
     },
     {
-        path: "/restaurant-page",
+        path: "homepage/:restaurantId",
+        element: <RestaurantPage />,
+    },
+    {
+        path: "restaurantId",
         element: <RestaurantPage />,
     },
     {
