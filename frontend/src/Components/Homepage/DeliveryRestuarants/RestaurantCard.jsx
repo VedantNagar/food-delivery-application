@@ -1,7 +1,7 @@
 import classes from "./RestaurantCard.module.css";
 import { FaStar } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import { NavLink } from "react-router-dom";
+
 const RestaurantCard = ({ restaurant }) => {
     const name = restaurant?.name ?? "";
     const coverImg = restaurant?.image ?? "";
@@ -11,42 +11,34 @@ const RestaurantCard = ({ restaurant }) => {
     const discount = restaurant?.discount;
     const cuisines = restaurant?.about;
     return (
-        <NavLink to="restaurantId">
-            <div className={classes.card}>
-                <div className={classes.coverImg}>
-                    <img src={coverImg} alt="" />
-                    {discount && (
-                        <div className={classes.discount}>{discount}</div>
-                    )}
-                </div>
-                <div className={classes.content}>
-                    <div className={classes.firstRow}>
-                        <span>{name}</span>
-                        <div className={classes.rating}>
-                            <span>{rating}</span>
-                            <div className={classes.star}>
-                                <IconContext.Provider
-                                    value={{ color: "white" }}
-                                >
-                                    <FaStar />
-                                </IconContext.Provider>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={classes.secondRow}>
-                        <div className={classes.cuisinesContainer}>
-                            <span className={classes.cuisine}>{cuisines}</span>
-                        </div>
-                        <span className={classes.cfo}>{approxPrice}</span>
-                    </div>
-                    {deliveryTime && (
-                        <div className={classes.deliveryTime}>
-                            {deliveryTime}
-                        </div>
-                    )}
-                </div>
+        <div className={classes.card}>
+            <div className={classes.coverImg}>
+                <img src={coverImg} alt="" />
+                {discount && <div className={classes.discount}>{discount}</div>}
             </div>
-        </NavLink>
+            <div className={classes.content}>
+                <div className={classes.firstRow}>
+                    <span>{name}</span>
+                    <div className={classes.rating}>
+                        <span>{rating}</span>
+                        <div className={classes.star}>
+                            <IconContext.Provider value={{ color: "white" }}>
+                                <FaStar />
+                            </IconContext.Provider>
+                        </div>
+                    </div>
+                </div>
+                <div className={classes.secondRow}>
+                    <div className={classes.cuisinesContainer}>
+                        <span className={classes.cuisine}>{cuisines}</span>
+                    </div>
+                    <span className={classes.cfo}>{approxPrice}</span>
+                </div>
+                {deliveryTime && (
+                    <div className={classes.deliveryTime}>{deliveryTime}</div>
+                )}
+            </div>
+        </div>
     );
 };
 export default RestaurantCard;
