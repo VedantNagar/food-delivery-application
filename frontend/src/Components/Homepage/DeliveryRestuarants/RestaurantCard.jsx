@@ -8,11 +8,10 @@ const RestaurantCard = ({ restaurant }) => {
     const deliveryTime = restaurant?.order?.deliveryTime ?? "";
     const rating = restaurant?.rating;
     const approxPrice = restaurant?.cft;
-    const offers = restaurant?.bulkOffers ?? [];
     const discount = restaurant?.discount;
     const cuisines = restaurant?.about;
     return (
-        <NavLink to="/restaurant-page">
+        <NavLink to="restaurantId">
             <div className={classes.card}>
                 <div className={classes.coverImg}>
                     <img src={coverImg} alt="" />
