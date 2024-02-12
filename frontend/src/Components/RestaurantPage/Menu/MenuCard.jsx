@@ -1,32 +1,9 @@
-import classes from "./Menu.module.css";
-import longLine from "../images/longLine.svg";
+import classes from "./MenuCard.module.css";
 import foodImg from "../images/foodImg.svg";
-const categories = [
-    {
-        category: "Recommended",
-    },
-    {
-        category: "Breakfast Box",
-    },
-    {
-        category: "Lunch Box",
-    },
-    {
-        category: "Combo Box",
-    },
-    {
-        category: "Biriyani Box",
-    },
-];
-const Menu = () => {
+
+const MenuCard = () => {
     return (
         <div className={classes.menu}>
-            <div className={classes.left}>
-                {categories.map((item) => {
-                    return <li className={`${classes.foodCategory}`}><a>{item.category}</a></li>;
-                })}
-            </div>
-            <img src={longLine} alt="" className={classes.longLine}/>
             <div className={classes.right}>
                 <div className={classes.info}>
                     <h4 className={classes.head}>Brunch for 2 - Veg (Save upto Rs.45)</h4>
@@ -41,4 +18,4 @@ const Menu = () => {
         </div>
     );
 };
-export default Menu;
+export default MenuCard;

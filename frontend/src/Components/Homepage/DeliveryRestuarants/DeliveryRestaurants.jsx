@@ -13,11 +13,11 @@ const DeliveryRestaurants = ({ list }) => {
             <div className={classes.deliveryItems}>
                 {list.map((restaurant) => {
                     return (
-                        <Link to={`/homepage/${restaurant?._id}`}>
-                            <RestaurantCard
-                                restaurant={restaurant}
-                                key={restaurant?._id}
-                            />
+                        <Link
+                            to={`/homepage/${restaurant?._id}`}
+                            key={restaurant?._id}
+                        >
+                            <RestaurantCard restaurant={restaurant} />
                         </Link>
                     );
                 })}
