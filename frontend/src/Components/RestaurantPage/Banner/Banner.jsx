@@ -6,13 +6,13 @@ import { FaStar } from "react-icons/fa";
 import { IconContext } from "react-icons";
 const Banner = ({ restaurantData }) => {
     const name =
-        restaurantData?.restaurant.name ?? "LunchBox - Meals and Thalis";
+        restaurantData?.name ?? "LunchBox - Meals and Thalis";
     const aboutCuisine =
-        restaurantData?.restaurant.about ?? "North Indian, Punjabi";
-    const rating = restaurantData?.restaurant.rating ?? "4.0";
-    const cft = restaurantData?.restaurant.cft ?? "₹200 for two";
-    const discount = restaurantData?.restaurant.discount ?? "Discounts soon!!";
-    const image = restaurantData?.restaurant.image ?? { bannerImg };
+        restaurantData?.about ?? "North Indian, Punjabi";
+    const rating = restaurantData?.rating ?? "4.0";
+    const cft = restaurantData?.cft ?? "₹200 for two";
+    const discount = restaurantData?.discount ?? "Discounts soon!!";
+    const image = restaurantData?.image ?? { bannerImg };
 
     return (
         <div className={classes.banner}>
