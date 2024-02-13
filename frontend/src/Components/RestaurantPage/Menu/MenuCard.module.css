@@ -16,6 +16,8 @@
 
 .right {
     display: flex;
+    width: 80vw;
+    justify-content: space-between;
     gap: 1rem;
 }
 
