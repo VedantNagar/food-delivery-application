@@ -2,6 +2,7 @@ import classes from "./MenuCard.module.css";
 import foodImg from "../images/foodImg.svg";
 
 const MenuCard = ({ item }) => {
+    console.log(item)
     const head = item?.name ?? "Brunch for 2 - Veg (Save upto Rs.45)";
     const price = item?.price ?? "599";
     const desc =

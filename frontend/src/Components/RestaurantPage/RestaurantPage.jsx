@@ -33,7 +33,8 @@ const RestaurantPage = () => {
         };
         fetchRestaurantInfo();
     }, []);
-    console.log(fetchedData);
+    console.log(fetchedData.menu);
+
     return (
         <>
             <div className={classes.wrapper}>
@@ -41,9 +42,9 @@ const RestaurantPage = () => {
             </div>
             <Banner restaurantData={fetchedData} />
             <div className={`${classes.wrapper} ${classes.scrollMenu}`}>
-                <MenuCard />
-                <MenuCard />
-                <MenuCard />
+                {fetchedData?.menu?.length !=0 && fetchedData?.menu?.map((item)=>{
+                    return <MenuCard item={item} key={item?._id}/>
+                })}
             </div>
             <div className={classes.footer}>
                 <Footer />
