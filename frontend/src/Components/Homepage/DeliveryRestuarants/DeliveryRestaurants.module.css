@@ -5,15 +5,19 @@
     flex-wrap: wrap;
     justify-content: center;
 }
-.deliveryItems{
+.deliveryItems {
     display: flex;
     flex-wrap: wrap;
     margin-top: 2rem;
     gap: 3rem;
-    /* justify-content: space-between; */
+    align-items: center;
 }
-@media(max-width: 768px){
-    .deliveryItems{
+
+.deliveryItems {
+    margin: 0 auto;
+}
+@media (max-width: 786px) {
+    .deliveryItems {
         justify-content: center;
     }
 }
