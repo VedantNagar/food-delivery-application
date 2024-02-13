@@ -20,8 +20,8 @@ a {
 }
 .coverImg img {
     object-fit: cover;
-    width: 21.5rem;
-    height: 14rem;
+    width: 19rem;
+    height: 12rem;
     transition: opacity 0.25s ease 0s, transform 0.25s ease 0s;
     border-radius: 1rem;
 }
@@ -55,4 +55,33 @@ a {
 }
 .coverImg img {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);;
+}
+
+@media(max-width: 1251px) and (min-width: 1130px){
+    .coverImg img {
+        width: 17rem;
+        height: 10rem;
+       
+    }
+}
+@media(max-width: 1130px) and (min-width: 1024px){
+    .coverImg img {
+        width: 15rem;
+        height: 9rem;
+       
+    }
+}
+@media(max-width: 1024px) and (min-width: 1024px){
+    .coverImg img {
+        width: 15rem;
+        height: 9rem;
+       
+    }
+}
+@media(max-width: 425px) and (min-width: 320px){
+    .coverImg img {
+        width: 15rem;
+        height: 9rem;
+       
+    }
 }
