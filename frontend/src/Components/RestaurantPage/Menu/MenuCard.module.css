@@ -18,11 +18,17 @@
     flex-direction: column;
     gap: 1rem;
 }
-
+.menu .info img {
+    width: 1rem;
+    height: 1rem;
+}
 desc {
     color: #808080;
 }
 .head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 1.25rem;
     font-weight: 400;
 }
