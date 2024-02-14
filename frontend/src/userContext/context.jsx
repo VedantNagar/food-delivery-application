@@ -7,6 +7,7 @@ export const userContext = createContext();
 export function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +43,7 @@ export function UserContextProvider({ children }) {
 
   return (
     <userContext.Provider
-      value={{ user, setUser, isLogin, setIsLogin, logOut }}
+      value={{ user, setUser, isLogin, setIsLogin, logOut ,isLoading, setIsLoading}}
     >
       {children}
     </userContext.Provider>

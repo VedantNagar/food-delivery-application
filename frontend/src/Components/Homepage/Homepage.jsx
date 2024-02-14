@@ -9,9 +9,10 @@ import TopBrands from "./DeliveryCollections/TopBrands.jsx";
 import DeliveryRestuarants from "./DeliveryRestuarants/DeliveryRestaurants.jsx";
 import Footer from "../Utils/Footer/Footer.jsx";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { getAllRestaurantUrl } from "../../../urls/restaurantUrl.js";
+import { userContext } from "../../userContext/context.jsx";
 const navbarHomePage = [
     { title: "Order Now", imgfwd: "", imgbwd: "" },
     { title: "Top Brands", imgfwd: dropdown, imgbwd: "" },
@@ -22,11 +23,14 @@ const navbarHomePage = [
 const HomePage = () => {
     const [restaurantData, setRestaurantData] = useState([]);
     const restaurantList = restaurantData;
+    const {setIsLoading } = useContext(userContext);
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setIsLoading(true);
                 const response = await axios.get(getAllRestaurantUrl);
                 setRestaurantData(response.data.restaurants);
+                setIsLoading(false);
             } catch (error) {
                 console.error("Error fetching restaurant data:", error);
             }

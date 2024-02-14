@@ -2,12 +2,14 @@ a {
     color: inherit;
 }
 .card {
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     background-color: #f3f3f3;
     padding: 0.75rem;
     border-radius: 1rem;
     font-family: Roboto;
+    width: 20.5rem;
+    margin: 1rem;
 }
 .content {
     display: flex;
@@ -54,34 +56,30 @@ a {
     text-align: end;
 }
 .coverImg img {
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
-@media(max-width: 1251px) and (min-width: 1130px){
+/* @media (max-width: 1251px) and (min-width: 1130px) {
     .coverImg img {
         width: 17rem;
         height: 10rem;
-       
     }
 }
-@media(max-width: 1130px) and (min-width: 1024px){
+@media (max-width: 1130px) and (min-width: 1024px) {
     .coverImg img {
         width: 15rem;
         height: 9rem;
-       
     }
 }
-@media(max-width: 1024px) and (min-width: 1024px){
+@media (max-width: 1024px) and (min-width: 1024px) {
     .coverImg img {
         width: 15rem;
         height: 9rem;
-       
     }
 }
-@media(max-width: 425px) and (min-width: 320px){
+@media (max-width: 425px) and (min-width: 320px) {
     .coverImg img {
         width: 15rem;
         height: 9rem;
-       
     }
-}
+} */
