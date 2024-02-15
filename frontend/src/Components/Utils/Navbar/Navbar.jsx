@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import classes from "./Navbar.module.css";
 import logo from "../../../images/logo.svg";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
@@ -7,10 +7,10 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-
 import Typography from "@mui/material/Typography";
 import { userContext } from "../../../userContext/context";
 import { useContext } from "react";
+
 const style = {
     position: "absolute",
     top: "50%",
@@ -24,6 +24,7 @@ const style = {
     borderRadius: "1rem",
 };
 const Navbar = ({ list }) => {
+    const location = useLocation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -44,7 +45,8 @@ const Navbar = ({ list }) => {
         });
     };
     const goto = isLogin ? "/homepage" : "#";
-    const {servicesRef} = useContext(userContext);
+    const { servicesRef } = useContext(userContext);
+
     return (
         <header>
             <nav>
@@ -72,6 +74,13 @@ const Navbar = ({ list }) => {
                             isMenuOpen ? `${classes.right}` : `${classes.hide}`
                         }
                     >
+                        {location.pathname === "/" && (
+                            <li>
+                                <a onClick={() => scrollHandler(servicesRef)}>
+                                    Services
+                                </a>
+                            </li>
+                        )}
                         {list.map((item) => {
                             return (
                                 <li key={item.title}>
@@ -90,11 +99,7 @@ const Navbar = ({ list }) => {
                                 </li>
                             );
                         })}
-                        {
-                            <li>
-                                <a onClick={() => scrollHandler(servicesRef)}>Services</a>
-                            </li>
-                        }
+                        
                         {!isLogin && (
                             <li>
                                 <NavLink to={goto} onClick={menuHandler}>
@@ -133,6 +138,7 @@ const Navbar = ({ list }) => {
                                 </Modal>
                             </li>
                         )}
+                        
                     </ul>
                 </div>
             </nav>

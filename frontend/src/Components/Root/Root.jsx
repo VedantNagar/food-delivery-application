@@ -15,7 +15,7 @@ const navbarHomePage = [
     { component: <DropdownMenu /> },
 ];
 const navbarSignIn = [
-    { title: "Sign In", to: "signin" },
+    { title: "Sign In" },
     // { title: "Services" },
 ];
 
