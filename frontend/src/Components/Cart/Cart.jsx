@@ -1,24 +1,14 @@
 import classes from "./Cart.module.css";
-import Navbar from "../Utils/Navbar/Navbar";
-import dropdown from "../Homepage/images/dropdown.svg";
-import cart from "../Homepage/images/cart.svg";
-import user from "../Homepage/images/user.svg";
-import NavSearchBar from "../Utils/NavSearchBar/NavSearchBar";
+
 import location from "./images/location.svg";
 import AddressBlock from "../Utils/AddressBlock/AddressBlock";
 import CartItem from "./CartItem/CartItem";
 import Button from "../Utils/Button/Button";
-import Footer from "../Utils/Footer/Footer";
-const navbarRestaurantPage = [
-    { title: "", imgfwd: "", imgbwd: "", component: <NavSearchBar /> },
-    { title: "Cart", imgfwd: cart, imgbwd: "", to: "cart" },
-    { title: "Kshitij", imgfwd: dropdown, imgbwd: user },
-];
+
 const Cart = () => {
     return (
         <>
             <div className={classes.wrapper}>
-                <Navbar list={navbarRestaurantPage} />
                 <div className={classes.heading}>
                     <h2>Secure Checkout</h2>
                     <hr />
@@ -100,9 +90,6 @@ const Cart = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className={classes.footer}>
-                <Footer />
             </div>
         </>
     );

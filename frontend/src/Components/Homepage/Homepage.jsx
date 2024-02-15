@@ -13,12 +13,12 @@ import { useContext, useEffect, useState } from "react";
 
 import { getAllRestaurantUrl } from "../../../urls/restaurantUrl.js";
 import { userContext } from "../../userContext/context.jsx";
-const navbarHomePage = [
-    { title: "Order Now", imgfwd: "", imgbwd: "" },
-    { title: "Top Brands", imgfwd: dropdown, imgbwd: "" },
-    { title: "Cart", imgfwd: cart, imgbwd: "", to: "cart" },
-    { title: "Kshitij", imgfwd: dropdown, imgbwd: user },
-];
+// const navbarHomePage = [
+//     { title: "Order Now", imgfwd: "", imgbwd: "" },
+//     { title: "Top Brands", imgfwd: dropdown, imgbwd: "" },
+//     { title: "Cart", imgfwd: cart, imgbwd: "", to: "cart" },
+//     { title: "Kshitij", imgfwd: dropdown, imgbwd: user },
+// ];
 
 const HomePage = () => {
     const [restaurantData, setRestaurantData] = useState([]);
@@ -42,7 +42,7 @@ const HomePage = () => {
     return (
         <>
             <div className={classes.wrapper}>
-                <Navbar list={navbarHomePage} />
+                {/* <Navbar list={navbarHomePage} /> */}
                 <Hero />
             </div>
             <DeliveryCollections />
@@ -50,9 +50,9 @@ const HomePage = () => {
                 <TopBrands />
                 <DeliveryRestuarants list={restaurantList} />
             </div>
-            <div className={classes.footer}>
+            {/* <div className={classes.footer}>
                 <Footer />
-            </div>
+            </div> */}
         </>
     );
 };
