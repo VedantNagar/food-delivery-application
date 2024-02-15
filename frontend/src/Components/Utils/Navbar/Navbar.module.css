@@ -10,6 +10,7 @@ nav {
     padding: 1rem 0.5rem 0.5rem 0.5rem;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
 }
 /* .right li a.active {
     color: #eb5757;
