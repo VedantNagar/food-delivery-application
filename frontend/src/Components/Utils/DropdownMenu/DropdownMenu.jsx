@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../../userContext/context";
 export default function DropdownMenu() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -31,6 +31,9 @@ export default function DropdownMenu() {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
+                style={{
+                    color: "#EB5757",
+                }}
             >
                 Account
             </Button>
