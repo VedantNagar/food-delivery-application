@@ -7,31 +7,40 @@ import { UserContextProvider } from "./userContext/context.jsx";
 import "./index.css";
 import Dashboard from "./Components/Dashboard/Dashboard.jsx";
 import Test from "./Test";
+import Root from "./Components/Root/Root.jsx";
 const router = createBrowserRouter([
     {
-        index: true,
-        element: <SignIn />,
-    },
-    {
-        path: "/homepage",
-        element: <HomePage />,
-    },
-    {
-        path: "/signin",
-        element: <SignIn />,
-    },
-    {
-        path: "homepage/:restaurantId",
-        element: <RestaurantPage />,
+        path: "/",
+        element: <Root />,
+        children: [
+            {
+                index: true,
+                element: <SignIn />,
+            },
+            {
+                path: "homepage",
+                element: <HomePage />,
+            },
+            
+            {
+                path: "homepage/:restaurantId",
+                element: <RestaurantPage />,
+            },
+            {
+                path: "signin",
+                element: <SignIn />,
+            },
+            {
+                path: "cart",
+                element: <Cart />,
+            },
+        ],
     },
     {
         path: "restaurantId",
         element: <RestaurantPage />,
     },
-    {
-        path: "/cart",
-        element: <Cart />,
-    },
+
     {
         path: "/dashboard",
         element: <Dashboard />,
