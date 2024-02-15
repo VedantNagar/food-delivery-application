@@ -8,11 +8,11 @@ import { userContext } from "../../userContext/context";
 import Footer from "../Utils/Footer/Footer";
 import classes from "./Root.module.css";
 import DropdownMenu from "../Utils/DropdownMenu/DropdownMenu";
-import NavSearchBar from "../Utils/NavSearchBar/NavSearchBar";
+
 const navbarHomePage = [
     { title: "Top Brands", imgfwd: dropdown, imgbwd: "", to: "homepage" },
     { title: "Cart", imgfwd: cart, imgbwd: "", to: "cart" },
-    { component: <DropdownMenu /> },
+    { imgbwd: user, component: <DropdownMenu /> },
 ];
 const navbarSignIn = [
     { title: "Sign In" },

@@ -10,11 +10,12 @@ nav {
     padding: 1rem 0.5rem 0.5rem 0.5rem;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
 }
-/* .right li a.active {
-    color: #eb5757;
-    text-decoration: underline;
-} */
+.right li a img:first-child {
+    width: 2rem;
+    height: 2rem;
+}
 
 .img {
     border-radius: 0 1rem 0 1rem;
@@ -49,9 +50,7 @@ nav {
     gap: 7.5rem;
     align-items: center;
 }
-/* .right ul a {
-    text-decoration: none;
-} */
+
 .right ul li {
     display: flex;
     align-items: center;

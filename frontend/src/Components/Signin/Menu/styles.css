@@ -1,6 +1,6 @@
 .swiper {
     width: 75rem;
-    height: 15rem;
+    height: 22rem;
 }
 
 .swiper-slide {
@@ -23,31 +23,31 @@
 @media (min-width: 2560px) {
     .swiper {
         width: 100rem;
-        height: 25rem;
+        height: 22rem;
     }
 }
 @media (max-width: 1024px) {
     .swiper {
         width: 45rem;
-        height: 9rem;
+        height: 22rem;
     }
 }
 @media (max-width: 768px) {
     .swiper {
         width: 40rem;
-        height: 12rem;
+        height: 22rem;
     }
 }
 @media (max-width: 425px) {
     .swiper {
         width: 22rem;
-        height: 14rem;
+        height: 22rem;
     }
 }
 @media (max-width: 375px) {
     .swiper {
-        width: 14rem;
-        height: 16rem;
+        width: 18rem;
+        height: 22rem;
     }
 }
 @media (min-width: 458px) and (max-width: 526px) {
