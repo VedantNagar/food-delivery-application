@@ -10,16 +10,13 @@ import classes from "./Root.module.css";
 import DropdownMenu from "../Utils/DropdownMenu/DropdownMenu";
 import NavSearchBar from "../Utils/NavSearchBar/NavSearchBar";
 const navbarHomePage = [
-    { title: "Order Now", imgfwd: "", imgbwd: "" },
     { title: "Top Brands", imgfwd: dropdown, imgbwd: "", to: "homepage" },
     { title: "Cart", imgfwd: cart, imgbwd: "", to: "cart" },
     { component: <DropdownMenu /> },
 ];
 const navbarSignIn = [
     { title: "Sign In", to: "signin" },
-    { title: "Services" },
-    { title: "Menu", to: "homepage"},
-    { title: "Contact" },
+    // { title: "Services" },
 ];
 
 const Root = () => {

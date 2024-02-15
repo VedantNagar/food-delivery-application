@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 
 export const userContext = createContext();
 
@@ -8,7 +8,7 @@ export function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const servicesRef = useRef(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -43,7 +43,7 @@ export function UserContextProvider({ children }) {
 
   return (
     <userContext.Provider
-      value={{ user, setUser, isLogin, setIsLogin, logOut ,isLoading, setIsLoading}}
+      value={{ user, setUser, isLogin, setIsLogin, logOut ,isLoading, setIsLoading,servicesRef}}
     >
       {children}
     </userContext.Provider>
