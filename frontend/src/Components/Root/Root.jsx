@@ -7,18 +7,18 @@ import { useContext } from "react";
 import { userContext } from "../../userContext/context";
 import Footer from "../Utils/Footer/Footer";
 import classes from "./Root.module.css";
+import DropdownMenu from "../Utils/DropdownMenu/DropdownMenu";
+import NavSearchBar from "../Utils/NavSearchBar/NavSearchBar";
 const navbarHomePage = [
-    { title: "Order Now", imgfwd: "", imgbwd: "" },
     { title: "Top Brands", imgfwd: dropdown, imgbwd: "", to: "homepage" },
     { title: "Cart", imgfwd: cart, imgbwd: "", to: "cart" },
-    { title: "Kshitij", imgfwd: dropdown, imgbwd: user },
+    { component: <DropdownMenu /> },
 ];
 const navbarSignIn = [
-    { title: "Sign In", to: "signin" },
-    { title: "Services" },
-    { title: "Menu", to: "homepage" },
-    { title: "Contact" },
+    { title: "Sign In" },
+    // { title: "Services" },
 ];
+
 const Root = () => {
     const { isLogin } = useContext(userContext);
     const navItems = isLogin ? navbarHomePage : navbarSignIn;

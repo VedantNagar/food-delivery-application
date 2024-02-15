@@ -3,6 +3,8 @@ import card1 from "../../../images/service-1.svg";
 import card2 from "../../../images/service-2.svg";
 import card3 from "../../../images/service-3.svg";
 import Card from "./Card";
+import { useContext } from "react";
+import { userContext } from "../../../userContext/context";
 const cards = [
     {
         img: card1,
@@ -21,8 +23,9 @@ const cards = [
     },
 ];
 const Services = () => {
+    const {servicesRef} = useContext(userContext);
     return (
-        <div className={classes.container}>
+        <div className={classes.container} ref={servicesRef}>
             <h3 className={classes.header}>What we serve</h3>
             <h1>
                 Your Favourite Food <br />
