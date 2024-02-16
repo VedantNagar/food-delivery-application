@@ -31,7 +31,6 @@ const Navbar = ({ list }) => {
     };
     const { isLogin } = useContext(userContext);
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const menuHandler = () => {
         if (!isLogin) {
