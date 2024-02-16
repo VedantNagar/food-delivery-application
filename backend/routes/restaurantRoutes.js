@@ -11,6 +11,9 @@ router.get('/getRestaurant/:id', restaurantController.getRestaurant); //id
 //get all rest
 router.get('/getAllRestaurant', restaurantController.getAllRestaurant);
 
+//get searched rest
+router.get('/getSearchRestaurants',restaurantController.searchRest)
+
 
 
 
@@ -36,5 +39,6 @@ router.patch('/changeStatus/:id',restaurantController.changeOrderStatus);
 
 //get all orders
 router.get('/getAllOrders/:id',restaurantController.getorders)
+
 
 module.exports = router;

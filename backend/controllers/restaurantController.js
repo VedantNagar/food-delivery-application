@@ -209,6 +209,16 @@ const getorders = async(req,res) => {
 }
 
 
+//search restaurant
+
+const searchRest = async(req,res) => {
+  const {name} = req.query
+  let result = restaurantModel.find({name:name});
+  const food = await result
+  res.status(200).json(food)
+}
+
+
 module.exports = {
   createRestaurant,
   getRestaurant,
@@ -217,5 +227,6 @@ module.exports = {
   editRestaurant,
   addFood,
   changeOrderStatus,
-  getorders
+  getorders,
+  searchRest
 };

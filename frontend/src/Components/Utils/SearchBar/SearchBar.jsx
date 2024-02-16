@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import search from "../../Homepage/images/Search.svg";
 import { allFoodUrl,singleFoodUrl,sortedFoodUrl } from "../../../../urls/foodUrl";
-import { getAllRestaurantUrl,getSingleRestaurantUrl } from "../../../../urls/restaurantUrl";
+import { getAllRestaurantUrl,getSingleRestaurantUrl,getSearchRestaurantsUrl } from "../../../../urls/restaurantUrl";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -16,17 +16,30 @@ const area = [
     { label: "Paschim Vihar" },
 ];
 const SearchBar = () => {
-    // const [name,setName] = useState("")
-    // const [minPrice,setMinPrice] = useState(null)
-    // const [maxPrice,setMaxPrice] = useState(null)
-    // useEffect(() => {
-    //     const fetchData = async() => {
-
-    //         const allFood = await axios.get(allFoodUrl)
-    //         console.log(allFood)
-    //     }
-    //     fetchData()
-    // },[name,minPrice,maxPrice])
+    const [name,setName] = useState("")
+    
+    useEffect(() => {
+        const fetchData = async() => {
+            try {
+            const searchRestaurant = await axios.get(getSearchRestaurantsUrl,{
+                params:{
+                    name:name
+                }
+            })
+            const searchFood = await axios.get(sortedFoodUrl,{
+                params:{
+                    name:name,
+                }
+            })
+            console.log(searchFood)
+            console.log(searchRestaurant)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        console.log(sortedFoodUrl)
+        fetchData()
+    },[name])
     return (
         <div className={classes.searchBar}>
             <div className={classes.left}>
