@@ -1,0 +1,23 @@
+.foodCard {
+    background-color: #f8f8f8;
+    border-radius: 1rem;
+    padding: 0.75rem;
+    border: 1px solid black;
+    width: fit-content;
+    display: flex;
+    gap: 0.5rem;
+}
+.fContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 10rem;
+}
+.fContent span:nth-child(2) {
+    color: #808080;
+}
+.fContent span:nth-child(3) {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}

@@ -5,16 +5,14 @@
     flex-wrap: wrap;
     justify-content: center;
 }
-/* .deliveryItems {
+.deliveryItems {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-} */
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 
 @media (max-width: 786px) {
     .deliveryItems {
-        display: flex;
-        flex-direction: column;
         justify-content: center;
     }
 }
