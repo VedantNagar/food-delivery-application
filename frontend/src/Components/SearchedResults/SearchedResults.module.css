@@ -1,0 +1,27 @@
+.results {
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 1rem;
+    font-family: "Poppins";
+}
+.wrapper {
+    width: 85vw;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.optionBtns {
+    display: flex;
+    gap: 1rem;
+}
+.outerDiv {
+    display: flex;
+}
+.foodItems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+}

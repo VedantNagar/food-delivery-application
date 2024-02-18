@@ -6,7 +6,7 @@ import RestaurantPage from "./Components/RestaurantPage/RestaurantPage";
 import { UserContextProvider } from "./userContext/context.jsx";
 import "./index.css";
 import Dashboard from "./Components/Dashboard/Dashboard.jsx";
-import Test from "./Test";
+import SearchedResults from "./Components/SearchedResults/SearchedResults.jsx";
 import Root from "./Components/Root/Root.jsx";
 const router = createBrowserRouter([
     {
@@ -21,17 +21,16 @@ const router = createBrowserRouter([
                 path: "homepage",
                 element: <HomePage />,
             },
-            
+            {
+                path: "homepage/results",
+                element: <SearchedResults />,
+            },
             {
                 path: "homepage/:restaurantId",
                 element: <RestaurantPage />,
             },
             {
-                path: "signin",
-                element: <SignIn />,
-            },
-            {
-                path: "cart",
+                path: "homepage/cart",
                 element: <Cart />,
             },
         ],
@@ -44,10 +43,6 @@ const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <Dashboard />,
-    },
-    {
-        path: "/test",
-        element: <Test />,
     },
 ]);
 function App() {
