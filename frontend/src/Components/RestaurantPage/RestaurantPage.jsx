@@ -28,6 +28,9 @@ const RestaurantPage = () => {
     return (
         <>
             <Banner restaurantData={fetchedData} />
+            <div className={classes.wrapper}>
+                <h1 className={classes.menu}>Menu</h1>
+            </div>
             <div className={`${classes.wrapper} ${classes.scrollMenu}`}>
                 {fetchedData?.menu?.length != 0 &&
                     fetchedData?.menu?.map((item) => {
