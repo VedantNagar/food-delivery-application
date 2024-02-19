@@ -34,7 +34,7 @@ const TopBrands = () => {
                     slidesPerView={6}
                     navigation={true}
                     modules={[Navigation]}
-                    className="mySwiper"
+                    className={classes.swiper}
                     breakpoints={{
                         375: {
                             slidesPerView: 1,

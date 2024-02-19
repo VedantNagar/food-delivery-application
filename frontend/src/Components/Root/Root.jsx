@@ -9,6 +9,7 @@ import Footer from "../Utils/Footer/Footer";
 import classes from "./Root.module.css";
 import DropdownMenu from "../Utils/DropdownMenu/DropdownMenu";
 import SearchedResults from "../SearchedResults/SearchedResults";
+import ScrollToTop from "../../ScrollToTop";
 const navbarHomePage = [
     { title: "Top Brands", imgfwd: dropdown, imgbwd: "", to: "homepage" },
     { title: "Cart", imgfwd: cart, imgbwd: "", to: "homepage/cart" },
@@ -27,6 +28,7 @@ const Root = () => {
                 <Navbar list={navItems} />
             </div>
             <Outlet />
+            <ScrollToTop/>
             <div className={classes.footer}>
                 <Footer />
             </div>
