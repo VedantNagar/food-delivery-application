@@ -1,8 +1,13 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Button from "../Utils/Button/Button";
 import FoodCard from "./FoodItemCard/FoodCard";
 import classes from "./SearchedResults.module.css";
 import food from "./images/f.svg";
-const foodItems = [
+import { sortedFoodUrl } from "../../../urls/foodUrl";
+import { getSearchRestaurantsUrl } from "../../../urls/restaurantUrl";
+import { useParams } from "react-router-dom";
+const foodItemss = [
     {
         _id: 1,
         title: "Paneer Tikka Rice Bowl",
@@ -46,11 +51,44 @@ const foodItems = [
         img: food,
     },
 ];
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
 const SearchedResults = () => {
+    const [foodItems, setFoodItems] = useState([]);
+    const params = useParams();
+    const name = params.resultName;
+    let capitalizedName = capitalizeFirstLetter(name);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const searchRestaurant = await axios.get(
+                    getSearchRestaurantsUrl,
+                    {
+                        params: {
+                            name: name,
+                        },
+                    }
+                );
+                const searchFood = await axios.get(sortedFoodUrl, {
+                    params: {
+                        name: name,
+                    },
+                });
+                setFoodItems(searchFood.data);
+                console.log(searchFood.data);
+                // console.log(searchRestaurant);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        console.log(sortedFoodUrl);
+        fetchData();
+    }, [name]);
     return (
         <div className={classes.wrapper}>
             <div className={classes.results}>
-                <h1>Search results for “ Rice Bowls”</h1>
+                <h1>Search results for "{capitalizedName}"</h1>
                 <div className={classes.optionBtns}>
                     <Button title="Dishes" />
                     <Button title="Restaurant" />

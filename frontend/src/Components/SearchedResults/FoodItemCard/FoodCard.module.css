@@ -7,6 +7,10 @@
     display: flex;
     gap: 0.5rem;
 }
+.fImage img {
+    width: 8rem;
+    height: 8rem;
+}
 .fContent {
     display: flex;
     flex-direction: column;
