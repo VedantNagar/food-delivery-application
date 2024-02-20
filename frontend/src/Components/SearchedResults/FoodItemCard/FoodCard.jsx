@@ -3,8 +3,8 @@ import tag from "../images/priceTag.svg";
 import food from "../images/f.svg";
 const FoodCard = ({ data }) => {
     const image = data.image ? data.image : food;
-    const title = data?.name;
-    const outlet = data?.restaurantID?.name;
+    const title = data?.name ?? "Your Food";
+    const outlet = data?.restaurantID?.name ?? "Your outlet";
     const price = data?.price;
     return (
         <div className={classes.foodCard}>
