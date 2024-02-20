@@ -21,7 +21,6 @@ const Cart = () => {
                         </div>
                         <div className={classes.addresses}>
                             <AddressBlock address="Dno. 12-34-12, XYC Apartments, DOOR Colony, Hyderabad, Telangana" />
-                            <AddressBlock address="Dno. 12-34-12, XYC Apartments, DOOR Colony, Hyderabad, Telangana" />
                         </div>
                         <div className={classes.notes}>
                             <p>Any Note for us?</p>

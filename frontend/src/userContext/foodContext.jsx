@@ -1,11 +1,18 @@
-import React from 'react'
 
-export const userContext = createContext();
+import { createContext} from "react";
 
-const foodContext = () => {
-  return (
-    <div>foodContext</div>
-  )
+
+export const foodContext = createContext();
+
+export function FoodContextProvider({ children }) {
+    
+    return (
+        <foodContext.Provider
+            value={{
+             
+            }}
+        >
+            {children}
+        </foodContext.Provider>
+    );
 }
-
-export default foodContext

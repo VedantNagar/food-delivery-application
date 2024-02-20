@@ -24,7 +24,7 @@ export function UserContextProvider({ children }) {
             try {
                 const response = await axios.get(profileUrl);
                 setUser(response.data);
-                console.log(response.data);
+                // console.log(response.data);
             } catch (error) {
                 // Handle errors, e.g., if the user is not authenticated
                 setIsLogin(false)

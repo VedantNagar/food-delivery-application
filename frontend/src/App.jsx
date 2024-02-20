@@ -8,7 +8,8 @@ import "./index.css";
 import Dashboard from "./Components/Dashboard/Dashboard.jsx";
 import SearchedResults from "./Components/SearchedResults/SearchedResults.jsx";
 import Root from "./Components/Root/Root.jsx";
-import axios from 'axios'
+import axios from "axios";
+import { FoodContextProvider } from "./userContext/foodContext.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
                 element: <HomePage />,
             },
             {
-                path: "homepage/results",
+                path: "homepage/results/:resultName",
                 element: <SearchedResults />,
             },
             {
@@ -47,14 +48,14 @@ const router = createBrowserRouter([
     },
 ]);
 function App() {
-    
-
-axios.defaults.withCredentials = true
+    axios.defaults.withCredentials = true;
     return (
         <div className="wrapper">
-            <UserContextProvider>
-                <RouterProvider router={router} />
-            </UserContextProvider>
+            <FoodContextProvider>
+                <UserContextProvider>
+                    <RouterProvider router={router} />
+                </UserContextProvider>
+            </FoodContextProvider>
         </div>
     );
 }

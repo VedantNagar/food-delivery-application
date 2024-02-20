@@ -82,7 +82,7 @@ const Navbar = ({ list }) => {
                         )}
                         {list.map((item) => {
                             return (
-                                <li key={item.title}>
+                                <li key={item.key}>
                                     <NavLink to={`/${item.to || "#"}`}>
                                         {item.imgbwd && (
                                             <img src={item.imgbwd} alt="" />

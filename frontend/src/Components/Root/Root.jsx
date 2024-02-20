@@ -11,12 +11,12 @@ import DropdownMenu from "../Utils/DropdownMenu/DropdownMenu";
 import SearchedResults from "../SearchedResults/SearchedResults";
 import ScrollToTop from "../../ScrollToTop";
 const navbarHomePage = [
-    { title: "Top Brands", imgfwd: dropdown, imgbwd: "", to: "homepage" },
-    { title: "Cart", imgfwd: cart, imgbwd: "", to: "homepage/cart" },
-    { imgbwd: user, component: <DropdownMenu /> },
+    { title: "Top Brands", imgfwd: dropdown, imgbwd: "", to: "homepage" ,key: 1124141241},
+    { title: "Cart", imgfwd: cart, imgbwd: "", to: "homepage/cart" , key: 214122412421},
+    { imgbwd: user, component: <DropdownMenu /> ,key: 214122412},
 ];
 const navbarSignIn = [
-    { title: "Sign In" },
+    { title: "Sign In" ,key: 2122412},
 ];
 
 const Root = () => {

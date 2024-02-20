@@ -6,8 +6,8 @@ import x from "../../../images/x.svg";
 const Footer = () => {
     const date = new Date();
     return (
-        <div className={classes.outerDiv}>
-            <footer>
+        <footer>
+            <div className={classes.innerDiv}>
                 <div className={classes.left}>
                     <div>
                         <div className={classes.logo}>
@@ -88,10 +88,14 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-            </footer>
-            <hr />
-            <p>© {date.getFullYear()} Fudo India, Inc. All rights reserved.</p>
-        </div>
+            </div>
+            <div>
+                <hr />
+                <p>
+                    © {date.getFullYear()} Fudo India, Inc. All rights reserved.
+                </p>
+            </div>
+        </footer>
     );
 };
 export default Footer;

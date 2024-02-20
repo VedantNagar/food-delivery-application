@@ -1,17 +1,21 @@
 import classes from "./FoodCard.module.css";
 import tag from "../images/priceTag.svg";
-const FoodCard = ({data}) => {
+import food from "../images/f.svg";
+const FoodCard = ({ data }) => {
+    const image = data.image ? data.image : food;
+    const title = data?.name ?? "Your Food";
+    const outlet = data?.restaurantID?.name ?? "Your outlet";
+    const price = data?.price;
     return (
         <div className={classes.foodCard}>
             <div className={classes.fImage}>
-                <img src={data.img}></img>
+                <img src={image}></img>
             </div>
             <div className={classes.fContent}>
-                <h4>{data.title}</h4>
-                <span>{data.outlet}</span>
+                <h4>{title}</h4>
+                <span>{outlet}</span>
                 <span>
-                    <img src={tag} alt="" />
-                    ₹{data.price}
+                    <img src={tag} alt="" />₹{price}
                 </span>
             </div>
         </div>
