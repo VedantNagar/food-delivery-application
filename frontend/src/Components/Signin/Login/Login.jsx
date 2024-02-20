@@ -19,15 +19,19 @@ const Login = () => {
         // console.log(data)
         const { email, password } = data;
         try {
-            const { data } = await axios.post(loginUrl, {
+            const response = await axios.post(loginUrl, {
                 email,
                 password,
             });
-            if (data.error) {
-                toast.error(data.error, {
+           
+            const values = response.data
+            
+            if (values.error) {
+                toast.error(values.error, {
                     duration: 2000,
                 });
             } else {
+                
                 setData({});
                 toast.success("Logged in", {
                     duration: 2000,
@@ -39,6 +43,7 @@ const Login = () => {
             console.log(error);
         }
     };
+    
     return (
         <form onSubmit={registerUser} className={classes.formAction}>
             <h1>Login</h1>

@@ -10,7 +10,15 @@ export function UserContextProvider({ children }) {
     const [isLogin, setIsLogin] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const servicesRef = useRef(null);
-    
+    useEffect(() => {
+        const token = document.cookie.replace(
+            /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,
+            "$1"
+        );
+        if(token){
+            setIsLogin(true);
+        }
+    },[])
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -19,14 +27,20 @@ export function UserContextProvider({ children }) {
                 console.log(response.data);
             } catch (error) {
                 // Handle errors, e.g., if the user is not authenticated
+                setIsLogin(false)
+                setUser(null)
                 console.error("Error fetching user profile:", error);
             }
         };
 
+      
+
+        
         const token = document.cookie.replace(
             /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,
             "$1"
         );
+        
 
         if (isLogin && token) {
             fetchData();

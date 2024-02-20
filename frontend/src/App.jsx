@@ -8,6 +8,7 @@ import "./index.css";
 import Dashboard from "./Components/Dashboard/Dashboard.jsx";
 import SearchedResults from "./Components/SearchedResults/SearchedResults.jsx";
 import Root from "./Components/Root/Root.jsx";
+import axios from 'axios'
 const router = createBrowserRouter([
     {
         path: "/",
@@ -46,6 +47,9 @@ const router = createBrowserRouter([
     },
 ]);
 function App() {
+    
+
+axios.defaults.withCredentials = true
     return (
         <div className="wrapper">
             <UserContextProvider>

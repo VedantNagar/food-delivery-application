@@ -27,7 +27,24 @@ app.get('/', (req, res) => {
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors())
+const allowedOrigins = [
+	"http://localhost:5173",
+	"http://localhost:8000",
+];
+
+const corsOptions = {
+	origin: (origin, callback) => {
+		if (allowedOrigins.includes(origin) || !origin) {
+			callback(null, true);
+		} else {
+			callback(new Error("Not allowed by CORS"));
+		}
+	},
+	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+	optionsSuccessStatus: 204,
+	credentials: true, // Allow credentials like cookies
+};
+app.use(cors(corsOptions))
 
 app.use('/api/v1/restaurant', restRouter);
 app.use('/api/v1/food', foodRouter);
