@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { createContext, useEffect, useRef, useState } from "react";
+import { profileUrl } from "../../urls/userUrl";
 
 export const userContext = createContext();
 
@@ -13,7 +14,7 @@ export function UserContextProvider({ children }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("/profile");
+                const response = await axios.get(profileUrl);
                 setUser(response.data);
                 console.log(response.data);
             } catch (error) {
