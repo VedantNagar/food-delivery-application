@@ -46,3 +46,11 @@
 h1 .coloredSpan {
     color: #eb5757;
 }
+@media (max-width: 375px) {
+    .results h1:first-child {
+        font-size: 1.25rem;
+    }
+    .optionBtns .proceedBtn {
+        font-size: 0.75rem;
+    }
+}
