@@ -1,6 +1,3 @@
-import dropdown from "../Homepage/images/dropdown.svg";
-import cart from "../Homepage/images/cart.svg";
-import user from "../Homepage/images/user.svg";
 import { Outlet } from "react-router-dom";
 import Navbar from "../Utils/Navbar/Navbar";
 import { useContext } from "react";
