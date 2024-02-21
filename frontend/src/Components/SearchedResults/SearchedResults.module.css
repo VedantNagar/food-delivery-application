@@ -4,7 +4,7 @@
     gap: 3rem;
     padding: 1rem;
     font-family: "Poppins";
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .wrapper {
@@ -39,8 +39,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
-h1 .coloredSpan{
+h1 .coloredSpan {
     color: #eb5757;
 }

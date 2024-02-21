@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
 import FoodCard from "./FoodItemCard/FoodCard";
 import classes from "./SearchedResults.module.css";
 import { sortedFoodUrl } from "../../../urls/foodUrl";
