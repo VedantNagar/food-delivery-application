@@ -12,7 +12,7 @@ const SearchBar = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         if (name) {
-            navigate(`results/${name}`);
+            navigate(`/homepage/results/${name}`);
         } else {
             alert("please type to search");
         }
