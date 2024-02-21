@@ -27,7 +27,7 @@ const HomePage = () => {
         fetchData();
     }, []);
 
-    // console.log(restaurantData);
+    console.log(restaurantData);
     return (
         <>
             <div className={classes.wrapper}>
