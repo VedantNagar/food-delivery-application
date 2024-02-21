@@ -44,7 +44,7 @@ const sortFoodsByPriceRange = async (req, res) => {
     // }
 
     let result = foodModal
-      .find({name:name})
+      .find({$or:[{name:name},{type:name}]})
       .populate({
         path: 'restaurantID', // Assuming the reference field is named 'restaurant'
         select: 'name rating', // Select the fields you want to include

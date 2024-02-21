@@ -117,7 +117,8 @@ const createRestaurant = async (req, res) => {
     const { name, about, address, phone, opening_hours ,owner} = req.body;
     
     const restaurant = await restaurantModel.create(req.body);
-
+    const restID = restaurant._id;
+    restaurantModel.findByIdAndUpdate(restID,{subName:name});
     // Send the created restaurant object in the response
     res.status(201).json(restaurant);
   } catch (error) {
@@ -213,7 +214,7 @@ const getorders = async(req,res) => {
 
 const searchRest = async(req,res) => {
   const {name} = req.query
-  let result = restaurantModel.find({name:name});
+  let result = restaurantModel.find({subName:name});
   const food = await result
   res.status(200).json(food)
 }

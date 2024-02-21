@@ -10,6 +10,11 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  subName:{
+    type:String,
+    trim:true,
+    lowercase:true
+  },
   address: {
     type: String,
     required: true,
@@ -47,6 +52,11 @@ const restaurantSchema = new mongoose.Schema({
         category: {
           type: String,
         },
+        type:{
+          type:String,
+          trim:true,
+          lowercase:true
+        }
       },
     ],
     default: [],
