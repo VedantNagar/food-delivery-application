@@ -1,6 +1,6 @@
 import classes from "./SearchBar.module.css";
 
-import search from "../../Homepage/images/search.svg";
+import search from '../../Homepage/images/Search.svg'
 import { useNavigate } from "react-router-dom";
 
 import {  useState } from "react";

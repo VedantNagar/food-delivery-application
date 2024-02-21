@@ -1,5 +1,5 @@
-const foodModal = require('../models/Food');
-const restModal = require('../models/restaurant');
+const foodModal = require("../models/Food");
+const restModal = require("../models/restaurant");
 
 // all items
 const allFood = async (req, res) => {
@@ -16,7 +16,7 @@ const singleFood = async (req, res) => {
 // Sort food items by price range in increasing order and filter by name, including restaurant information
 const sortFoodsByPriceRange = async (req, res) => {
   try {
-    const { sort = 'price', name } = req.query;
+    const { sort = "price", name } = req.query;
 
     // Basic input validation for price range
     // if (
@@ -42,13 +42,19 @@ const sortFoodsByPriceRange = async (req, res) => {
     // if (name) {
     //   query.name = { $regex: name, $options: 'i' };
     // }
+    const searchQuery = name;
+    const regexPattern = new RegExp(searchQuery.split(/\s+/).join("|"), "i");
+
+    // Assuming you have a MongoDB collection named 'names'
+    
 
     let result = foodModal
-      .find({$or:[{name:name},{type:name}]})
+      .find({ name: { $regex: regexPattern } })
       .populate({
-        path: 'restaurantID', // Assuming the reference field is named 'restaurant'
-        select: 'name rating', // Select the fields you want to include
+        path: "restaurantID", // Assuming the reference field is named 'restaurant'
+        select: "name rating", // Select the fields you want to include
       })
+      
       .sort(sort);
 
     const foods = await result;
@@ -56,7 +62,7 @@ const sortFoodsByPriceRange = async (req, res) => {
     res.json(foods);
   } catch (error) {
     console.error(error);
-    res.json({ error: 'Internal server error' });
+    res.json({ error: "Internal server error" });
   }
 };
 

@@ -76,7 +76,7 @@ const SearchedResults = () => {
                 });
                 setFoodItems(searchFood.data);
                 console.log(searchFood.data);
-                // console.log(searchRestaurant);
+                console.log(searchRestaurant);
             } catch (error) {
                 console.log(error);
             }
