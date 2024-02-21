@@ -3,54 +3,53 @@ import { useEffect, useState } from "react";
 import Button from "../Utils/Button/Button";
 import FoodCard from "./FoodItemCard/FoodCard";
 import classes from "./SearchedResults.module.css";
-import food from "./images/f.svg";
 import { sortedFoodUrl } from "../../../urls/foodUrl";
 import { getSearchRestaurantsUrl } from "../../../urls/restaurantUrl";
 import { useParams } from "react-router-dom";
-const foodItemss = [
-    {
-        _id: 1,
-        title: "Paneer Tikka Rice Bowl",
-        outlet: "The Good Bowl",
-        price: 200,
-        img: food,
-    },
-    {
-        _id: 2,
-        title: "Paneer Tikka Rice Bowl",
-        outlet: "The Good Bowl",
-        price: 200,
-        img: food,
-    },
-    {
-        _id: 3,
-        title: "Paneer Tikka Rice Bowl",
-        outlet: "The Good Bowl",
-        price: 200,
-        img: food,
-    },
-    {
-        _id: 4,
-        title: "Paneer Tikka Rice Bowl",
-        outlet: "The Good Bowl",
-        price: 200,
-        img: food,
-    },
-    {
-        _id: 5,
-        title: "Paneer Tikka Rice Bowl",
-        outlet: "The Good Bowl",
-        price: 200,
-        img: food,
-    },
-    {
-        _id: 6,
-        title: "Paneer Tikka Rice Bowl",
-        outlet: "The Good Bowl",
-        price: 200,
-        img: food,
-    },
-];
+// const foodItemss = [
+//     {
+//         _id: 1,
+//         title: "Paneer Tikka Rice Bowl",
+//         outlet: "The Good Bowl",
+//         price: 200,
+//         img: food,
+//     },
+//     {
+//         _id: 2,
+//         title: "Paneer Tikka Rice Bowl",
+//         outlet: "The Good Bowl",
+//         price: 200,
+//         img: food,
+//     },
+//     {
+//         _id: 3,
+//         title: "Paneer Tikka Rice Bowl",
+//         outlet: "The Good Bowl",
+//         price: 200,
+//         img: food,
+//     },
+//     {
+//         _id: 4,
+//         title: "Paneer Tikka Rice Bowl",
+//         outlet: "The Good Bowl",
+//         price: 200,
+//         img: food,
+//     },
+//     {
+//         _id: 5,
+//         title: "Paneer Tikka Rice Bowl",
+//         outlet: "The Good Bowl",
+//         price: 200,
+//         img: food,
+//     },
+//     {
+//         _id: 6,
+//         title: "Paneer Tikka Rice Bowl",
+//         outlet: "The Good Bowl",
+//         price: 200,
+//         img: food,
+//     },
+// ];
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
