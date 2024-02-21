@@ -1,12 +1,5 @@
-import React, { useState } from "react";
 import heroImg from "../../../images/hero-section-landing.svg";
-import axios from "axios";
-import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { userContext } from "../../../userContext/context";
 import classes from "./SignInHero.module.css";
-import { loginUrl } from "../../../../urls/userUrl";
 import Register from "../register/Register";
 import { Link, useSearchParams } from "react-router-dom";
 
@@ -14,39 +7,6 @@ import Login from "../Login/Login";
 const SignInHero = () => {
     const [searchParams] = useSearchParams();
     const login = searchParams.get("mode") === "login";
-    const { setIsLogin } = useContext(userContext);
-    const navigate = useNavigate();
-    const [data, setData] = useState({
-        email: "",
-        password: "",
-    });
-
-    const registerUser = async (e) => {
-        e.preventDefault();
-        // console.log(data)
-        const { email, password } = data;
-        try {
-            const { data } = await axios.post(loginUrl, {
-                email,
-                password,
-            });
-            if (data.error) {
-                toast.error(data.error, {
-                    duration: 2000,
-                });
-            } else {
-                setData({});
-                toast.success("Logged in", {
-                    duration: 2000,
-                });
-                setIsLogin(true);
-                navigate("/homepage");
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     return (
         <div className={classes.hero}>
             <div className={classes.left}>

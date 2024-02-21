@@ -84,15 +84,10 @@ const Navbar = ({ list }) => {
                             return (
                                 <li key={item.key}>
                                     <NavLink to={`/${item.to || "#"}`}>
-                                        {item.imgbwd && (
-                                            <img src={item.imgbwd} alt="" />
-                                        )}
                                         {item.title && (
                                             <p href="#">{item.title}</p>
                                         )}
-                                        {item.imgfwd && (
-                                            <img src={item.imgfwd} alt="" />
-                                        )}
+                                        {item.imgfwd && item.imgfwd}
                                         {item.component && item.component}
                                     </NavLink>
                                 </li>

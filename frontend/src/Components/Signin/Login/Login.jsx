@@ -16,22 +16,21 @@ const Login = () => {
     const { setIsLogin } = useContext(userContext);
     const registerUser = async (e) => {
         e.preventDefault();
-        // console.log(data)
         const { email, password } = data;
         try {
             const response = await axios.post(loginUrl, {
                 email,
                 password,
             });
-           
-            const values = response.data
-            
+
+            const values = response.data;
+
             if (values.error) {
                 toast.error(values.error, {
                     duration: 2000,
                 });
+                alert(values.error);
             } else {
-                
                 setData({});
                 toast.success("Logged in", {
                     duration: 2000,
@@ -43,7 +42,7 @@ const Login = () => {
             console.log(error);
         }
     };
-    
+
     return (
         <form onSubmit={registerUser} className={classes.formAction}>
             <h1>Login</h1>

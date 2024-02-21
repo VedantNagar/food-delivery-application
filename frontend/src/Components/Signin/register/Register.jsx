@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import classes from "./Register.module.css";
 import { registerUrl } from "../../../../urls/userUrl";
 import Button from "../../Utils/Button/Button";
+import { userContext } from "../../../userContext/context";
 const Register = () => {
+    const {setIsLogin} = useContext(userContext);
     const navigate = useNavigate();
     const [data, setData] = useState({
         first_name: "",
@@ -55,6 +57,7 @@ const Register = () => {
                     password: "",
                 });
                 toast.success("Login Successful. Welcome!");
+                setIsLogin(true);
                 navigate("/homepage");
             }
         } catch (error) {

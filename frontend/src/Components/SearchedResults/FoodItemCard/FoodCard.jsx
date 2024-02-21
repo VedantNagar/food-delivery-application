@@ -4,8 +4,10 @@ import food from "../images/f.svg";
 const FoodCard = ({ data }) => {
     const image = data.image ? data.image : food;
     const title = data?.name ?? "Your Food";
-    const outlet = data?.restaurantID?.name ?? "Your outlet";
+    const outlet = data?.restaurantID?.name ?? null;
+    const discountTag = outlet ? outlet : data?.discount;
     const price = data?.price;
+    const cft = data?.cft;
     return (
         <div className={classes.foodCard}>
             <div className={classes.fImage}>
@@ -13,9 +15,10 @@ const FoodCard = ({ data }) => {
             </div>
             <div className={classes.fContent}>
                 <h4>{title}</h4>
-                <span>{outlet}</span>
+                <span>{discountTag}</span>
                 <span>
-                    <img src={tag} alt="" />₹{price}
+                    <img src={tag} alt="" />
+                    {price ? <p>₹{price}</p> : <p>{cft}</p>}
                 </span>
             </div>
         </div>

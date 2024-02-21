@@ -4,6 +4,9 @@
     margin: 0 auto;
     overflow: hidden;
 }
+.wrapper .menu {
+    font-family: Poppins;
+}
 .footer {
     width: 100vw;
     overflow: hidden;
@@ -15,7 +18,7 @@
     height: 80vh;
     overflow: scroll;
 }
-.menu{
+.menu {
     margin-left: 1.5rem;
     margin-top: 0.5rem;
 }
