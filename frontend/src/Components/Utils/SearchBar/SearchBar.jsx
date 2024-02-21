@@ -3,21 +3,16 @@ import classes from "./SearchBar.module.css";
 import search from "../../Homepage/images/search.svg";
 import { useNavigate } from "react-router-dom";
 
-import { useState } from "react";
-const area = [
-    { label: "Janakpuri" },
-    { label: "Patel Nagar" },
-    { label: "Shalimar Bagh" },
-    { label: "Rajendra Nagar" },
-    { label: "Paschim Vihar" },
-];
+import {  useState } from "react";
+
 const SearchBar = () => {
     const [name, setName] = useState("");
     const navigate = useNavigate();
+
     const submitHandler = (e) => {
         e.preventDefault();
         if (name) {
-            navigate(`results/${name}`);
+            navigate(`/homepage/results/${name}`);
         } else {
             alert("please type to search");
         }
