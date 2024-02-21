@@ -36,11 +36,13 @@
     display: flex;
 }
 .foodItems {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    width: 100vw;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: repeat(3, auto);
     gap: 2rem;
-    /* justify-content: space-between; */
 }
+
 h1 .coloredSpan {
     color: #eb5757;
 }
