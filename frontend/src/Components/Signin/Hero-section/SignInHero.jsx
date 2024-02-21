@@ -1,75 +1,47 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import heroImg from "../../../images/hero-section-landing.svg";
-import axios from "axios";
-import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { userContext } from "../../../userContext/context";
 import classes from "./SignInHero.module.css";
-import { loginUrl } from "../../../../urls/userUrl";
 import Register from "../register/Register";
-import { Link, useSearchParams } from "react-router-dom";
-
+import { Link, useLocation } from "react-router-dom";
 import Login from "../Login/Login";
-const SignInHero = () => {
-    const [searchParams] = useSearchParams();
-    const login = searchParams.get("mode") === "login";
-    const { setIsLogin } = useContext(userContext);
-    const navigate = useNavigate();
-    const [data, setData] = useState({
-        email: "",
-        password: "",
-    });
+import { userContext } from "../../../userContext/context";
 
-    const registerUser = async (e) => {
-        e.preventDefault();
-        // console.log(data)
-        const { email, password } = data;
-        try {
-            const { data } = await axios.post(loginUrl, {
-                email,
-                password,
-            });
-            if (data.error) {
-                toast.error(data.error, {
-                    duration: 2000,
-                });
-            } else {
-                setData({});
-                toast.success("Logged in", {
-                    duration: 2000,
-                });
-                setIsLogin(true);
-                navigate("/homepage");
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+const SignInHero = () => {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const mode = searchParams.get("mode");
+    const { isLogin } = useContext(userContext);
+    const isLoginMode = mode === "login" || !mode;
 
     return (
         <div className={classes.hero}>
             <div className={classes.left}>
-                <h1>{login ? "Welcome Back." : "Hey there, "}</h1>
-                <h3>Let's {login ? "log" : "sign"} you in.</h3>
-                <img
-                    src={heroImg}
-                    alt="not found"
-                    className={classes.signInImg}
-                />
+                <div>
+                    <h1>{isLoginMode ? "Welcome Back." : "Hey there, "}</h1>
+                    {isLogin ? (
+                        <h3>You are already logged in</h3>
+                    ) : (
+                        <h3>Let's {isLoginMode ? "log" : "sign"} you in.</h3>
+                    )}
+
+                    <img
+                        src={heroImg}
+                        alt="not found"
+                        className={classes.signInImg}
+                    />
+                </div>
             </div>
             <div className={classes.right}>
-                <div>
-                    <div>
-                        {login ? <Login /> : <Register />}
-                        <p className={classes.mode}>
-                            Want to
-                            <Link to={`?mode=${login ? "signup" : "login"}`}>
-                                {login ? " Create new a user " : " Login "}
-                            </Link>
-                            ?
-                        </p>
-                    </div>
+                {isLogin ? <h1>Lets find something to eat for you!</h1> : ""}
+                <div className={`${isLogin ? classes.hide : ""}`}>
+                    {isLoginMode ? <Login /> : <Register />}
+                    <p className={classes.mode}>
+                        Want to
+                        <Link to={`?mode=${isLoginMode ? "signup" : "login"}`}>
+                            {isLoginMode ? " Create new a user " : " Login "}
+                        </Link>
+                        ?
+                    </p>
                 </div>
             </div>
         </div>

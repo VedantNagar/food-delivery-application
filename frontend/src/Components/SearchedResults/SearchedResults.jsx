@@ -1,60 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Button from "../Utils/Button/Button";
 import FoodCard from "./FoodItemCard/FoodCard";
 import classes from "./SearchedResults.module.css";
 import { sortedFoodUrl } from "../../../urls/foodUrl";
 import { getSearchRestaurantsUrl } from "../../../urls/restaurantUrl";
-import { useParams } from "react-router-dom";
-// const foodItemss = [
-//     {
-//         _id: 1,
-//         title: "Paneer Tikka Rice Bowl",
-//         outlet: "The Good Bowl",
-//         price: 200,
-//         img: food,
-//     },
-//     {
-//         _id: 2,
-//         title: "Paneer Tikka Rice Bowl",
-//         outlet: "The Good Bowl",
-//         price: 200,
-//         img: food,
-//     },
-//     {
-//         _id: 3,
-//         title: "Paneer Tikka Rice Bowl",
-//         outlet: "The Good Bowl",
-//         price: 200,
-//         img: food,
-//     },
-//     {
-//         _id: 4,
-//         title: "Paneer Tikka Rice Bowl",
-//         outlet: "The Good Bowl",
-//         price: 200,
-//         img: food,
-//     },
-//     {
-//         _id: 5,
-//         title: "Paneer Tikka Rice Bowl",
-//         outlet: "The Good Bowl",
-//         price: 200,
-//         img: food,
-//     },
-//     {
-//         _id: 6,
-//         title: "Paneer Tikka Rice Bowl",
-//         outlet: "The Good Bowl",
-//         price: 200,
-//         img: food,
-//     },
-// ];
+import { Link, useParams } from "react-router-dom";
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 const SearchedResults = () => {
+    const [activeBtn, setActiveBtn] = useState("Dishes");
+    const handleBtnClick = (btnName) => {
+        setActiveBtn(btnName);
+    };
     const [foodItems, setFoodItems] = useState([]);
+    const [restaurants, setRestaurants] = useState([]);
     const params = useParams();
     const name = params.resultName;
     let capitalizedName = capitalizeFirstLetter(name);
@@ -75,13 +35,14 @@ const SearchedResults = () => {
                     },
                 });
                 setFoodItems(searchFood.data);
-                console.log(searchFood.data);
-                console.log(searchRestaurant);
+                setRestaurants(searchRestaurant.data);
+                // console.log(searchFood.data);
+                // console.log(searchRestaurant);
             } catch (error) {
                 console.log(error);
             }
         };
-        console.log(sortedFoodUrl);
+        // console.log(sortedFoodUrl);
         fetchData();
     }, [name]);
     return (
@@ -89,14 +50,58 @@ const SearchedResults = () => {
             <div className={classes.results}>
                 <h1>Search results for "{capitalizedName}"</h1>
                 <div className={classes.optionBtns}>
-                    <Button title="Dishes" />
-                    <Button title="Restaurant" />
+                    <button
+                        className={`${classes.proceedBtn} ${
+                            activeBtn === "Dishes" ? classes.active : ""
+                        }`}
+                        onClick={() => handleBtnClick("Dishes")}
+                    >
+                        Dishes
+                    </button>
+                    <button
+                        className={`${classes.proceedBtn} ${
+                            activeBtn === "Restaurant" ? classes.active : ""
+                        }`}
+                        onClick={() => handleBtnClick("Restaurant")}
+                    >
+                        Restaurant
+                    </button>
                 </div>
                 <div className={classes.outerDiv}>
                     <div className={classes.foodItems}>
-                        {foodItems.map((item) => {
-                            return <FoodCard data={item} key={item._id} />;
-                        })}
+                        {activeBtn === "Dishes" && foodItems.length === 0 && (
+                            <h1>
+                                No food items related to {capitalizedName} found
+                                <span className={classes.coloredSpan}> :(</span>
+                            </h1>
+                        )}
+                        {activeBtn === "Restaurant" &&
+                            restaurants.length === 0 && (
+                                <h1>
+                                    No restaurants related to {capitalizedName}{" "}
+                                    found
+                                    <span className={classes.coloredSpan}>
+                                        {" "}
+                                        :(
+                                    </span>
+                                </h1>
+                            )}
+                        {activeBtn === "Dishes"
+                            ? foodItems.map((item) => {
+                                  return (
+                                      <FoodCard data={item} key={item._id} />
+                                  );
+                              })
+                            : restaurants.map((item) => {
+                                  return (
+                                      <Link
+                                          to={`/homepage/${item._id}`}
+                                          key={item._id}
+                                      >
+                                          <FoodCard data={item} />
+                                      </Link>
+                                  );
+                              })}
                     </div>
                 </div>
             </div>

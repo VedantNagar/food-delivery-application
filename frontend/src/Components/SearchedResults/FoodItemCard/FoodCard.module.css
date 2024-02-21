@@ -25,3 +25,19 @@
     gap: 0.25rem;
     align-items: center;
 }
+@media (max-width: 375px) {
+    .fImage img {
+        width: 6rem;
+        height: 6rem;
+    }
+    .fContent h4 {
+        font-size: 0.75rem;
+    }
+
+    .fContent span:nth-child(2) {
+        font-size: 0.75rem;
+    }
+    .fContent span:nth-child(3) {
+        font-size: 0.75rem;
+    }
+}

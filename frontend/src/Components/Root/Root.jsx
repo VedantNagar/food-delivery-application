@@ -1,6 +1,3 @@
-import dropdown from "../Homepage/images/dropdown.svg";
-import cart from "../Homepage/images/cart.svg";
-import user from "../Homepage/images/user.svg";
 import { Outlet } from "react-router-dom";
 import Navbar from "../Utils/Navbar/Navbar";
 import { useContext } from "react";
@@ -8,16 +5,28 @@ import { userContext } from "../../userContext/context";
 import Footer from "../Utils/Footer/Footer";
 import classes from "./Root.module.css";
 import DropdownMenu from "../Utils/DropdownMenu/DropdownMenu";
-import SearchedResults from "../SearchedResults/SearchedResults";
+import { BiHomeAlt2 } from "react-icons/bi";
+import { LiaShoppingBagSolid } from "react-icons/lia";
+
 import ScrollToTop from "../../ScrollToTop";
 const navbarHomePage = [
-    { title: "Top Brands", imgfwd: dropdown, imgbwd: "", to: "homepage" ,key: 1124141241},
-    { title: "Cart", imgfwd: cart, imgbwd: "", to: "homepage/cart" , key: 214122412421},
-    { imgbwd: user, component: <DropdownMenu /> ,key: 214122412},
+    {
+        title: "Home",
+        imgfwd: <BiHomeAlt2 />,
+        imgbwd: "",
+        to: "homepage",
+        key: 1124141241,
+    },
+    {
+        title: "Cart",
+        imgfwd: <LiaShoppingBagSolid />,
+        imgbwd: "",
+        to: "homepage/cart",
+        key: 214122412421,
+    },
+    { component: <DropdownMenu />, key: 214122412 },
 ];
-const navbarSignIn = [
-    { title: "Sign In" ,key: 2122412},
-];
+const navbarSignIn = [{ title: "Sign In", key: 2122412 }];
 
 const Root = () => {
     const { isLogin } = useContext(userContext);
@@ -28,7 +37,7 @@ const Root = () => {
                 <Navbar list={navItems} />
             </div>
             <Outlet />
-            <ScrollToTop/>
+            <ScrollToTop />
             <div className={classes.footer}>
                 <Footer />
             </div>

@@ -3,7 +3,6 @@ import foodImg from "../images/foodImg.svg";
 import veg from "../images/veg.png";
 import nonVeg from "../images/nonVeg.png";
 const MenuCard = ({ item }) => {
-    console.log(item);
     const head = item?.name ?? "Brunch for 2 - Veg (Save upto Rs.45)";
     const price = item?.price ?? "599";
     const image = item?.image?.length > 0 ? item.image : foodImg;

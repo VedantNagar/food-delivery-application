@@ -23,7 +23,7 @@ const RestaurantPage = () => {
         };
         fetchRestaurantInfo();
     }, []);
-    console.log(fetchedData.menu);
+    // console.log(fetchedData.menu);
 
     return (
         <>
