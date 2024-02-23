@@ -1,4 +1,7 @@
-const url = "http://localhost:8000/api/v1/order"
+const url =
+  import.meta.env.PROD === true
+    ? '/api/vi/order'
+    : 'http://localhost:8000/api/v1/order';
 
 //create order
 /*

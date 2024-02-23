@@ -1,6 +1,9 @@
-const url = 'http://localhost:8000/api/v1/cart';
+const url =
+  import.meta.env.PROD === true
+    ? '/api/vi/cart'
+    : 'http://localhost:8000/api/v1/cart';
 
-//add to card 
+//add to card
 //const { userID, foodID, quantityToAdd } = req.body;
 export const addToCartUrl = `${url}/addToCart`;
 
