@@ -1,6 +1,6 @@
 const url =
   import.meta.env.PROD === true
-    ? '/api/vi/cart'
+    ? '/api/v1/cart'
     : 'http://localhost:8000/api/v1/cart';
 
 //add to card

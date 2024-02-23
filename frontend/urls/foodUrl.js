@@ -1,6 +1,6 @@
 const url =
   import.meta.env.PROD === true
-    ? '/api/vi/food'
+    ? '/api/v1/food'
     : 'http://localhost:8000/api/v1/food';
 
 export const allFoodUrl = `${url}/allFood`;
