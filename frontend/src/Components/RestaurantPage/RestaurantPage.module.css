@@ -1,24 +1,24 @@
 .wrapper {
-    width: 85vw;
-    height: 100%;
-    margin: 0 auto;
-    overflow: hidden;
+  width: 85vw;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
 }
 .wrapper .menu {
-    font-family: Poppins;
+  font-family: Poppins;
 }
 .footer {
-    width: 100vw;
-    overflow: hidden;
-    background-color: #f8f8f8;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f8f8f8;
 }
 .scrollMenu {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    height: 80vh;
-    overflow: scroll;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  height: 80vh;
+  overflow: scroll;
 }
 .menu {
-    margin-left: 1.5rem;
-    margin-top: 0.5rem;
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
 }
