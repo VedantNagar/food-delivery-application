@@ -27,7 +27,11 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:8000'];
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:8000',
+  'https://food-delivery-application-rtu9.onrender.com',
+];
 
 const corsOptions = {
   origin: (origin, callback) => {
