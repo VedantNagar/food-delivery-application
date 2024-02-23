@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Food = require('../models/Food');
 const cartModel = require('../models/cart');
+const restaurant = require('../models/restaurant');
 // get cart
 /* const getCart = async(req,res)=>{
     const {id:user_ID} = req.params
@@ -59,22 +60,19 @@ const addToCart = async (req, res) => {
   try {
     const { userID, foodID, quantityToAdd } = req.body;
 
-    //input validation
+    // Input validation
     if (!userID || !foodID || !quantityToAdd || quantityToAdd <= 0) {
-      return res.json({ error: 'Invalid Input.Provide all details' });
+      return res.json({ error: 'Invalid Input. Provide all details' });
     }
-    //find user by ID
-    const user = await User.findById(userID);
-    /* console.log(user); */
 
-    //check if user exists
+    // Find user by ID
+    const user = await User.findById(userID);
     if (!user) {
       return res.json({ error: 'User not found' });
     }
-    //finding food item by ID
-    const foodItem = await Food.findById(foodID);
 
-    // Check if the food item exists
+    // Find food item by ID
+    const foodItem = await Food.findById(foodID);
     if (!foodItem) {
       return res.json({ error: 'Food item not found' });
     }
@@ -82,7 +80,7 @@ const addToCart = async (req, res) => {
     // Find the user's cart by user ID
     let userCart = await cartModel.findOne({ userID: userID });
 
-    //creating a new cart if it doesn't exist
+    // Create a new cart if it doesn't exist
     if (!userCart) {
       userCart = new cartModel({
         userID: userID,
@@ -91,13 +89,10 @@ const addToCart = async (req, res) => {
     }
 
     // Find the index of the item in the cart's items array
-    const itemIndex = userCart.items.findIndex((item) =>
-      item.food.equals(foodID)
-    );
+    const itemIndex = userCart.items.findIndex((item) => item.food.equals(foodID));
 
-    //if item is in the cart, incrementing its quantity , else adding the new element
+    // If item is in the cart, increment its quantity, else add the new element
     if (itemIndex !== -1) {
-      /* Item found, proceed with the logic */
       userCart.items[itemIndex].quantity += parseInt(quantityToAdd);
     } else {
       userCart.items.push({
@@ -105,18 +100,42 @@ const addToCart = async (req, res) => {
         quantity: parseInt(quantityToAdd),
       });
     }
-    /* console.log('After Update:', userCart); */
 
-    //saving the updated cart
+    // // Populate cart with food name and price
+    // userCart = await populateCartItems(userCart);
+
+    // Save the updated cart
     await userCart.save();
 
-    //sending cart and quantity
+    // Sending cart and quantity
     res.json(userCart);
   } catch (error) {
     console.error(error);
     res.json({ error: 'Internal server error' });
   }
 };
+
+// Function to populate cart items with food name and price
+// const populateCartItems = async (userCart) => {
+//   for (let item of userCart.items) {
+//     const foodItem = await Food.findById(item.food);
+//     const rest = await restaurant.findById(item.restaurantID)
+//     if (foodItem) {
+//       item.name = foodItem.name;
+//       item.about = foodItem.about;
+//       item.category = foodItem.category;
+//       item.image = foodItem.image;
+//       item.price = foodItem.price;
+//     }
+//     if(rest){
+//       item.restaurantName = rest.name
+//       item.restaurantRating = rest.rating
+//       item.restaurantDiscount = rest.discount
+//     }
+//   }
+//   return userCart;
+// };
+
 
 //delete from cart
 

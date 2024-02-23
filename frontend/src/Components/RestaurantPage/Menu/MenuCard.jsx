@@ -28,7 +28,7 @@ const MenuCard = ({ item }) => {
     const result = await axios.post(addToCartUrl,{
 
         userID:user.id,
-        foodID:item._id,
+        foodID:item.foodID,
         quantityToAdd:1
     },{
         headers: {
