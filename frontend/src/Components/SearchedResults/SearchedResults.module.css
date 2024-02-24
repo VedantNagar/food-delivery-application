@@ -37,7 +37,7 @@
 }
 .foodItems {
     display: grid;
-    width: 100vw;
+    width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: repeat(3, auto);
     gap: 2rem;

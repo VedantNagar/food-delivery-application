@@ -6,11 +6,11 @@
     font-family: Poppins;
     margin-bottom: 4rem;
 }
-hr{
+hr {
     width: 100% !important;
 }
 .footer {
-    width: 100vw;
+    width: 100%;
     overflow: hidden;
     background-color: #f8f8f8;
 }
@@ -80,13 +80,13 @@ hr{
     display: flex;
     justify-content: center;
 }
-@media(max-width: 1024px){
-    .cart{
+@media (max-width: 1024px) {
+    .cart {
         width: 20rem;
     }
 }
-@media(max-width: 768px){
-    .wrapper{
+@media (max-width: 768px) {
+    .wrapper {
         font-size: 0.75rem;
     }
     .notes form input {
@@ -94,22 +94,22 @@ hr{
         height: 6.25rem;
     }
 }
-@media(max-width: 652px){
-    .content{
+@media (max-width: 652px) {
+    .content {
         flex-wrap: wrap;
     }
-    .addresses{
+    .addresses {
         flex-wrap: nowrap;
     }
 }
-@media(max-width: 425px){
-    .right{
+@media (max-width: 425px) {
+    .right {
         justify-content: center;
         align-items: center;
     }
 }
-@media(max-width: 320px){
-    .topBottom{
-        justify-content:end;
+@media (max-width: 320px) {
+    .topBottom {
+        justify-content: end;
     }
 }

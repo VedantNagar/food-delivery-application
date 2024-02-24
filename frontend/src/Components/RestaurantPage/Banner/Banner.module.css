@@ -11,7 +11,7 @@
 }
 .banner {
     background-color: #202020;
-    width: 100vw;
+    width: 100%;
 
     margin-top: 4rem;
     font-family: Poppins;
@@ -25,7 +25,7 @@
     display: flex;
     gap: 1rem;
 }
-.left h3:first-child{
+.left h3:first-child {
     font-size: 1.75rem;
 }
 .desc {
@@ -43,7 +43,7 @@
     flex-direction: column;
     font-size: 0.875rem;
 }
-.category{
+.category {
     font-size: 0.875rem;
 }
 .ratingFirstRow {
@@ -58,46 +58,44 @@
     display: flex;
     gap: 1.5rem;
 }
-.right .offer{
+.right .offer {
     display: flex;
     gap: 0.5rem;
 }
-.right{
+.right {
     display: flex;
     align-items: center;
 }
-.right h2:first-child{
-    color: #EB5757;
+.right h2:first-child {
+    color: #eb5757;
     margin-bottom: 1rem;
 }
-.offers{
-    border: 2px dashed #EB5757;
+.offers {
+    border: 2px dashed #eb5757;
     padding: 1.5rem;
     border-radius: 1rem;
 }
-@media(max-width: 425px){
-    .left{
+@media (max-width: 425px) {
+    .left {
         flex-wrap: wrap;
     }
 }
-@media((min-width: 425px )and (max-width: 768px)){
-    .wrapper{
+@media ((min-width: 425px )and (max-width: 768px)) {
+    .wrapper {
         align-items: center;
         justify-content: center;
     }
-    .left{
+    .left {
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
     }
 }
-@media((min-width: 320px )and (max-width: 425px)){
-    .left{
+@media ((min-width: 320px )and (max-width: 425px)) {
+    .left {
         font-size: 0.75rem;
-
     }
-    .wrapper{
-       font-size: 0.75rem;
+    .wrapper {
+        font-size: 0.75rem;
     }
-    
 }

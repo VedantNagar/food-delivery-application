@@ -13,10 +13,8 @@ const MenuCard = ({ item }) => {
     console.log(user);
     const cookies = document.cookie.split(";");
 
-    // Initialize variable to store the token value
     let token = null;
 
-    // Iterate through each cookie to find the one with the name 'token'
     cookies.forEach((cookie) => {
       const [name, value] = cookie.trim().split("=");
       if (name === "token") {
@@ -33,7 +31,7 @@ const MenuCard = ({ item }) => {
     },{
         headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json' // set Content-Type as needed
+            'Content-Type': 'application/json' 
           }
     })
     console.log(result)
@@ -59,7 +57,7 @@ const MenuCard = ({ item }) => {
         </h4>
         <h4 className={classes.price}>₹{price}</h4>
         <p className={classes.desc}>{desc}</p>
-        <p>{category}</p>
+        
       </div>
       <div className={classes.image}>
         <img src={image} alt="" />
