@@ -1,7 +1,7 @@
-const User = require('../models/user');
-const Food = require('../models/Food');
-const cartModel = require('../models/cart');
-const restaurant = require('../models/restaurant');
+const User = require("../models/user");
+const Food = require("../models/Food");
+const cartModel = require("../models/cart");
+const restaurant = require("../models/restaurant");
 // get cart
 /* const getCart = async(req,res)=>{
     const {id:user_ID} = req.params
@@ -24,23 +24,32 @@ const restaurant = require('../models/restaurant');
 const getCart = async (req, res) => {
   try {
     //getting userID
-    const userID = req.body.userID;
+    const userID = req.user.id;
+    
 
     //checking userID
     if (!userID) {
-      return res.json({ error: 'Provide userID' });
+      return res.json({ error: "Provide userID" });
     }
     //finding the user
     const user = await User.findById(userID);
 
     //checking if user exists
     if (!user) {
-      return res.json({ error: 'User not found' });
+      return res.json({ error: "User not found" });
     }
-    const userName = `${user.first_name} ${user.last_name || ''}`;
+    const userName = `${user.first_name} ${user.last_name || ""}`;
 
     //finding user's cart using userID
-    const userCart = await cartModel.findOne({ userID: userID });
+    const userCart = await cartModel.findOne({ userID: userID })
+    .populate({
+      path: "items.food",
+      populate: {
+          path: "restaurantID",
+          model: "restaurantModel",
+          select: "name about rating phone image discount address cft rating",
+      },
+  });
 
     //checking if the cart exists
     if (!userCart) {
@@ -51,7 +60,7 @@ const getCart = async (req, res) => {
     res.json({ userCart });
   } catch (error) {
     console.log(error);
-    res.json({ error: 'Internal server error' });
+    res.json({ error: "Internal server error" });
   }
 };
 //add to cart
@@ -61,24 +70,39 @@ const addToCart = async (req, res) => {
     const { userID, foodID, quantityToAdd } = req.body;
 
     // Input validation
+
     if (!userID || !foodID || !quantityToAdd || quantityToAdd <= 0) {
-      return res.json({ error: 'Invalid Input. Provide all details' });
+      return res.json({ error: "Invalid Input. Provide all details" });
     }
 
     // Find user by ID
     const user = await User.findById(userID);
     if (!user) {
-      return res.json({ error: 'User not found' });
+      return res.json({ error: "User not found" });
     }
 
     // Find food item by ID
     const foodItem = await Food.findById(foodID);
     if (!foodItem) {
-      return res.json({ error: 'Food item not found' });
+      return res.json({ error: "Food item not found" });
     }
 
     // Find the user's cart by user ID
-    let userCart = await cartModel.findOne({ userID: userID });
+    const userCart = await cartModel
+    .findOne({ userID: userID })
+    .populate({
+        path: "items.food",
+        populate: {
+            path: "restaurantID",
+            model: "restaurantModel",
+            select: "name about rating phone image discount address cft rating",
+        },
+    });
+
+console.log(userCart);
+
+
+    console.log(userCart);
 
     // Create a new cart if it doesn't exist
     if (!userCart) {
@@ -89,7 +113,9 @@ const addToCart = async (req, res) => {
     }
 
     // Find the index of the item in the cart's items array
-    const itemIndex = userCart.items.findIndex((item) => item.food.equals(foodID));
+    const itemIndex = userCart.items.findIndex((item) =>
+      item.food.equals(foodID)
+    );
 
     // If item is in the cart, increment its quantity, else add the new element
     if (itemIndex !== -1) {
@@ -111,7 +137,7 @@ const addToCart = async (req, res) => {
     res.json(userCart);
   } catch (error) {
     console.error(error);
-    res.json({ error: 'Internal server error' });
+    res.json({ error: "Internal server error" });
   }
 };
 
@@ -136,7 +162,6 @@ const addToCart = async (req, res) => {
 //   return userCart;
 // };
 
-
 //delete from cart
 
 const removeFromCart = async (req, res) => {
@@ -145,14 +170,14 @@ const removeFromCart = async (req, res) => {
 
     //validation
     if (!userID || !foodID || !quantityToRemove || quantityToRemove <= 0) {
-      return res.json({ error: 'Invalid action. Provide all details' });
+      return res.json({ error: "Invalid action. Provide all details" });
     }
     //finding user
     const user = await User.findById(userID);
 
     //checking if user exists
     if (!user) {
-      return res.json({ error: 'User not found' });
+      return res.json({ error: "User not found" });
     }
     //finding user's cart by user ID
     const userCart = await cartModel.findOne({ userID: userID });
@@ -183,11 +208,11 @@ const removeFromCart = async (req, res) => {
       await userCart.save();
       return res.json(userCart);
     } else {
-      return res.json({ error: 'Item not found in the cart' });
+      return res.json({ error: "Item not found in the cart" });
     }
   } catch (error) {
     console.log(error);
-    res.json({ error: 'Internal Server Error' });
+    res.json({ error: "Internal Server Error" });
   }
 };
 
