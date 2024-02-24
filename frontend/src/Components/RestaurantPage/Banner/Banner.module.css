@@ -25,6 +25,9 @@
     display: flex;
     gap: 1rem;
 }
+.wrapper .left img {
+    object-fit: contain;
+}
 .left h3:first-child {
     font-size: 1.75rem;
 }
