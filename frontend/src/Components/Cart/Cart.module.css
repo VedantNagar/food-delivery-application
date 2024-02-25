@@ -63,7 +63,7 @@ hr {
 }
 .items {
     height: 13.5rem;
-    overflow: scroll;
+    overflow-y: scroll;
     margin: 1rem 0;
 }
 .bill {
@@ -80,6 +80,7 @@ hr {
     display: flex;
     justify-content: center;
 }
+
 @media (max-width: 1024px) {
     .cart {
         width: 20rem;
