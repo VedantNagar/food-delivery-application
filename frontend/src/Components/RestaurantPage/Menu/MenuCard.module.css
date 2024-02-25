@@ -36,6 +36,7 @@ desc {
     font-weight: 400;
 }
 .menu .image img {
+    object-fit: fill;
     border-radius: 1rem;
     width: 10rem;
     height: 10rem;
@@ -46,14 +47,17 @@ desc {
 .menu a {
     cursor: pointer;
     color: #1ac84b;
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
-    background: #fff;
     border-radius: 10px;
     padding: 1rem 1.5rem;
     position: absolute;
     white-space: nowrap;
     top: 3.5rem;
     left: 7rem;
+    background: rgba(255, 255, 255, 0.73);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.21);
 }
 @media (max-width: 425px) {
     .menu {
