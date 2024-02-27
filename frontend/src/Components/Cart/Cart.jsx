@@ -13,8 +13,8 @@ import axios from "axios";
 const Cart = () => {
     const [items, setItems] = useState([]);
     const { user, isLogin } = useContext(userContext);
-    // console.log(user);
-    console.log(items);
+    console.log(user);
+    // console.log(items);
 
     useEffect(() => {
         const fetchCart = async () => {

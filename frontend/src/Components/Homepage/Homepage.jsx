@@ -7,12 +7,11 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { getAllRestaurantUrl } from "../../../urls/restaurantUrl.js";
 import { userContext } from "../../userContext/context.jsx";
-
-
+import { useLocation } from "react-router-dom";
 const HomePage = () => {
     const [restaurantData, setRestaurantData] = useState([]);
     const restaurantList = restaurantData;
-    const {setIsLoading } = useContext(userContext);
+    const { setIsLoading } = useContext(userContext);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -28,6 +27,10 @@ const HomePage = () => {
     }, []);
 
     // console.log(restaurantData);
+    // const {pathname} = useLocation();
+    // useEffect(()=>{
+    //     window.scrollTo(0,0);
+    // },[pathname])
     return (
         <>
             <div className={classes.wrapper}>
@@ -38,7 +41,6 @@ const HomePage = () => {
                 <TopBrands />
                 <DeliveryRestuarants list={restaurantList} />
             </div>
-            
         </>
     );
 };
