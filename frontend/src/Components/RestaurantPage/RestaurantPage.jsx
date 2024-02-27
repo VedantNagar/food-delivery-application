@@ -2,11 +2,12 @@ import classes from "./RestaurantPage.module.css";
 import Banner from "./Banner/Banner";
 import { useEffect } from "react";
 import { getSingleRestaurantUrl } from "../../../urls/restaurantUrl";
-import { useParams } from "react-router-dom";
+import { ScrollRestoration, useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import MenuCard from "./Menu/MenuCard";
-
+import { useLocation } from "react-router-dom";
+import { useRef } from "react";
 const RestaurantPage = () => {
     const params = useParams();
     const [fetchedData, setFetchData] = useState([]);
@@ -23,21 +24,29 @@ const RestaurantPage = () => {
         };
         fetchRestaurantInfo();
     }, []);
-    // console.log(fetchedData.menu);
+
+    const componentRef = useRef(null);
+
+    useEffect(() => {
+        if (componentRef.current) {
+            componentRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [componentRef.current]);
 
     return (
-        <>
+        <div ref={componentRef}>
+
             <Banner restaurantData={fetchedData} />
             <div className={classes.wrapper}>
                 <h1 className={classes.menu}>Menu</h1>
             </div>
             <div className={`${classes.wrapper} ${classes.scrollMenu}`}>
                 {fetchedData?.menu?.length != 0 &&
-                    fetchedData?.menu?.map((item) => {
-                        return <MenuCard item={item} key={item?._id} />;
-                    })}
+                    fetchedData?.menu?.map((item) => (
+                        <MenuCard item={item} key={item?._id} />
+                    ))}
             </div>
-        </>
+        </div>
     );
 };
 export default RestaurantPage;

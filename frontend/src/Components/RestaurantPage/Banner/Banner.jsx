@@ -15,7 +15,7 @@ const Banner = ({ restaurantData }) => {
     const image = restaurantData?.image ?? { bannerImg };
 
     return (
-        <div className={classes.banner}>
+        <div className={classes.banner} autoFocus>
             <div className={classes.wrapper}>
                 <div className={classes.left}>
                     <img src={image} alt="" className={classes.bannerImg} />

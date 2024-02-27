@@ -74,7 +74,9 @@ nav {
     display: none;
     cursor: pointer;
 }
-
+ul li a{
+    cursor: pointer;
+}
 @media (max-width: 1024px) {
     .navBtn {
         display: flex;
