@@ -38,7 +38,7 @@ const getCart = async (req, res) => {
     if (!user) {
       return res.json({ error: "User not found" });
     }
-    const userName = `${user.first_name} ${user.last_name || ""}`;
+     const userName = `${user.first_name} ${user.last_name || ""}`;
 
     //finding user's cart using userID
     const userCart = await cartModel.findOne({ userID: userID })
@@ -57,7 +57,16 @@ const getCart = async (req, res) => {
         error: `Cart not found for user ${userName} with ID ${userID}`,
       });
     }
-    res.json({ userCart });
+    console.log(userCart.items)
+    let array = userCart.items;
+    let total = 0;
+    array.forEach(element => {
+      total = total + element.food.price*element.quantity
+    });
+    console.log(total)
+    const newUserCart = [{...userCart._doc,total}]
+    console.log(newUserCart)
+    res.json({ newUserCart });
   } catch (error) {
     console.log(error);
     res.json({ error: "Internal server error" });

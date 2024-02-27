@@ -13,14 +13,15 @@ import axios from "axios";
 const Cart = () => {
     const [items, setItems] = useState([]);
     const { user, isLogin } = useContext(userContext);
-    console.log(user);
-    // console.log(items);
+    // console.log(user);
+    console.log(items);
 
     useEffect(() => {
         const fetchCart = async () => {
             const response = await axios.get(getAllFoodCartUrl);
-            // console.log(response?.data?.userCart?.items);
-            setItems(response?.data?.userCart?.items);
+            console.log(response?.data);
+            setItems(response?.data?.newUserCart);
+            
         };
         if (isLogin) {
             fetchCart();
@@ -57,10 +58,10 @@ const Cart = () => {
                         <div className={classes.cart}>
                             <div className={classes.topBottom}>
                                 <h3>Cart</h3>
-                                <span>{items.length} items</span>
+                                <span>{items?.length} items</span>
                             </div>
                             <div className={classes.items}>
-                                {items.map((item) => {
+                                {items?.map((item) => {
                                     return (
                                         <CartItem
                                             key={item._id}
