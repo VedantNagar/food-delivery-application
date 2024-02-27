@@ -8,9 +8,11 @@
   font-family: Poppins;
 }
 .footer {
-  width: 100%;
-  overflow: hidden;
-  background-color: #f8f8f8;
+
+    width: 100%;
+    overflow: hidden;
+    background-color: #f8f8f8;
+
 }
 .scrollMenu {
   margin-top: 2rem;

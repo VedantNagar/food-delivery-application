@@ -1,6 +1,7 @@
-const User = require('../models/user');
-const Food = require('../models/Food');
-const cartModel = require('../models/cart');
+const User = require("../models/user");
+const Food = require("../models/Food");
+const cartModel = require("../models/cart");
+const restaurant = require("../models/restaurant");
 // get cart
 /* const getCart = async(req,res)=>{
     const {id:user_ID} = req.params
@@ -23,23 +24,32 @@ const cartModel = require('../models/cart');
 const getCart = async (req, res) => {
   try {
     //getting userID
-    const userID = req.body.userID;
+    const userID = req.user.id;
+    
 
     //checking userID
     if (!userID) {
-      return res.json({ error: 'Provide userID' });
+      return res.json({ error: "Provide userID" });
     }
     //finding the user
     const user = await User.findById(userID);
 
     //checking if user exists
     if (!user) {
-      return res.json({ error: 'User not found' });
+      return res.json({ error: "User not found" });
     }
-    const userName = `${user.first_name} ${user.last_name || ''}`;
+     const userName = `${user.first_name} ${user.last_name || ""}`;
 
     //finding user's cart using userID
-    const userCart = await cartModel.findOne({ userID: userID });
+    const userCart = await cartModel.findOne({ userID: userID })
+    .populate({
+      path: "items.food",
+      populate: {
+          path: "restaurantID",
+          model: "restaurantModel",
+          select: "name about rating phone image discount address cft rating",
+      },
+  });
 
     //checking if the cart exists
     if (!userCart) {
@@ -47,10 +57,19 @@ const getCart = async (req, res) => {
         error: `Cart not found for user ${userName} with ID ${userID}`,
       });
     }
-    res.json({ userCart });
+    console.log(userCart.items)
+    let array = userCart.items;
+    let total = 0;
+    array.forEach(element => {
+      total = total + element.food.price*element.quantity
+    });
+    console.log(total)
+    const newUserCart = [{...userCart._doc,total}]
+    console.log(newUserCart)
+    res.json({ newUserCart });
   } catch (error) {
     console.log(error);
-    res.json({ error: 'Internal server error' });
+    res.json({ error: "Internal server error" });
   }
 };
 //add to cart
@@ -59,30 +78,42 @@ const addToCart = async (req, res) => {
   try {
     const { userID, foodID, quantityToAdd } = req.body;
 
-    //input validation
+    // Input validation
+
     if (!userID || !foodID || !quantityToAdd || quantityToAdd <= 0) {
-      return res.json({ error: 'Invalid Input.Provide all details' });
+      return res.json({ error: "Invalid Input. Provide all details" });
     }
-    //find user by ID
+
+    // Find user by ID
     const user = await User.findById(userID);
-    /* console.log(user); */
-
-    //check if user exists
     if (!user) {
-      return res.json({ error: 'User not found' });
+      return res.json({ error: "User not found" });
     }
-    //finding food item by ID
-    const foodItem = await Food.findById(foodID);
 
-    // Check if the food item exists
+    // Find food item by ID
+    const foodItem = await Food.findById(foodID);
     if (!foodItem) {
-      return res.json({ error: 'Food item not found' });
+      return res.json({ error: "Food item not found" });
     }
 
     // Find the user's cart by user ID
-    let userCart = await cartModel.findOne({ userID: userID });
+    const userCart = await cartModel
+    .findOne({ userID: userID })
+    .populate({
+        path: "items.food",
+        populate: {
+            path: "restaurantID",
+            model: "restaurantModel",
+            select: "name about rating phone image discount address cft rating",
+        },
+    });
 
-    //creating a new cart if it doesn't exist
+console.log(userCart);
+
+
+    console.log(userCart);
+
+    // Create a new cart if it doesn't exist
     if (!userCart) {
       userCart = new cartModel({
         userID: userID,
@@ -95,9 +126,8 @@ const addToCart = async (req, res) => {
       item.food.equals(foodID)
     );
 
-    //if item is in the cart, incrementing its quantity , else adding the new element
+    // If item is in the cart, increment its quantity, else add the new element
     if (itemIndex !== -1) {
-      /* Item found, proceed with the logic */
       userCart.items[itemIndex].quantity += parseInt(quantityToAdd);
     } else {
       userCart.items.push({
@@ -105,18 +135,41 @@ const addToCart = async (req, res) => {
         quantity: parseInt(quantityToAdd),
       });
     }
-    /* console.log('After Update:', userCart); */
 
-    //saving the updated cart
+    // // Populate cart with food name and price
+    // userCart = await populateCartItems(userCart);
+
+    // Save the updated cart
     await userCart.save();
 
-    //sending cart and quantity
+    // Sending cart and quantity
     res.json(userCart);
   } catch (error) {
     console.error(error);
-    res.json({ error: 'Internal server error' });
+    res.json({ error: "Internal server error" });
   }
 };
+
+// Function to populate cart items with food name and price
+// const populateCartItems = async (userCart) => {
+//   for (let item of userCart.items) {
+//     const foodItem = await Food.findById(item.food);
+//     const rest = await restaurant.findById(item.restaurantID)
+//     if (foodItem) {
+//       item.name = foodItem.name;
+//       item.about = foodItem.about;
+//       item.category = foodItem.category;
+//       item.image = foodItem.image;
+//       item.price = foodItem.price;
+//     }
+//     if(rest){
+//       item.restaurantName = rest.name
+//       item.restaurantRating = rest.rating
+//       item.restaurantDiscount = rest.discount
+//     }
+//   }
+//   return userCart;
+// };
 
 //delete from cart
 
@@ -126,14 +179,14 @@ const removeFromCart = async (req, res) => {
 
     //validation
     if (!userID || !foodID || !quantityToRemove || quantityToRemove <= 0) {
-      return res.json({ error: 'Invalid action. Provide all details' });
+      return res.json({ error: "Invalid action. Provide all details" });
     }
     //finding user
     const user = await User.findById(userID);
 
     //checking if user exists
     if (!user) {
-      return res.json({ error: 'User not found' });
+      return res.json({ error: "User not found" });
     }
     //finding user's cart by user ID
     const userCart = await cartModel.findOne({ userID: userID });
@@ -164,11 +217,11 @@ const removeFromCart = async (req, res) => {
       await userCart.save();
       return res.json(userCart);
     } else {
-      return res.json({ error: 'Item not found in the cart' });
+      return res.json({ error: "Item not found in the cart" });
     }
   } catch (error) {
     console.log(error);
-    res.json({ error: 'Internal Server Error' });
+    res.json({ error: "Internal Server Error" });
   }
 };
 
