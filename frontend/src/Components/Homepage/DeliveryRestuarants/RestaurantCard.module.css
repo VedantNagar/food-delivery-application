@@ -21,7 +21,7 @@ a {
     position: relative;
 }
 .coverImg img {
-    object-fit: cover;
+    object-fit: contain;
     width: 19rem;
     height: 12rem;
     transition: opacity 0.25s ease 0s, transform 0.25s ease 0s;

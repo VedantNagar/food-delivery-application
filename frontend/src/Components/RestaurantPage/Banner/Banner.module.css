@@ -10,8 +10,10 @@
   flex-wrap: wrap;
 }
 .banner {
-  background-color: #202020;
-  width: 100%;
+
+    background-color: #202020;
+    width: 100%;
+
 
   margin-top: 4rem;
   font-family: Poppins;
@@ -25,8 +27,11 @@
   display: flex;
   gap: 1rem;
 }
+.wrapper .left img {
+    object-fit: contain;
+}
 .left h3:first-child {
-  font-size: 1.75rem;
+    font-size: 1.75rem;
 }
 .desc {
   display: flex;
@@ -44,7 +49,9 @@
   font-size: 0.875rem;
 }
 .category {
-  font-size: 0.875rem;
+
+    font-size: 0.875rem;
+
 }
 .ratingFirstRow {
   color: white;
@@ -59,43 +66,4 @@
   gap: 1.5rem;
 }
 .right .offer {
-  display: flex;
-  gap: 0.5rem;
-}
-.right {
-  display: flex;
-  align-items: center;
-}
-.right h2:first-child {
-  color: #eb5757;
-  margin-bottom: 1rem;
-}
-.offers {
-  border: 2px dashed #eb5757;
-  padding: 1.5rem;
-  border-radius: 1rem;
-}
-@media (max-width: 425px) {
-  .left {
-    flex-wrap: wrap;
-  }
-}
-@media ((min-width: 425px )and (max-width: 768px)) {
-  .wrapper {
-    align-items: center;
-    justify-content: center;
-  }
-  .left {
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-}
-@media ((min-width: 320px )and (max-width: 425px)) {
-  .left {
-    font-size: 0.75rem;
-  }
-  .wrapper {
-    font-size: 0.75rem;
-  }
-}
+

@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import Navbar from "../Utils/Navbar/Navbar";
 import { useContext } from "react";
 import { userContext } from "../../userContext/context";
@@ -32,16 +32,16 @@ const Root = () => {
     const { isLogin } = useContext(userContext);
     const navItems = isLogin ? navbarHomePage : navbarSignIn;
     return (
-        <>
+        <div>
+            <ScrollRestoration />
             <div className={classes.wrapper}>
                 <Navbar list={navItems} />
             </div>
             <Outlet />
-            <ScrollToTop />
             <div className={classes.footer}>
                 <Footer />
             </div>
-        </>
+        </div>
     );
 };
 export default Root;

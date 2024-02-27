@@ -117,8 +117,6 @@ const createRestaurant = async (req, res) => {
     const { name, about, address, phone, opening_hours, owner } = req.body;
 
     const restaurant = await restaurantModel.create(req.body);
-    const restID = restaurant._id;
-    restaurantModel.findByIdAndUpdate(restID, { subName: name });
     // Send the created restaurant object in the response
     res.status(201).json(restaurant);
   } catch (error) {
@@ -141,6 +139,7 @@ const addFood = async (req, res) => {
   menuItem.price = items.price;
   const food = await FoodModal.create({ ...menuItem, restaurantID });
   const restaurant = await restaurantModel.findById(restaurantID);
+  menuItem.foodID = food._id
   restaurant.menu.push(menuItem);
   await restaurant.save();
   res.status(200).json(food);
