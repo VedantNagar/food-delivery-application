@@ -7,12 +7,12 @@
   margin-bottom: 4rem;
 }
 hr {
-    width: 100% !important;
+  width: 100% !important;
 }
 .footer {
-    width: 100%;
-    overflow: hidden;
-    background-color: #f8f8f8;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f8f8f8;
 }
 .heading {
   margin: 2rem 0;
@@ -62,11 +62,9 @@ hr {
   overflow: hidden;
 }
 .items {
-
-    height: 13.5rem;
-    overflow-y: scroll;
-    margin: 1rem 0;
-
+  height: 13.5rem;
+  overflow-y: scroll;
+  margin: 1rem 0;
 }
 .bill {
   color: #808080;
@@ -82,6 +80,7 @@ hr {
   display: flex;
   justify-content: center;
 }
+
 @media (max-width: 1024px) {
   .cart {
     width: 20rem;
@@ -110,38 +109,8 @@ hr {
     align-items: center;
   }
 }
-
-
-@media (max-width: 1024px) {
-    .cart {
-        width: 20rem;
-    }
-}
-@media (max-width: 768px) {
-    .wrapper {
-        font-size: 0.75rem;
-    }
-    .notes form input {
-        width: 15rem;
-        height: 6.25rem;
-    }
-}
-@media (max-width: 652px) {
-    .content {
-        flex-wrap: wrap;
-    }
-    .addresses {
-        flex-wrap: nowrap;
-    }
-}
-@media (max-width: 425px) {
-    .right {
-        justify-content: center;
-        align-items: center;
-    }
-}
 @media (max-width: 320px) {
-    .topBottom {
-        justify-content: end;
-    }
+  .topBottom {
+    justify-content: end;
+  }
 }
