@@ -40,7 +40,7 @@ const Cart = () => {
                             <h2>Delivery address</h2>
                         </div>
                         <div className={classes.addresses}>
-                            <AddressBlock address="Dno. 12-34-12, XYC Apartments, DOOR Colony, Hyderabad, Telangana" />
+                            <AddressBlock address={user?.address} />
                         </div>
                         <div className={classes.notes}>
                             <p>Any Note for us?</p>
