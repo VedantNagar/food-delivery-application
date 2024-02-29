@@ -57,15 +57,45 @@ const getCart = async (req, res) => {
         error: `Cart not found for user ${userName} with ID ${userID}`,
       });
     }
-    console.log(userCart.items)
+    // console.log(userCart.items)
+    let discount = 0;
+    const promises = userCart.items.map(async (item) => {
+        const restID = item.food.restaurantID._id;
+        const rest = await restaurant.findById(restID);
+        const disc = rest.discount;
+        let no = 0; // Default discount if not specified in the discount string
+    
+        
+        if(disc[1] === "%"){
+          no = Number(disc.slice(0,1))
+        }
+        else if(disc[2] === "%"){
+          no = Number(disc.slice(0,2))
+        }
+        else{
+          no = 0;
+        }
+    
+        console.log(item.food.price);
+        return no * 0.01 * item.food.price*item.quantity;
+    });
+    
+    Promise.all(promises)
+        .then((discounts) => {
+            discount = discounts.reduce((total, discount) => total + discount, 0);
+        })
+        .catch((error) => {
+            console.error("Error calculating discounts:", error);
+        });
+        console.log("discount = " + discount);
     let array = userCart.items;
     let total = 0;
     array.forEach(element => {
       total = total + element.food.price*element.quantity
     });
     console.log(total)
-    const newUserCart = [{...userCart._doc,total}]
-    console.log(newUserCart)
+    const newUserCart = [{...userCart._doc,total,discount}]
+    // console.log(newUserCart)
     res.json({ newUserCart });
   } catch (error) {
     console.log(error);
