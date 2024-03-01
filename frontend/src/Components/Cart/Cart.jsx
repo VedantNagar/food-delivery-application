@@ -55,20 +55,20 @@ const Cart = () => {
                         <div className={classes.cart}>
                             <div className={classes.topBottom}>
                                 <h3>Cart</h3>
-                                <span>{cartItems[0]?.items.length} items</span>
+                                <span>{cartItems[0]?.items?.length} items</span>
                             </div>
                             <div className={classes.items}>
                                 {cartItems[0]?.items?.map((item) => {
                                     return (
                                         <CartItem
-                                            key={item._id}
+                                            key={item?._id}
                                             from={
                                                 item?.food?.restaurantID
                                                     ?.name ?? "Your outlet"
                                             }
                                             title={item?.food?.name}
                                             price={item?.food?.price}
-                                            quantity={item.quantity}
+                                            quantity={item?.quantity}
                                         />
                                     );
                                 })}
