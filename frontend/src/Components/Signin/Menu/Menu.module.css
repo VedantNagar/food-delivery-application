@@ -1,10 +1,10 @@
-.container{
+.container {
     margin-bottom: 15rem;
 }
 .container .header {
-    font-family: 'Poppins';
+    font-family: "Poppins";
     text-transform: uppercase;
-    color: #EB5757;
+    color: #eb5757;
     font-size: 1.125rem;
     text-align: center;
 }
@@ -15,21 +15,21 @@
     text-align: center;
     margin-top: 1rem;
 }
-.container .innerContainer{
+.container .innerContainer {
     display: flex;
     margin-top: 2rem;
     gap: 4rem;
 }
 
-.left{
+.left {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     gap: 1rem;
 }
 
-@media (max-width: 1024px){
-    .container{
+@media (max-width: 1024px) {
+    .container {
         margin-top: 2rem;
     }
     .container .header {
@@ -39,21 +39,20 @@
         font-size: 2.25rem;
         margin-bottom: 1rem;
     }
-    .container .innerContainer{
+    .container .innerContainer {
         gap: 1.5rem;
-       flex-direction: column;
+        flex-direction: column;
     }
-    .left{
+    .left {
         flex-direction: row;
         justify-content: center;
     }
-    
 }
-@media(max-width: 425px){
-    .container{
+@media (max-width: 425px) {
+    .container {
         margin-bottom: 5rem;
     }
-    .container .header{
+    .container .header {
         font-size: 1.25rem;
     }
     .container h1 {
@@ -61,20 +60,19 @@
         margin-bottom: 1rem;
     }
 }
-@media(max-width: 768px){
-    .container{
+@media (max-width: 768px) {
+    .container {
         margin-bottom: 8rem;
     }
-    .container .header h1{
+    .container .header h1 {
         font-size: 1.25rem;
     }
-
 }
-@media(max-width: 375px){
-    .container .header{
+@media (max-width: 375px) {
+    .container .header {
         font-size: 0.75rem;
     }
-    .container h1{
+    .container h1 {
         font-size: 1.25rem;
     }
 }
