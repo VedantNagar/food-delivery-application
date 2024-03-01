@@ -58,7 +58,13 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/cart', cartRouter);
 // app.use('/api/v1/cart',cartRouter)
 
-app.use(NotFoundMIddleware);
+app.get('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, '../frontend/dist/index.html'), (err) => {
+		if (err) {
+			console.error('Error sending file:', err);
+		}
+	});
+});
 app.use(errorMiddleware);
 
 const port = process.env.PORT || 8000;
