@@ -4,13 +4,12 @@ const restaurantSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    
   },
   about: {
     type: String,
     required: true,
   },
-  
+
   address: {
     type: String,
     required: true,
@@ -22,13 +21,13 @@ const restaurantSchema = new mongoose.Schema({
   image: {
     type: [String],
   },
-  cft:{
-    type:String,
-    required:false
+  cft: {
+    type: String,
+    required: false,
   },
-  discount:{
-    type:String,
-    required:false
+  discount: {
+    type: Number,
+    required: false,
   },
   menu: {
     type: [
@@ -48,10 +47,10 @@ const restaurantSchema = new mongoose.Schema({
         category: {
           type: String,
         },
-        foodID:{
-          type:mongoose.Schema.Types.ObjectId,
-          ref:'food'
-        }
+        foodID: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'food',
+        },
       },
     ],
     default: [],
@@ -64,16 +63,18 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  owner:{
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref:"users"
+    ref: 'users',
   },
-  orderID: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref:"orders",
-    required: false,
-  }],
+  orderID: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'orders',
+      required: false,
+    },
+  ],
 });
 
 // Use mongoose.model to create the model and export it

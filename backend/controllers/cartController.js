@@ -1,7 +1,7 @@
-const User = require("../models/user");
-const Food = require("../models/Food");
-const cartModel = require("../models/cart");
-const restaurant = require("../models/restaurant");
+const User = require('../models/user');
+const Food = require('../models/Food');
+const cartModel = require('../models/cart');
+const restaurant = require('../models/restaurant');
 // get cart
 /* const getCart = async(req,res)=>{
     const {id:user_ID} = req.params
@@ -25,31 +25,29 @@ const getCart = async (req, res) => {
   try {
     //getting userID
     const userID = req.user.id;
-    
 
     //checking userID
     if (!userID) {
-      return res.json({ error: "Provide userID" });
+      return res.json({ error: 'Provide userID' });
     }
     //finding the user
     const user = await User.findById(userID);
 
     //checking if user exists
     if (!user) {
-      return res.json({ error: "User not found" });
+      return res.json({ error: 'User not found' });
     }
-     const userName = `${user.first_name} ${user.last_name || ""}`;
+    const userName = `${user.first_name} ${user.last_name || ''}`;
 
     //finding user's cart using userID
-    const userCart = await cartModel.findOne({ userID: userID })
-    .populate({
-      path: "items.food",
+    const userCart = await cartModel.findOne({ userID: userID }).populate({
+      path: 'items.food',
       populate: {
-          path: "restaurantID",
-          model: "restaurantModel",
-          select: "name about rating phone image discount address cft rating",
+        path: 'restaurantID',
+        model: 'restaurantModel',
+        select: 'name about rating phone image discount address cft rating',
       },
-  });
+    });
 
     //checking if the cart exists
     if (!userCart) {
@@ -60,46 +58,39 @@ const getCart = async (req, res) => {
     // console.log(userCart.items)
     let discount = 0;
     const promises = userCart.items.map(async (item) => {
-        const restID = item.food.restaurantID._id;
-        const rest = await restaurant.findById(restID);
-        const disc = rest.discount;
-        let no = 0; // Default discount if not specified in the discount string
-    
-        
-        if(disc[1] === "%"){
-          no = Number(disc.slice(0,1))
-        }
-        else if(disc[2] === "%"){
-          no = Number(disc.slice(0,2))
-        }
-        else{
-          no = 0;
-        }
-    
-        console.log(item.food.price);
-        return no * 0.01 * item.food.price*item.quantity;
+      const restID = item.food.restaurantID._id;
+      const rest = await restaurant.findById(restID);
+      const disc = rest.discount;
+
+      /* console.log('The discount is', disc); */
+
+      console.log(item.food.price * item.quantity);
+      const value = disc * 0.01 * item.food.price * item.quantity;
+      console.log('The discounted price is', value);
+      return value;
     });
-    
+
     Promise.all(promises)
-        .then((discounts) => {
-            discount = discounts.reduce((total, discount) => total + discount, 0);
-        })
-        .catch((error) => {
-            console.error("Error calculating discounts:", error);
+      .then((discounts) => {
+        discount = discounts.reduce((total, discount) => total + discount, 0);
+        console.log('discount = ' + discount);
+        let array = userCart.items;
+        let total = 0;
+        array.forEach((element) => {
+          total = total + element.food.price * element.quantity;
         });
-        console.log("discount = " + discount);
-    let array = userCart.items;
-    let total = 0;
-    array.forEach(element => {
-      total = total + element.food.price*element.quantity
-    });
-    console.log(total)
-    const newUserCart = [{...userCart._doc,total,discount}]
-    // console.log(newUserCart)
-    res.json({ newUserCart });
+        console.log(total);
+        const newUserCart = [{ ...userCart._doc, total, discount }];
+        // console.log(newUserCart)
+        res.json({ newUserCart });
+      })
+      .catch((error) => {
+        console.error('Error calculating discounts:', error);
+        res.json({ error });
+      });
   } catch (error) {
     console.log(error);
-    res.json({ error: "Internal server error" });
+    res.json({ error: 'Internal server error' });
   }
 };
 //add to cart
@@ -111,35 +102,32 @@ const addToCart = async (req, res) => {
     // Input validation
 
     if (!userID || !foodID || !quantityToAdd || quantityToAdd <= 0) {
-      return res.json({ error: "Invalid Input. Provide all details" });
+      return res.json({ error: 'Invalid Input. Provide all details' });
     }
 
     // Find user by ID
     const user = await User.findById(userID);
     if (!user) {
-      return res.json({ error: "User not found" });
+      return res.json({ error: 'User not found' });
     }
 
     // Find food item by ID
     const foodItem = await Food.findById(foodID);
     if (!foodItem) {
-      return res.json({ error: "Food item not found" });
+      return res.json({ error: 'Food item not found' });
     }
 
     // Find the user's cart by user ID
-    const userCart = await cartModel
-    .findOne({ userID: userID })
-    .populate({
-        path: "items.food",
-        populate: {
-            path: "restaurantID",
-            model: "restaurantModel",
-            select: "name about rating phone image discount address cft rating",
-        },
+    const userCart = await cartModel.findOne({ userID: userID }).populate({
+      path: 'items.food',
+      populate: {
+        path: 'restaurantID',
+        model: 'restaurantModel',
+        select: 'name about rating phone image discount address cft rating',
+      },
     });
 
-console.log(userCart);
-
+    console.log(userCart);
 
     console.log(userCart);
 
@@ -176,7 +164,7 @@ console.log(userCart);
     res.json(userCart);
   } catch (error) {
     console.error(error);
-    res.json({ error: "Internal server error" });
+    res.json({ error: 'Internal server error' });
   }
 };
 
@@ -209,14 +197,14 @@ const removeFromCart = async (req, res) => {
 
     //validation
     if (!userID || !foodID || !quantityToRemove || quantityToRemove <= 0) {
-      return res.json({ error: "Invalid action. Provide all details" });
+      return res.json({ error: 'Invalid action. Provide all details' });
     }
     //finding user
     const user = await User.findById(userID);
 
     //checking if user exists
     if (!user) {
-      return res.json({ error: "User not found" });
+      return res.json({ error: 'User not found' });
     }
     //finding user's cart by user ID
     const userCart = await cartModel.findOne({ userID: userID });
@@ -247,11 +235,11 @@ const removeFromCart = async (req, res) => {
       await userCart.save();
       return res.json(userCart);
     } else {
-      return res.json({ error: "Item not found in the cart" });
+      return res.json({ error: 'Item not found in the cart' });
     }
   } catch (error) {
     console.log(error);
-    res.json({ error: "Internal Server Error" });
+    res.json({ error: 'Internal Server Error' });
   }
 };
 
