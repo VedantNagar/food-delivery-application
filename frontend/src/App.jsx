@@ -4,7 +4,7 @@ import SignIn from './Components/Signin/Signin';
 import HomePage from './Components/Homepage/Homepage';
 import RestaurantPage from './Components/RestaurantPage/RestaurantPage';
 import { UserContextProvider } from './userContext/context.jsx';
-import './index.css';
+import './App.css';
 import Dashboard from './Components/Dashboard/Dashboard.jsx';
 import SearchedResults from './Components/SearchedResults/SearchedResults.jsx';
 import Root from './Components/Root/Root.jsx';
