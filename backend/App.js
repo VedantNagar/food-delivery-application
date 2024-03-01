@@ -31,6 +31,7 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:8000',
   'https://food-delivery-application-rtu9.onrender.com',
+  'https://kshitij-fudo-app.onrender.com',
 ];
 
 const corsOptions = {
