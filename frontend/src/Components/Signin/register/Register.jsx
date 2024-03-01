@@ -67,7 +67,7 @@ const Register = () => {
 
     return (
         <form onSubmit={registerUser} className={classes.formAction}>
-            <h1>Register</h1>
+            <h1 className="text-4xl">Register</h1>
             <div className={classes.cover}>
                 <div className={`${classes.input}`}>
                     <input
