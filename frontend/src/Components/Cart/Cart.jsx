@@ -12,6 +12,7 @@ import axios from "axios";
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const { user, isLogin } = useContext(userContext);
+    // console.log(user);
     console.log(cartItems);
 
     useEffect(() => {
@@ -78,11 +79,15 @@ const Cart = () => {
                                 <h4>Bill details</h4>
                                 <div className={classes.billInfo}>
                                     <span>Discount</span>
-                                    <span>₹32.00</span>
+                                    <span>₹{cartItems[0]?.discount}</span>
                                 </div>
                                 <div className={classes.topBottom}>
-                                    <h3>Total</h3>
-                                    <span>₹{cartItems[0]?.total}</span>
+                                    <h3>Total (after discount)</h3>
+                                    <span>
+                                        ₹
+                                        {cartItems[0]?.total -
+                                            cartItems[0]?.discount}
+                                    </span>
                                 </div>
                                 <div className={classes.btn}>
                                     <Button title="Proceed To Payment" />
