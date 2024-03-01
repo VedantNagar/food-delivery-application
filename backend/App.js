@@ -3,7 +3,7 @@ const NotFoundMIddleware = require('./middleware/notFound');
 const connectDB = require('./database/connect');
 const morgan = require('morgan');
 const cors = require('cors');
-
+const path = require('path');
 //routes
 const restRouter = require('./routes/restaurantRoutes');
 const foodRouter = require('./routes/foodRoutes');
