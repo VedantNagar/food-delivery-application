@@ -12,6 +12,7 @@ import axios from "axios";
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const { user, isLogin } = useContext(userContext);
+    // console.log(user);
     console.log(cartItems);
 
     useEffect(() => {
@@ -55,20 +56,20 @@ const Cart = () => {
                         <div className={classes.cart}>
                             <div className={classes.topBottom}>
                                 <h3>Cart</h3>
-                                <span>{cartItems[0]?.items.length} items</span>
+                                <span>{cartItems[0]?.items?.length} items</span>
                             </div>
                             <div className={classes.items}>
                                 {cartItems[0]?.items?.map((item) => {
                                     return (
                                         <CartItem
-                                            key={item._id}
+                                            key={item?._id}
                                             from={
                                                 item?.food?.restaurantID
                                                     ?.name ?? "Your outlet"
                                             }
                                             title={item?.food?.name}
                                             price={item?.food?.price}
-                                            quantity={item.quantity}
+                                            quantity={item?.quantity}
                                         />
                                     );
                                 })}
@@ -78,11 +79,15 @@ const Cart = () => {
                                 <h4>Bill details</h4>
                                 <div className={classes.billInfo}>
                                     <span>Discount</span>
-                                    <span>₹32.00</span>
+                                    <span>₹{cartItems[0]?.discount}</span>
                                 </div>
                                 <div className={classes.topBottom}>
-                                    <h3>Total</h3>
-                                    <span>₹{cartItems[0]?.total}</span>
+                                    <h3>Total (after discount)</h3>
+                                    <span>
+                                        ₹
+                                        {cartItems[0]?.total -
+                                            cartItems[0]?.discount}
+                                    </span>
                                 </div>
                                 <div className={classes.btn}>
                                     <Button title="Proceed To Payment" />

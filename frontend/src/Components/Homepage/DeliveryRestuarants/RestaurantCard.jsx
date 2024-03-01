@@ -14,7 +14,8 @@ const RestaurantCard = ({ restaurant }) => {
         <div className={classes.card}>
             <div className={classes.coverImg}>
                 <img src={coverImg} alt="" />
-                {discount && <div className={classes.discount}>{discount}</div>}
+                {discount && <div className={classes.discount}>{discount}% off</div>}
+                
             </div>
             <div className={classes.content}>
                 <div className={classes.firstRow}>

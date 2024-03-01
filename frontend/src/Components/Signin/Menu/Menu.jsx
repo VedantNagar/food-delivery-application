@@ -5,7 +5,7 @@ import ramenIcon from "../../../images/ramen-vector.svg";
 import cupCakeIcon from "../../../images/muffin-vector.svg";
 import iceCreamIcon from "../../../images/iceCream-vector.svg";
 import Carousel from "./Carousel";
-import MenuBtn from "./MenuBtn"
+import MenuBtn from "./MenuBtn";
 const btnItem = [
     { img: burgerIcon, title: "Burger" },
     { img: pizzaIcon, title: "Pizza" },
@@ -23,8 +23,14 @@ const Menu = () => {
             </h1>
             <div className={classes.innerContainer}>
                 <div className={classes.left}>
-                    {btnItem.map((item)=>{
-                        return <MenuBtn img={item.img} title={item.title} key={item.title}/>
+                    {btnItem.map((item) => {
+                        return (
+                            <MenuBtn
+                                img={item.img}
+                                title={item.title}
+                                key={item.title}
+                            />
+                        );
                     })}
                 </div>
                 <div className={classes.right}>

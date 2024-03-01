@@ -3,7 +3,7 @@ const NotFoundMIddleware = require('./middleware/notFound');
 const connectDB = require('./database/connect');
 const morgan = require('morgan');
 const cors = require('cors');
-
+const path = require('path');
 //routes
 const restRouter = require('./routes/restaurantRoutes');
 const foodRouter = require('./routes/foodRoutes');
@@ -31,6 +31,7 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:8000',
   'https://food-delivery-application-rtu9.onrender.com',
+  'https://kshitij-fudo-app.onrender.com',
 ];
 
 const corsOptions = {
@@ -57,7 +58,13 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/cart', cartRouter);
 // app.use('/api/v1/cart',cartRouter)
 
-app.use(NotFoundMIddleware);
+app.get('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, '../frontend/dist/index.html'), (err) => {
+		if (err) {
+			console.error('Error sending file:', err);
+		}
+	});
+});
 app.use(errorMiddleware);
 
 const port = process.env.PORT || 8000;
