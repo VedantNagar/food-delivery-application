@@ -35,10 +35,9 @@ const RestaurantPage = () => {
 
     return (
         <div ref={componentRef}>
-
             <Banner restaurantData={fetchedData} />
             <div className={classes.wrapper}>
-                <h1 className={classes.menu}>Menu</h1>
+                <h1 className="font-poppins text-3xl ml-4 mt-4">Menu</h1>
             </div>
             <div className={`${classes.wrapper} ${classes.scrollMenu}`}>
                 {fetchedData?.menu?.length != 0 &&

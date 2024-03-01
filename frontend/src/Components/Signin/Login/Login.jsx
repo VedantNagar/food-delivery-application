@@ -45,9 +45,10 @@ const Login = () => {
 
     return (
         <form onSubmit={registerUser} className={classes.formAction}>
-            <h1>Login</h1>
+            <h1 className="text-4xl">Login</h1>
             <div className={classes.input}>
                 <input
+                    className="p-2"
                     type="email"
                     placeholder="Enter email"
                     value={data.email}
@@ -61,6 +62,7 @@ const Login = () => {
             </div>
             <div className={classes.input}>
                 <input
+                    className="p-2"
                     type="password"
                     placeholder="Enter password"
                     value={data.password}
