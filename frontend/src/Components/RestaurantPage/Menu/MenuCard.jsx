@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { userContext } from "../../../userContext/context";
 
 
-const MenuCard = ({ item }) => {
+const MenuCard = ({ item , onAddCart}) => {
     const { user } = useContext(userContext);
     const handleClick = async () => {
         console.log(item);
@@ -39,6 +39,7 @@ const MenuCard = ({ item }) => {
                 },
             }
         );
+        onAddCart();
         console.log(result);
     };
 

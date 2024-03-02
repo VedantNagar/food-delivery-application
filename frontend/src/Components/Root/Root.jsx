@@ -8,7 +8,6 @@ import DropdownMenu from "../Utils/DropdownMenu/DropdownMenu";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 
-import ScrollToTop from "../../ScrollToTop";
 const navbarHomePage = [
     {
         title: "Home",
@@ -21,8 +20,8 @@ const navbarHomePage = [
         title: "Cart",
         imgfwd: <LiaShoppingBagSolid />,
         imgbwd: "",
-        // to: "homepage/cart",
-        to: "dashboard",
+        to: "homepage/cart",
+        // to: "dashboard",
         key: 214122412421,
     },
     { component: <DropdownMenu />, key: 214122412 },

@@ -40,7 +40,9 @@ const Cart = () => {
                             <h2>Delivery address</h2>
                         </div>
                         <div className={classes.addresses}>
-                            <AddressBlock address={user?.address} />
+                            <AddressBlock
+                                address={user?.address ?? "Your address"}
+                            />
                         </div>
                         <div className={classes.notes}>
                             <p>Any Note for us?</p>
@@ -56,37 +58,59 @@ const Cart = () => {
                         <div className={classes.cart}>
                             <div className={classes.topBottom}>
                                 <h3>Cart</h3>
-                                <span>{cartItems[0]?.items?.length} items</span>
+                                <span>
+                                    {!cartItems
+                                        ? "0 "
+                                        : cartItems[0]?.items?.length}
+                                    items
+                                </span>
                             </div>
                             <div className={classes.items}>
-                                {cartItems[0]?.items?.map((item) => {
-                                    return (
-                                        <CartItem
-                                            key={item?._id}
-                                            from={
-                                                item?.food?.restaurantID
-                                                    ?.name ?? "Your outlet"
-                                            }
-                                            title={item?.food?.name}
-                                            price={item?.food?.price}
-                                            quantity={item?.quantity}
-                                        />
-                                    );
-                                })}
+                                {!cartItems ? (
+                                    <CartItem
+                                        key="0"
+                                        from="Dummy outlet"
+                                        title="Dummy"
+                                        price="0"
+                                        quantity="0"
+                                    />
+                                ) : (
+                                    cartItems[0]?.items?.map((item) => {
+                                        return (
+                                            <CartItem
+                                                key={item?._id}
+                                                from={
+                                                    item?.food?.restaurantID
+                                                        ?.name ?? "Your outlet"
+                                                }
+                                                title={item?.food?.name}
+                                                price={item?.food?.price}
+                                                quantity={item?.quantity}
+                                            />
+                                        );
+                                    })
+                                )}
                             </div>
                             <hr />
                             <div className={classes.bill}>
                                 <h4>Bill details</h4>
                                 <div className={classes.billInfo}>
                                     <span>Discount</span>
-                                    <span>₹{cartItems[0]?.discount}</span>
+                                    <span>
+                                        ₹
+                                        {!cartItems
+                                            ? "0 "
+                                            : cartItems[0]?.discount}
+                                    </span>
                                 </div>
                                 <div className={classes.topBottom}>
                                     <h3>Total (after discount)</h3>
                                     <span>
                                         ₹
-                                        {cartItems[0]?.total -
-                                            cartItems[0]?.discount}
+                                        {!cartItems
+                                            ? "0 "
+                                            : cartItems[0]?.total -
+                                              cartItems[0]?.discount}
                                     </span>
                                 </div>
                                 <div className={classes.btn}>
