@@ -5,10 +5,8 @@ import line from "../images/line.svg";
 import { FaStar } from "react-icons/fa";
 import { IconContext } from "react-icons";
 const Banner = ({ restaurantData }) => {
-    const name =
-        restaurantData?.name ?? "LunchBox - Meals and Thalis";
-    const aboutCuisine =
-        restaurantData?.about ?? "North Indian, Punjabi";
+    const name = restaurantData?.name ?? "LunchBox - Meals and Thalis";
+    const aboutCuisine = restaurantData?.about ?? "North Indian, Punjabi";
     const rating = restaurantData?.rating ?? "4.0";
     const cft = restaurantData?.cft ?? "₹200 for two";
     const discount = restaurantData?.discount ?? "Discounts soon!!";
@@ -53,7 +51,7 @@ const Banner = ({ restaurantData }) => {
                     <div className={classes.offers}>
                         <h2>Offers</h2>
                         <div className={classes.offer}>
-                            <img src={offerImg} alt="" /> <p>{discount}</p>
+                            <img src={offerImg} alt="" /> <p>{discount}% off</p>
                         </div>
                         <div className={classes.offer}>
                             <img src={offerImg} alt="" />{" "}
