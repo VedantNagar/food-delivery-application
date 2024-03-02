@@ -60,6 +60,7 @@ select {
     gap: 0.5rem;
 }
 input.inline {
+    padding: 0.5rem;
     width: 9.25rem;
 }
 @media (max-width: 1024px) {

@@ -67,7 +67,7 @@ const Register = () => {
 
     return (
         <form onSubmit={registerUser} className={classes.formAction}>
-            <h1>Register</h1>
+            <h1 className="text-4xl">Register</h1>
             <div className={classes.cover}>
                 <div className={`${classes.input}`}>
                     <input
@@ -94,6 +94,7 @@ const Register = () => {
             </div>
             <div className={classes.input}>
                 <input
+                    className="p-2"
                     type="text"
                     placeholder="Enter Address"
                     value={data.address}
@@ -104,6 +105,7 @@ const Register = () => {
             </div>
             <div className={classes.input}>
                 <input
+                    className="p-2"
                     type="number"
                     placeholder="Enter Contact"
                     value={data.contact}
@@ -114,6 +116,7 @@ const Register = () => {
             </div>
             <div className={classes.input}>
                 <select
+                    className="p-2"
                     value={data.role}
                     onChange={(e) => setData({ ...data, role: e.target.value })}
                 >
@@ -123,6 +126,7 @@ const Register = () => {
             </div>
             <div className={classes.input}>
                 <input
+                    className="p-2"
                     type="email"
                     placeholder="Enter Email"
                     value={data.email}
@@ -133,6 +137,7 @@ const Register = () => {
             </div>
             <div className={classes.input}>
                 <input
+                    className="p-2"
                     type="password"
                     placeholder="Enter Password"
                     value={data.password}

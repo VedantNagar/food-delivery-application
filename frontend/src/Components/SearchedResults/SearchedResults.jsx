@@ -81,18 +81,17 @@ const SearchedResults = () => {
                                     No restaurants related to {capitalizedName}{" "}
                                     found
                                     <span className={classes.coloredSpan}>
-                                        {" "}
                                         :(
                                     </span>
                                 </h1>
                             )}
                         {activeBtn === "Dishes"
-                            ? foodItems.map((item) => {
+                            ? foodItems?.map((item) => {
                                   return (
                                       <FoodCard data={item} key={item._id} />
                                   );
                               })
-                            : restaurants.map((item) => {
+                            : restaurants?.map((item) => {
                                   return (
                                       <Link
                                           to={`/homepage/${item._id}`}

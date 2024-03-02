@@ -6,9 +6,9 @@ import axios from "axios";
 import { addToCartUrl } from "../../../../urls/cartUrl";
 import { useContext } from "react";
 import { userContext } from "../../../userContext/context";
-import { ScrollRestoration } from "react-router-dom";
 
-const MenuCard = ({ item }) => {
+
+const MenuCard = ({ item , onAddCart}) => {
     const { user } = useContext(userContext);
     const handleClick = async () => {
         console.log(item);
@@ -39,12 +39,13 @@ const MenuCard = ({ item }) => {
                 },
             }
         );
+        onAddCart();
         console.log(result);
     };
 
     const head = item?.name ?? "Brunch for 2 - Veg (Save upto Rs.45)";
     const price = item?.price ?? "599";
-    const image = item?.image?.length > 0 ? item.image : foodImg;
+    const image = item?.image?.length > 0 ? item?.image : foodImg;
     const category = item?.category;
     const desc =
         item?.about ??

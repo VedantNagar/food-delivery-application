@@ -2,15 +2,43 @@ import classes from "./RestaurantPage.module.css";
 import Banner from "./Banner/Banner";
 import { useEffect } from "react";
 import { getSingleRestaurantUrl } from "../../../urls/restaurantUrl";
-import { ScrollRestoration, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import MenuCard from "./Menu/MenuCard";
-import { useLocation } from "react-router-dom";
 import { useRef } from "react";
+import Snackbar from "@mui/material/Snackbar";
+import Fade from "@mui/material/Fade";
+import Slide from "@mui/material/Slide";
+
+function SlideTransition(props) {
+    return <Slide {...props} direction="up" />;
+}
+
+function GrowTransition(props) {
+    return <Grow {...props} />;
+}
 const RestaurantPage = () => {
     const params = useParams();
     const [fetchedData, setFetchData] = useState([]);
+    const [state, setState] = useState({
+        open: false,
+        Transition: Fade,
+    });
+
+    const handleClick = (Transition) => () => {
+        setState({
+            open: true,
+            Transition,
+        });
+    };
+
+    const handleClose = () => {
+        setState({
+            ...state,
+            open: false,
+        });
+    };
     useEffect(() => {
         const fetchRestaurantInfo = async () => {
             try {
@@ -42,9 +70,21 @@ const RestaurantPage = () => {
             <div className={`${classes.wrapper} ${classes.scrollMenu}`}>
                 {fetchedData?.menu?.length != 0 &&
                     fetchedData?.menu?.map((item) => (
-                        <MenuCard item={item} key={item?._id} />
+                        <MenuCard
+                            item={item}
+                            key={item?._id}
+                            onAddCart={handleClick(SlideTransition)}
+                        />
                     ))}
             </div>
+            <Snackbar
+                open={state.open}
+                onClose={handleClose}
+                TransitionComponent={state.Transition}
+                message="Hurray!! item is added"
+                key={state.Transition.name}
+                autoHideDuration={1200}
+            />
         </div>
     );
 };
