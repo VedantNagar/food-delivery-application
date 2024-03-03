@@ -8,17 +8,21 @@ import { getAllFoodCartUrl } from "../../../urls/cartUrl";
 import { useContext } from "react";
 import { userContext } from "../../userContext/context";
 import axios from "axios";
-
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const { user, isLogin } = useContext(userContext);
+    const { isLoading, setIsLoading } = useContext(userContext);
+    // console.log("cartitems are" , cartItems);
 
-    console.log(cartItems);
-
+    const userID = cartItems[0]?.userID;
     useEffect(() => {
         const fetchCart = async () => {
+            setIsLoading(true);
             const response = await axios.get(getAllFoodCartUrl);
             // console.log(response?.data?.newUserCart);
+            setIsLoading(false);
             setCartItems(response?.data?.newUserCart);
         };
         if (isLogin) {
@@ -62,10 +66,17 @@ const Cart = () => {
                                     {!cartItems
                                         ? "0 "
                                         : cartItems[0]?.items?.length}
-                                    items
+                                    <span> items</span>
                                 </span>
                             </div>
                             <div className={classes.items}>
+                                {isLoading && (
+                                    <Skeleton
+                                        variant="rounded"
+                                        width={210}
+                                        height={60}
+                                    />
+                                )}
                                 {!cartItems ? (
                                     <CartItem
                                         key="0"
@@ -74,6 +85,24 @@ const Cart = () => {
                                         price="0"
                                         quantity="0"
                                     />
+                                ) : isLoading ? (
+                                    <Stack spacing={1}>
+                                        <Skeleton
+                                            variant="rounded"
+                                            width={210}
+                                            height={60}
+                                        />
+                                        <Skeleton
+                                            variant="rounded"
+                                            width={210}
+                                            height={60}
+                                        />
+                                        <Skeleton
+                                            variant="rounded"
+                                            width={210}
+                                            height={60}
+                                        />
+                                    </Stack>
                                 ) : (
                                     cartItems[0]?.items?.map((item) => {
                                         return (
@@ -86,6 +115,8 @@ const Cart = () => {
                                                 title={item?.food?.name}
                                                 price={item?.food?.price}
                                                 quantity={item?.quantity}
+                                                foodId={item?._id}
+                                                user={userID}
                                             />
                                         );
                                     })
