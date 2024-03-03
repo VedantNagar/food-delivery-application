@@ -118,7 +118,7 @@ const addToCart = async (req, res) => {
     }
 
     // Find the user's cart by user ID
-    const userCart = await cartModel.findOne({ userID: userID }).populate({
+    var userCart = await cartModel.findOne({ userID: userID }).populate({
       path: 'items.food',
       populate: {
         path: 'restaurantID',
@@ -126,8 +126,6 @@ const addToCart = async (req, res) => {
         select: 'name about rating phone image discount address cft rating',
       },
     });
-
-    console.log(userCart);
 
     console.log(userCart);
 
