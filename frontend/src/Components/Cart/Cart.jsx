@@ -115,8 +115,9 @@ const Cart = () => {
                                                 title={item?.food?.name}
                                                 price={item?.food?.price}
                                                 quantity={item?.quantity}
-                                                foodId={item?._id}
+                                                foodID={item?.food?._id}
                                                 user={userID}
+                                                
                                             />
                                         );
                                     })

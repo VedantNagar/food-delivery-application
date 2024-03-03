@@ -99,7 +99,7 @@ const addToCart = async (req, res) => {
   try {
     const { foodID, quantityToAdd } = req.body;
     const userID = req.user.id;
-
+    console.log(foodID)
     //checking userID
     if (!userID) {
       return res.json({ error: "Provide userID" });
