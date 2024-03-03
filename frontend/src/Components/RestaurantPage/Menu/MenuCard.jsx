@@ -65,7 +65,7 @@ const MenuCard = ({ item , onAddCart}) => {
                 <p className={classes.desc}>{desc}</p>
             </div>
             <div className={classes.image}>
-                <img src={image} alt="" />
+                <img src={image} alt=""  />
                 <a className={classes.add} onClick={handleClick}>
                     Add +
                 </a>
