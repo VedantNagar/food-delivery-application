@@ -15,6 +15,11 @@ const Cart = () => {
     const { user, isLogin } = useContext(userContext);
     const { isLoading, setIsLoading } = useContext(userContext);
     // console.log("cartitems are" , cartItems);
+    const [total, setTotal] = useState();
+    const foodLocalQuantityHandler = (localQuantity) =>{
+        setTotal(localQuantity);
+    }
+
 
     const userID = cartItems[0]?.userID;
     useEffect(() => {
@@ -28,7 +33,7 @@ const Cart = () => {
         if (isLogin) {
             fetchCart();
         }
-    }, [isLogin]);
+    }, [isLogin,total]);
 
     return (
         <>
@@ -117,7 +122,7 @@ const Cart = () => {
                                                 quantity={item?.quantity}
                                                 foodID={item?.food?._id}
                                                 user={userID}
-                                                
+                                                totalHandler={foodLocalQuantityHandler}
                                             />
                                         );
                                     })
