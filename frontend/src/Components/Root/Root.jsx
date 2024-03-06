@@ -3,7 +3,6 @@ import Navbar from "../Utils/Navbar/Navbar";
 import { useContext } from "react";
 import { userContext } from "../../userContext/context";
 import Footer from "../Utils/Footer/Footer";
-import classes from "./Root.module.css";
 import DropdownMenu from "../Utils/DropdownMenu/DropdownMenu";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { LiaShoppingBagSolid } from "react-icons/lia";
@@ -34,11 +33,11 @@ const Root = () => {
     return (
         <div>
             <ScrollRestoration />
-            <div className={classes.wrapper}>
+            <div className="w-customVW h-full mx-auto overflow-hidden">
                 <Navbar list={navItems} />
             </div>
             <Outlet />
-            <div className={classes.footer}>
+            <div className="w-full overflow-hidden bg-[#F5F5F5]">
                 <Footer />
             </div>
         </div>
