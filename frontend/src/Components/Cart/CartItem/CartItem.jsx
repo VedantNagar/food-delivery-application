@@ -3,7 +3,7 @@ import { addToCartUrl, removeFromCartUrl } from "../../../../urls/cartUrl";
 import classes from "./CartItem.module.css";
 import axios from "axios";
 
-const CartItem = ({ from, title, price, quantity, foodID }) => {
+const CartItem = ({ from, title, price, quantity, foodID,totalHandler }) => {
   // Local state to track quantity
   const [localQuantity, setLocalQuantity] = useState(quantity);
   const [disable,setDisable]=useState(false);
@@ -21,6 +21,7 @@ const CartItem = ({ from, title, price, quantity, foodID }) => {
       // if(response.data.error)
       // return;
       // Update local quantity
+      totalHandler(localQuantity + 1);
       setLocalQuantity((prevQuantity) => prevQuantity + 1);
       
     } catch (error) {
@@ -43,6 +44,7 @@ const CartItem = ({ from, title, price, quantity, foodID }) => {
       // if(response.data.error)
       // return;
       // Update local quantity
+      totalHandler(localQuantity - 1);
       setLocalQuantity((prevQuantity) => prevQuantity - 1);
     } catch (error) {
       console.error("Error:", error);
