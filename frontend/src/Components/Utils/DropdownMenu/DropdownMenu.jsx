@@ -23,6 +23,10 @@ export default function DropdownMenu() {
         e.preventDefault();
         setAnchorEl(null);
     };
+    const handleOrder = (e) => {
+        e.preventDefault();
+        navigate("/homepage/orders");
+    };
     return (
         <div>
             <Button
@@ -46,7 +50,7 @@ export default function DropdownMenu() {
                     "aria-labelledby": "basic-button",
                 }}
             >
-                <MenuItem onClick={handleClose}>Orders</MenuItem>
+                <MenuItem onClick={handleOrder}>Orders</MenuItem>
                 <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </Menu>
         </div>

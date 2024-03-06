@@ -9,6 +9,9 @@ export default {
             fontFamily: {
                 poppins: ["Poppins"],
             },
+            width: {
+                customVW: "85vw",
+            }
         },
     },
     plugins: [],
