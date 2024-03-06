@@ -1,5 +1,4 @@
 footer {
-
     font-family: "Poppins";
     width: 85vw;
     margin: 0 auto;
@@ -22,6 +21,9 @@ footer {
     border-radius: 0 0.5rem 0 0.5rem;
     width: 2rem;
     height: 2rem;
+}
+.left .logo h2{
+    font-weight: 500;
 }
 .logo {
     font-family: "Poppins", sans-serif;
@@ -57,11 +59,14 @@ footer {
     text-decoration: none;
     color: inherit;
 }
+.right li a,.right li p{
+    font-weight: 300;
+}
 .right ul li {
     list-style: none;
 }
 .right h3 {
-    font-weight: 700;
+    font-weight: 500;
 }
 hr {
     width: 85vw;

@@ -10,6 +10,7 @@ import SearchedResults from './Components/SearchedResults/SearchedResults.jsx';
 import Root from './Components/Root/Root.jsx';
 import axios from 'axios';
 import { FoodContextProvider } from './userContext/foodContext.jsx'; //
+import Order from './Components/Orders/Order.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: 'homepage/cart',
         element: <Cart />,
+      },
+      {
+        path: 'homepage/orders',
+        element: <Order />,
       },
     ],
   },
