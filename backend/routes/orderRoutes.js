@@ -10,6 +10,7 @@ router.use(authMiddleware);
 
 router.post('/createOrder', OrderController.createOrder);
 router.get('/getOrder/:id', OrderController.getOrderById);
+router.get('/getAllOrder',OrderController.getAllOrder)
 router.patch('/deleteOrder/:id',OrderController.deleteOrder)
 
 // router.post('/orders', OrderController.createOrder); //allows creation of new food order

@@ -13,6 +13,7 @@ export const createOrderUrl = `${url}/createOrder`;
 //const { id: orderId } = req.params;
 export const getOrderUrl = `${url}/getOrder`;
 
+export const getAllOrderUrl = `${url}/getAllOrder`
 //delete order
 //const { id: orderId } = req.params;
 //const { userId } = req.body;

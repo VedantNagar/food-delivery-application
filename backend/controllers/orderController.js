@@ -2,6 +2,8 @@ const Order = require('../models/Orders');
 const Food = require('../models/Food');
 const Restaurant = require('../models/restaurant');
 const User = require('../models/user');
+
+
 //  Create a new order
 // const createOrder = async (req, res) => {
 //   const { items, totalAmount, paymentMethod, orderStatus, userId } = req.body;
@@ -36,8 +38,8 @@ const User = require('../models/user');
 
 const createOrder = async (req, res) => {
   try {
-    const { items, totalAmount, paymentMethod, orderStatus, userId } = req.body;
-
+    const { items, totalAmount, paymentMethod, orderStatus} = req.body;
+    const userId = req.user.id;
     const user = User.findById({userId})
     if(!user){
       res.status(400).json({
@@ -54,27 +56,41 @@ const createOrder = async (req, res) => {
 
     // Iterate through each restaurant's items and create a separate order
     for (const restaurantID in groupedItems) {
+      const rest = await Restaurant.findById(restaurantID); // Note the await here
+      const disc = rest.discount;
       const restaurantItems = groupedItems[restaurantID];
-
+      let sum = 0;
+      restaurantItems.forEach(item => {
+          sum += item.quantity * item.food.price; // shorthand for sum = sum + ...
+      });
+  
+      sum -= (sum * disc * 0.01);
+  
+      // Check if sum is a valid number, if not, set it to 0
+      if (isNaN(sum)) {
+          sum = 0;
+      }
+  
       const newOrder = new Order({
-        items: restaurantItems,
-        totalAmount,
-        paymentMethod,
-        orderStatus,
-        user: userId,
-        orderDate: new Date(),
-        restaurant: restaurantID,
+          items: restaurantItems,
+          totalAmount: sum,
+          paymentMethod,
+          orderStatus,
+          user: userId,
+          orderDate: new Date(),
+          restaurant: restaurantID,
       });
-
+  
       const savedOrder = await newOrder.save();
-
-      //add order in restaurant datanase
+  
+      // Add order in restaurant database
       await Restaurant.findByIdAndUpdate(restaurantID, {
-        $push: { orderID: savedOrder._id },
+          $push: { orderID: savedOrder._id },
       });
-
+  
       orders.push(savedOrder);
-    }
+  }
+  
     //update order in  user
     await User.findByIdAndUpdate(userId, {
       $push: { orderID: { $each: orders } },
@@ -121,6 +137,13 @@ async function groupByRestaurant(items) {
     console.error(error);
     throw new Error('Error grouping items by restaurant');
   }
+}
+
+//get all order 
+const getAllOrder = async(req,res) => {
+  const userID = req.user.id
+  const orders = await Order.find({user:userID});
+  res.json(orders)
 }
 
 // Get order by ID
@@ -206,6 +229,6 @@ const deleteOrder = async (req, res) => {
   }
 };
 
-module.exports = { getOrderById, createOrder, deleteOrder };
+module.exports = { getOrderById, createOrder, deleteOrder ,getAllOrder};
 
 //user -> order -> many rest (id)

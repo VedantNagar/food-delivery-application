@@ -24,6 +24,7 @@ const OrderItemSchema = new mongoose.Schema(
     paymentMethod: {
       // COD// CARD // Net Banking // Google Pay
       type: String,
+      default: 'CARD',
     },
     orderStatus: {
       // preparing // onway // delivered // cancelled

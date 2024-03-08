@@ -1,6 +1,17 @@
+import axios from "axios"
 import OrderCard from "./OrderCard"
+import { getAllOrderUrl } from "../../../urls/orderUrl"
+import { useEffect } from "react"
 
 const Order = () => {
+  useEffect(() => {
+    const allOrders = async() => {
+      const response = await axios.get(getAllOrderUrl)
+      console.log(response)
+    }
+
+    allOrders()
+  },[])
   return (
     <div className="w-customVW mx-auto">
         <div className="my-8">

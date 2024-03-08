@@ -10,11 +10,21 @@ import { userContext } from "../../userContext/context";
 import axios from "axios";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
+import { createOrderUrl } from "../../../urls/orderUrl";
 const Cart = () => {
+
+    const createOrder = async() => {
+        const responce = await axios.post(createOrderUrl,{
+            items:cartItems[0]?.items,
+            totalAmount:cartItems[0].total,
+        })
+        console.log(responce)
+    }
+
     const [cartItems, setCartItems] = useState([]);
     const { user, isLogin } = useContext(userContext);
     const { isLoading, setIsLoading } = useContext(userContext);
-    // console.log("cartitems are" , cartItems);
+    console.log("cartitems are" , cartItems[0]);
     const [total, setTotal] = useState();
     const foodLocalQuantityHandler = (localQuantity) =>{
         setTotal(localQuantity);
@@ -151,7 +161,7 @@ const Cart = () => {
                                     </span>
                                 </div>
                                 <div className={classes.btn}>
-                                    <Button title="Proceed To Payment" />
+                                    <Button title="Proceed To Payment" onClick={createOrder}/>
                                 </div>
                             </div>
                         </div>
