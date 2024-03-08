@@ -15,7 +15,7 @@ const OrderCard = ({fields}) => {
     const dateString = fields?.createdAt;
 const formattedDate = formatDate(dateString);
   return (
-    <div className="border border-1 rounded-xl border-black w-full py-6 flex justify-around ">
+    <div className="border border-1 rounded-xl border-black w-full py-6 grid grid-cols-4 text-center">
         <h3 className="text-lg">{fields?.paymentMethod}</h3>
         <h3 className="text-lg">{formattedDate}</h3>
         <h3 className="text-lg">{fields?.orderStatus}</h3>

@@ -22,7 +22,7 @@ const Order = () => {
         </div>
         <div className="rounded-lg min-h-96 my-6 bg-[#FBFBFB]">
           {/* Order */}
-          <div className="py-2 flex justify-around">
+          <div className="py-2 justify-around grid grid-cols-4 text-center">
             <h2 className="text-xl font-medium">Payment by</h2>
             <h2 className="text-xl font-medium">Date</h2>
             <h2 className="text-xl font-medium">Status</h2>
