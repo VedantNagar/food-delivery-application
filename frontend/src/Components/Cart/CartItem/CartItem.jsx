@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addToCartUrl, removeFromCartUrl } from "../../../../urls/cartUrl";
+import { addToCartUrl, deleteCartItemUrl, removeFromCartUrl } from "../../../../urls/cartUrl";
 import classes from "./CartItem.module.css";
 import axios from "axios";
 import { MdOutlineCancel } from "react-icons/md";
@@ -7,6 +7,21 @@ const CartItem = ({ from, title, price, quantity, foodID, totalHandler }) => {
     // Local state to track quantity
     const [localQuantity, setLocalQuantity] = useState(quantity);
     const [disable, setDisable] = useState(false);
+
+
+    //delete item from cart
+    const deleteItem = async () => {
+    try {
+        const response = await axios.delete(deleteCartItemUrl, {
+            data: {
+                foodID: foodID
+            }
+        });
+        console.log(response);
+    } catch (error) {
+        console.error(error);
+    }
+};
 
     // Function to handle increase in quantity
     const increase = async () => {
@@ -59,7 +74,7 @@ const CartItem = ({ from, title, price, quantity, foodID, totalHandler }) => {
             </div>
             <div className={classes.item}>
                 <div className={classes.left}>
-                    <div><MdOutlineCancel color="#EB5757"/></div>
+                    <button onClick={deleteItem}><MdOutlineCancel color="#EB5757"/></button>
                     <div>
                         <p>{title}</p>
                         <span className={classes.price}>₹{price}</span>

@@ -14,3 +14,5 @@ export const removeFromCartUrl = `${url}/removeFromCart`;
 //get all food from card
 //const userID = req.body.userID;
 export const getAllFoodCartUrl = `${url}/getAllFood`;
+
+export const deleteCartItemUrl = `${url}/deleteFromCart`

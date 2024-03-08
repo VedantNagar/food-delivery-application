@@ -14,25 +14,17 @@ import { createOrderUrl } from "../../../urls/orderUrl";
 import { MdOutlineCancel } from "react-icons/md";
 const Cart = () => {
 
-    const createOrder = async() => {
-        const responce = await axios.post(createOrderUrl,{
-            items:cartItems[0]?.items,
-            totalAmount:cartItems[0].total,
-        })
-        console.log(responce)
-    }
+    
 
     const [cartItems, setCartItems] = useState([]);
     const { user, isLogin } = useContext(userContext);
     const { isLoading, setIsLoading } = useContext(userContext);
-    console.log("cartitems are" , cartItems[0]);
+    // console.log("cartitems are" , cartItems[0]);
     const [total, setTotal] = useState();
     const foodLocalQuantityHandler = (localQuantity) =>{
         setTotal(localQuantity);
     }
 
-
-    const userID = cartItems[0]?.userID;
     useEffect(() => {
         const fetchCart = async () => {
             setIsLoading(true);
@@ -45,6 +37,21 @@ const Cart = () => {
             fetchCart();
         }
     }, [isLogin,total]);
+
+    
+
+    const createOrder = async() => {
+        const response = await axios.post(createOrderUrl,{
+            items:cartItems[0]?.items,
+            totalAmount:cartItems[0].total,
+        })
+        console.log(response)
+    }
+
+    if(!cartItems){
+        return <h1>Cart is empty</h1>
+    }
+    const userID = cartItems[0]?.userID;
 
     return (
         <>

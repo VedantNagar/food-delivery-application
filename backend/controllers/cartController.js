@@ -2,6 +2,7 @@ const User = require("../models/user");
 const Food = require("../models/Food");
 const cartModel = require("../models/cart");
 const restaurant = require("../models/restaurant");
+
 // get cart
 /* const getCart = async(req,res)=>{
     const {id:user_ID} = req.params
@@ -162,13 +163,10 @@ const addToCart = async (req, res) => {
       });
     }
 
-    // // Populate cart with food name and price
-    // userCart = await populateCartItems(userCart);
-
-    // Save the updated cart
+    
     await userCart.save();
 
-    // Sending cart and quantity
+   
     res.json(userCart);
   } catch (error) {
     console.error(error);
@@ -239,6 +237,8 @@ const removeFromCart = async (req, res) => {
         // Reduce the quantity of the existing item
         existingCartItem.quantity -= quantityToRemove;
       }
+
+     
       //save updated cart
       await userCart.save();
       return res.json(userCart);
@@ -251,12 +251,33 @@ const removeFromCart = async (req, res) => {
   }
 };
 
+//delete from cart
+const deleteCart = async (req,res) => {
+  try {
+    const {foodID} = req.body
+    console.log(foodID)
+    const response = await cartModel.findOne({userID:req.user.id})
+    console.log(response)
+    console.log(response.items)
+    const cart = response.items.filter((item) => 
+      item.food.toString() !== foodID
+    )
+    console.log(cart)
+    response.items = cart
+    await response.save()
+    return res.status(200).json(cart)
+  } catch (error) {
+    return res.status(400).json(error)
+  }
+}
+
 //edit cart
 
 module.exports = {
   getCart,
   removeFromCart,
   addToCart,
+  deleteCart
 };
 
 // user(userID) -> addTocart(foodID) -> if(!findCart) -> create -> addFood
