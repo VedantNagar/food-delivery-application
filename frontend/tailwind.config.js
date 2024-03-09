@@ -11,6 +11,9 @@ export default {
             },
             width: {
                 customVW: "85vw",
+            },
+            screens:{
+                'iPhone11': '375px',
             }
         },
     },
