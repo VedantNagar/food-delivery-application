@@ -29,7 +29,8 @@ const Order = () => {
           </div>
           <div className="flex flex-col gap-4 overflow-scroll max-h-96 min-h-80 p-4 iPhone11:p-0">
           
-          {orderItem?.map((item)=>{
+          {orderItem?.slice()
+            .reverse().map((item)=>{
             return <OrderCard fields={item} key={item._id}/>
           })}
             
