@@ -7,12 +7,11 @@ import { addToCartUrl } from "../../../../urls/cartUrl";
 import { useContext } from "react";
 import { userContext } from "../../../userContext/context";
 
-
-const MenuCard = ({ item , onAddCart}) => {
+const MenuCard = ({ item, onAddCart }) => {
     const { user } = useContext(userContext);
     const handleClick = async () => {
         console.log(item);
-        console.log(user);
+        // console.log(user);
         const cookies = document.cookie.split(";");
 
         let token = null;
@@ -24,7 +23,7 @@ const MenuCard = ({ item , onAddCart}) => {
             }
         });
 
-        console.log(token);
+        // console.log(token);
         const result = await axios.post(
             addToCartUrl,
             {
@@ -65,7 +64,7 @@ const MenuCard = ({ item , onAddCart}) => {
                 <p className={classes.desc}>{desc}</p>
             </div>
             <div className={classes.image}>
-                <img src={image} alt=""  />
+                <img src={image} alt="" />
                 <a className={classes.add} onClick={handleClick}>
                     Add +
                 </a>

@@ -11,19 +11,28 @@ import axios from "axios";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import { createOrderUrl } from "../../../urls/orderUrl";
-import { MdOutlineCancel } from "react-icons/md";
+import { foodContext } from "../../userContext/foodContext";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 const Cart = () => {
-
-    
-
+    const [open, setOpen] = useState(false);
+    const { render } = useContext(foodContext);
     const [cartItems, setCartItems] = useState([]);
     const { user, isLogin } = useContext(userContext);
     const { isLoading, setIsLoading } = useContext(userContext);
-    // console.log("cartitems are" , cartItems[0]);
     const [total, setTotal] = useState();
-    const foodLocalQuantityHandler = (localQuantity) =>{
+
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    const foodLocalQuantityHandler = (localQuantity) => {
         setTotal(localQuantity);
-    }
+    };
 
     useEffect(() => {
         const fetchCart = async () => {
@@ -36,20 +45,19 @@ const Cart = () => {
         if (isLogin) {
             fetchCart();
         }
-    }, [isLogin,total]);
+    }, [isLogin, total, render]);
 
-    
+    const createOrder = async () => {
+        const response = await axios.post(createOrderUrl, {
+            items: cartItems[0]?.items,
+            totalAmount: cartItems[0].total,
+        });
+        setOpen(true);
+        console.log(response);
+    };
 
-    const createOrder = async() => {
-        const response = await axios.post(createOrderUrl,{
-            items:cartItems[0]?.items,
-            totalAmount:cartItems[0].total,
-        })
-        console.log(response)
-    }
-
-    if(!cartItems){
-        return <h1>Cart is empty</h1>
+    if (!cartItems) {
+        return <h1>Cart is empty</h1>;
     }
     const userID = cartItems[0]?.userID;
 
@@ -140,7 +148,9 @@ const Cart = () => {
                                                 quantity={item?.quantity}
                                                 foodID={item?.food?._id}
                                                 user={userID}
-                                                totalHandler={foodLocalQuantityHandler}
+                                                totalHandler={
+                                                    foodLocalQuantityHandler
+                                                }
                                             />
                                         );
                                     })
@@ -169,8 +179,26 @@ const Cart = () => {
                                     </span>
                                 </div>
                                 <div className={classes.btn}>
-                                    <Button title="Proceed To Payment" onClick={createOrder}/>
+                                    <Button
+                                        title="Proceed To Payment"
+                                        onClick={createOrder}
+                                    />
                                 </div>
+                                <Snackbar
+                                    open={open}
+                                    autoHideDuration={2000}
+                                    onClose={handleClose}
+                                >
+                                    <Alert
+                                        onClose={handleClose}
+                                        severity="success"
+                                        variant="outlined"
+                                        sx={{ width: "100%" }}
+                                    >
+                                        Congratulations, you order is
+                                        successfully placed!!!
+                                    </Alert>
+                                </Snackbar>
                             </div>
                         </div>
                     </div>
