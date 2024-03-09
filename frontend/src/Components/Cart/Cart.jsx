@@ -11,15 +11,12 @@ import axios from "axios";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import { createOrderUrl } from "../../../urls/orderUrl";
-import { MdOutlineCancel } from "react-icons/md";
+import { foodContext } from "../../userContext/foodContext";
 const Cart = () => {
-
-    
-
+    const {render} = useContext(foodContext);
     const [cartItems, setCartItems] = useState([]);
     const { user, isLogin } = useContext(userContext);
     const { isLoading, setIsLoading } = useContext(userContext);
-    // console.log("cartitems are" , cartItems[0]);
     const [total, setTotal] = useState();
     const foodLocalQuantityHandler = (localQuantity) =>{
         setTotal(localQuantity);
@@ -36,7 +33,7 @@ const Cart = () => {
         if (isLogin) {
             fetchCart();
         }
-    }, [isLogin,total]);
+    }, [isLogin,total,render]);
 
     
 

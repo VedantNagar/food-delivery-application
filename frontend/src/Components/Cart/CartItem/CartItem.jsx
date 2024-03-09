@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { addToCartUrl, deleteCartItemUrl, removeFromCartUrl } from "../../../../urls/cartUrl";
 import classes from "./CartItem.module.css";
 import axios from "axios";
 import { MdOutlineCancel } from "react-icons/md";
+import { foodContext } from "../../../userContext/foodContext";
 const CartItem = ({ from, title, price, quantity, foodID, totalHandler }) => {
     // Local state to track quantity
     const [localQuantity, setLocalQuantity] = useState(quantity);
     const [disable, setDisable] = useState(false);
-
-
+    const {render,setRender} = useContext(foodContext);
     //delete item from cart
     const deleteItem = async () => {
     try {
@@ -17,6 +17,7 @@ const CartItem = ({ from, title, price, quantity, foodID, totalHandler }) => {
                 foodID: foodID
             }
         });
+        setRender(!render);
         console.log(response);
     } catch (error) {
         console.error(error);
@@ -33,9 +34,6 @@ const CartItem = ({ from, title, price, quantity, foodID, totalHandler }) => {
                 quantityToAdd: 1,
             });
             console.log(response.data);
-            // if(response.data.error)
-            // return;
-            // Update local quantity
             totalHandler(localQuantity + 1);
             setLocalQuantity((prevQuantity) => prevQuantity + 1);
         } catch (error) {
@@ -55,9 +53,6 @@ const CartItem = ({ from, title, price, quantity, foodID, totalHandler }) => {
                 quantityToRemove: 1,
             });
             console.log(response.data);
-            // if(response.data.error)
-            // return;
-            // Update local quantity
             totalHandler(localQuantity - 1);
             setLocalQuantity((prevQuantity) => prevQuantity - 1);
         } catch (error) {
