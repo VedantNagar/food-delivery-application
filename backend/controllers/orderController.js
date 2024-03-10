@@ -176,8 +176,9 @@ const getOrderById = async (req, res) => {
 //delete order - orderstatus(cancelled) by Orderid
 
 const deleteOrder = async (req, res) => {
-  const { id: orderId } = req.params;
-  const { userId } = req.body;
+  const {orderId} = req.body
+  console.log(orderId)
+  const userId = req.user.id;
   //input validation for orderID
   if (!orderId || !userId) {
     return res.status(400).json({ error: 'Provide valid orderId and userId' });
@@ -186,7 +187,7 @@ const deleteOrder = async (req, res) => {
   try {
     //finding order by ID
     const order = await Order.findById(orderId);
-
+    console.log(order)
     //checking if the order exists
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
