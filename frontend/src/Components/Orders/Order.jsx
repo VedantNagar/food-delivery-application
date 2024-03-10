@@ -27,13 +27,11 @@ const Order = () => {
             <h2 >Status</h2>
             <h2 >Total</h2>
           </div>
-          <div className="flex flex-col gap-4 overflow-scroll max-h-96 min-h-80 p-4 iPhone11:p-0">
-          
+          <div className="flex flex-col gap-4 overflow-scroll max-h-96 iPhone11:p-4 min-h-screen">
           {orderItem?.slice()
             .reverse().map((item)=>{
             return <OrderCard fields={item} key={item._id}/>
           })}
-            
             
           </div>
         </div>
