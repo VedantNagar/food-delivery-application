@@ -36,7 +36,12 @@ const Login = () => {
                     duration: 2000,
                 });
                 setIsLogin(true);
-                navigate("/homepage");
+                if(values.role === 'owner'){
+                    navigate("/admin");
+                }
+                else{
+                    navigate("/homepage");
+                }
             }
         } catch (error) {
             console.log(error);
