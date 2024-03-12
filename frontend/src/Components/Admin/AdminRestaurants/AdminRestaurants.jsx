@@ -6,8 +6,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 const AdminRestaurants = () => {
   return (
-    <div className="bg-red-100 w-screen h-screen p-6">
-      <div className="grid grid-cols-3 gap-5">
+    <div className="w-screen h-screen p-6">
+      <h1 className="text-3xl font-poppins">Your restaurants</h1>
+      <div className="grid gap-5 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 ">
         <Card sx={{ maxWidth: 345 }}>
           <CardMedia
             sx={{ height: 140 }}
