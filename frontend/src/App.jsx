@@ -11,6 +11,7 @@ import axios from 'axios';
 import { FoodContextProvider } from './userContext/foodContext.jsx'; //
 import Order from './Components/Orders/Order.jsx';
 import AdminRoot from './Components/Admin/AdminRoot.jsx';
+import AdminRestaurants from './Components/Admin/AdminRestaurants/AdminRestaurants.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -50,7 +51,13 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: <AdminRoot />,
-    children:[]
+    children:[
+      {
+        index: true,
+        element: <AdminRestaurants />,
+      },
+    
+    ]
   },
 ]);
 function App() {
