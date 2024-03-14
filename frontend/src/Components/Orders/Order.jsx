@@ -1,10 +1,12 @@
 import axios from "axios"
 import OrderCard from "./OrderCard"
 import { getAllOrderUrl } from "../../../urls/orderUrl"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { foodContext } from "../../userContext/foodContext"
 
 const Order = () => {
   const [orderItem, setOrderItem] = useState([]);
+  const {render} = useContext(foodContext);
   useEffect(() => {
     const allOrders = async() => {
       const response = await axios.get(getAllOrderUrl)
@@ -13,7 +15,7 @@ const Order = () => {
     }
 
     allOrders()
-  },[])
+  },[render])
   return (
     <div className="w-customVW mx-auto">
         <div className="my-8">
