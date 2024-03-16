@@ -9,7 +9,7 @@ import { RxCross2, RxFontSize } from "react-icons/rx";
 import { foodContext } from "../../userContext/foodContext";
 const OrderCard = ({ fields, orderID }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const {render, setRender} = useContext(foodContext);
+    const { render, setRender } = useContext(foodContext);
     const cancelOrder = async (orderID) => {
         const response = await axios.patch(deleteOrderUrl, {
             orderId: orderID,
@@ -50,16 +50,18 @@ const OrderCard = ({ fields, orderID }) => {
                     aria-controls="panel1-content"
                     id="panel1-header"
                 >
-                    <button
-                        onClick={() => cancelOrder(orderID)}
-                        className="flex flex-col justify-center items-center text-xs"
-                    >
-                        <RxCross2
-                            color="#EB5757"
-                            style={{ fontSize: "2rem" }}
-                        />
-                        Cancel
-                    </button>
+                    <div className="flex flex-col justify-center items-center ">
+                        <button
+                            onClick={() => cancelOrder(orderID)}
+                            className="rounded-full hover:bg-fudo-red-light p-2"
+                            title="Cancel Order"
+                        >
+                            <RxCross2
+                                color="#EB5757"
+                                style={{ fontSize: "2rem" }}
+                            />
+                        </button>
+                    </div>
                     <div className="w-full py-6 grid grid-cols-4 text-center md:text-lg iPhone11:text-xs gap-10">
                         <h3>{fields?.paymentMethod}</h3>
                         <h3>{formattedDate}</h3>

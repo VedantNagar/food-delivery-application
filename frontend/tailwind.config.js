@@ -5,6 +5,7 @@ export default {
         extend: {
             colors: {
                 "fudo-red": "#EB5757",
+                "fudo-red-light": "#f0eded",
             },
             fontFamily: {
                 poppins: ["Poppins"],
@@ -12,9 +13,9 @@ export default {
             width: {
                 customVW: "85vw",
             },
-            screens:{
-                'iPhone11': '375px',
-            }
+            screens: {
+                iPhone11: "375px",
+            },
         },
     },
     plugins: [],
