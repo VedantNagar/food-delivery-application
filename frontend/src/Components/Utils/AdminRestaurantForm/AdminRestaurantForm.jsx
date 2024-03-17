@@ -9,6 +9,9 @@ const AdminRestaurantForm = () => {
             tabIndex="-1"
             aria-hidden="true"
             className="overflow-y-auto overflow-x-hidden fixed top-1/2 left-1/2 z-[calc(infinity)] justify-center items-center w-screen h-screen max-h-full -translate-x-1/2 -translate-y-1/2 grid place-content-center backdrop-blur-sm backdrop-brightness-50"
+            onClick={() => {
+                setModal(false);
+            }}
         >
             <div className="relative p-4 w-full max-w-md max-h-full">
                 <div className="relative bg-white rounded-lg shadow ">
@@ -153,7 +156,7 @@ const AdminRestaurantForm = () => {
                                     id="description"
                                     rows="4"
                                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                                    placeholder="Write product description here"
+                                    placeholder="Write restaurant description here"
                                 ></textarea>
                             </div>
                         </div>

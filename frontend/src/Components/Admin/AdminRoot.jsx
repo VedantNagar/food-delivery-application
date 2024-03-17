@@ -11,8 +11,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useContext } from "react";
@@ -21,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AdminRestaurantForm from "../Utils/AdminRestaurantForm/AdminRestaurantForm";
 import { utilityContext } from "../../userContext/utilityContext";
+import { SlLogout } from "react-icons/sl";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -185,11 +184,7 @@ const AdminRoot = () => {
                                         justifyContent: "center",
                                     }}
                                 >
-                                    {index % 2 === 0 ? (
-                                        <InboxIcon />
-                                    ) : (
-                                        <MailIcon />
-                                    )}
+                                    <SlLogout className="!text-white !text-xl" />
                                 </ListItemIcon>
                                 <ListItemText
                                     primary={text}
