@@ -20,7 +20,8 @@ router.get('/getSearchRestaurants',restaurantController.searchRest)
 //middleware
 router.use(authMiddleware);
 
-
+//get all user restaurants(userID)
+router.get('/getAllUserRestaurant',restaurantController.getAllUserRestaurant)
 
 //delete rest(id)
 router.delete('/deleteRestaurant/:id', restaurantController.deleteRestaurant);

@@ -2,8 +2,8 @@ const restaurantModel = require("../models/restaurant");
 const FoodModal = require("../models/Food");
 const Order = require("../models/Orders");
 const User = require("../models/user");
-const restaurant = require("../models/restaurant");
-const user = require("../models/user");
+
+
 
 // const getRestaurant = async (req,res) => {
 //     const { id: restaurantID } = req.params;
@@ -214,6 +214,21 @@ const searchRest = async (req, res) => {
   res.status(200).json(food);
 };
 
+//get user restaurants(userID)
+const getAllUserRestaurant = async (req, res) => {
+  try {
+    const userID = req.user.id;
+    // console.log(userID);
+    const AllRest = await restaurantModel.find({ owner: userID })
+    
+    res.json(AllRest);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 module.exports = {
   createRestaurant,
   getRestaurant,
@@ -224,4 +239,5 @@ module.exports = {
   changeOrderStatus,
   getorders,
   searchRest,
+  getAllUserRestaurant
 };
