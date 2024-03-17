@@ -6,11 +6,12 @@ import { foodContext } from "../../userContext/foodContext";
 
 const Order = () => {
     const [orderItem, setOrderItem] = useState([]);
-    const { render } = useContext(foodContext);
+    const { render, setRender } = useContext(foodContext);
 
     const [filter, setFilter] = useState("all");
     const filterOrders = (status) => {
         setFilter(status);
+        setRender(!render);
     };
     console.log(filter);
     useEffect(() => {
