@@ -32,21 +32,43 @@ const Order = () => {
             <div className="flex gap-5">
                 <button
                     onClick={() => filterOrders("pending")}
-                    className="border border-fudo-red rounded-md p-2 hover:scale-110 transition-transform hover:bg-fudo-red hover:text-white"
+                    className={`border ${
+                        filter === "pending"
+                            ? "bg-fudo-red text-white scale-110"
+                            : "border-fudo-red"
+                    } rounded-md p-2 hover:scale-110 transition-transform hover:bg-fudo-red hover:text-white`}
                 >
                     Pending
                 </button>
                 <button
                     onClick={() => filterOrders("cancelled")}
-                    className="border border-fudo-red rounded-md p-2 hover:scale-110 transition-transform hover:bg-fudo-red hover:text-white"
+                    className={`border ${
+                        filter === "cancelled"
+                            ? "bg-fudo-red text-white scale-110"
+                            : "border-fudo-red"
+                    } rounded-md p-2 hover:scale-110 transition-transform hover:bg-fudo-red hover:text-white`}
                 >
                     Cancelled
                 </button>
                 <button
                     onClick={() => filterOrders("delivered")}
-                    className="border border-fudo-red rounded-md p-2 hover:scale-110 transition-transform hover:bg-fudo-red hover:text-white"
+                    className={`border ${
+                        filter === "delivered"
+                            ? "bg-fudo-red text-white scale-110"
+                            : "border-fudo-red"
+                    } rounded-md p-2 hover:scale-110 transition-transform hover:bg-fudo-red hover:text-white`}
                 >
                     Delivered
+                </button>
+                <button
+                    onClick={() => filterOrders("preparing")}
+                    className={`border ${
+                        filter === "preparing"
+                            ? "bg-fudo-red text-white scale-110"
+                            : "border-fudo-red"
+                    } rounded-md p-2 hover:scale-110 transition-transform hover:bg-fudo-red hover:text-white`}
+                >
+                    Preparing
                 </button>
             </div>
             <div className="rounded-xl min-h-96 my-6 bg-[#FBFBFB]">
@@ -58,17 +80,26 @@ const Order = () => {
                 </div>
                 <div className="flex flex-col gap-4 overflow-scroll max-h-96 iPhone11:p-4 min-h-screen">
                     {orderItem
-                        ?.slice()
-                        .reverse()
-                        .map((item) => {
-                            return (
-                                <OrderCard
-                                    fields={item}
-                                    orderID={item?._id}
-                                    key={item._id}
-                                />
-                            );
-                        })}
+                        ?.filter((item) =>
+                            filter === "all"
+                                ? true
+                                : item.orderStatus === filter
+                        )
+                        .map((item) => (
+                            <OrderCard
+                                fields={item}
+                                orderID={item._id}
+                                key={item._id}
+                            />
+                        ))}
+                    {orderItem?.filter((item) =>
+                        filter === "all" ? true : item.orderStatus === filter
+                    ).length === 0 && (
+                        <h1 className="text-center text-2xl my-9">
+                            No {filter} orders to show{" "}
+                            <span className="text-fudo-red">:(</span>
+                        </h1>
+                    )}
                 </div>
             </div>
         </div>
