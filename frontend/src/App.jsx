@@ -5,12 +5,13 @@ import HomePage from './Components/Homepage/Homepage';
 import RestaurantPage from './Components/RestaurantPage/RestaurantPage';
 import { UserContextProvider } from './userContext/context.jsx';
 import './App.css';
-import Dashboard from './Components/Dashboard/Dashboard.jsx';
 import SearchedResults from './Components/SearchedResults/SearchedResults.jsx';
 import Root from './Components/Root/Root.jsx';
 import axios from 'axios';
 import { FoodContextProvider } from './userContext/foodContext.jsx'; //
 import Order from './Components/Orders/Order.jsx';
+import AdminRoot from './Components/Admin/AdminRoot.jsx';
+import AdminRestaurants from './Components/Admin/AdminRestaurants/AdminRestaurants.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -48,8 +49,15 @@ const router = createBrowserRouter([
   },
 
   {
-    path: '/dashboard',
-    element: <Dashboard />,
+    path: '/admin',
+    element: <AdminRoot />,
+    children:[
+      {
+        index: true,
+        element: <AdminRestaurants />,
+      },
+    
+    ]
   },
 ]);
 function App() {

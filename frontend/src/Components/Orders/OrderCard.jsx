@@ -1,22 +1,22 @@
 import Accordion from "@mui/material/Accordion";
-import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Button from "@mui/material/Button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { deleteOrderUrl } from "../../../urls/orderUrl";
 import axios from "axios";
-const OrderCard = ({ fields, orderID}) => {
+import { RxCross2, RxFontSize } from "react-icons/rx";
+import { foodContext } from "../../userContext/foodContext";
+const OrderCard = ({ fields, orderID }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    
-
-    const cancelOrder = async(orderID) => {
-        const response = await axios.patch(deleteOrderUrl,{
-            orderId:orderID
-        })
-        console.log(response)
-    }
+    const { render, setRender } = useContext(foodContext);
+    const cancelOrder = async (orderID) => {
+        const response = await axios.patch(deleteOrderUrl, {
+            orderId: orderID,
+        });
+        setRender(!render);
+        console.log(response);
+    };
 
     useEffect(() => {
         const handleResize = () => {
@@ -27,7 +27,7 @@ const OrderCard = ({ fields, orderID}) => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
-    
+
     function formatDate(dateString) {
         const date = new Date(dateString);
         const day = date.getDate();
@@ -49,10 +49,20 @@ const OrderCard = ({ fields, orderID}) => {
                     expandIcon={windowWidth > 385 ? <ExpandMoreIcon /> : null}
                     aria-controls="panel1-content"
                     id="panel1-header"
-                >   
-                    <button onClick={() => cancelOrder(orderID)}>cancel</button>
+                >
+                    <div className="flex flex-col justify-center items-center ">
+                        <button
+                            onClick={() => cancelOrder(orderID)}
+                            className="rounded-full hover:bg-fudo-red-light p-2"
+                            title="Cancel Order"
+                        >
+                            <RxCross2
+                                color="#EB5757"
+                                style={{ fontSize: "2rem" }}
+                            />
+                        </button>
+                    </div>
                     <div className="w-full py-6 grid grid-cols-4 text-center md:text-lg iPhone11:text-xs gap-10">
-                        
                         <h3>{fields?.paymentMethod}</h3>
                         <h3>{formattedDate}</h3>
                         <h3>{fields?.orderStatus}</h3>
