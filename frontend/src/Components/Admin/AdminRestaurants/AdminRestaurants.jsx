@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AdminRestaurantCard from "../../AdminRestaurantCard/AdminRestaurantCard";
+import AdminRestaurantCard from "../AdminRestaurantCard/AdminRestaurantCard";
 import axios from "axios";
 import { getAllUserRestUrl } from "../../../../urls/admin";
 const AdminRestaurants = () => {
@@ -8,7 +8,7 @@ const AdminRestaurants = () => {
         const getAllRest = async () => {
             const response = await axios.get(getAllUserRestUrl);
             setRestaurantCard(response.data);
-            console.log(response.data);
+            // console.log(response.data);
         };
         getAllRest();
     }, []);
