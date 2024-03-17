@@ -8,7 +8,7 @@ import "./App.css";
 import SearchedResults from "./Components/SearchedResults/SearchedResults.jsx";
 import Root from "./Components/Root/Root.jsx";
 import axios from "axios";
-import { FoodContextProvider } from "./userContext/foodContext.jsx"; //
+import { UtilityContextProvider } from "./userContext/utilityContext.jsx"; //
 import Order from "./Components/Orders/Order.jsx";
 import AdminRoot from "./Components/Admin/AdminRoot.jsx";
 import AdminRestaurants from "./Components/Admin/AdminRestaurants/AdminRestaurants.jsx";
@@ -44,11 +44,6 @@ const router = createBrowserRouter([
             },
         ],
     },
-    // {
-    //     path: "restaurantId",
-    //     element: <RestaurantPage />,
-    // },
-
     {
         path: "/admin",
         element: <AdminRoot />,
@@ -58,7 +53,7 @@ const router = createBrowserRouter([
                 element: <AdminRestaurants />,
             },
             {
-                path: 'orders',
+                path: "orders",
                 element: <RestaurantOrders />,
             },
         ],
@@ -68,11 +63,11 @@ function App() {
     axios.defaults.withCredentials = true;
     return (
         <div className="wrapper">
-            <FoodContextProvider>
+            <UtilityContextProvider>
                 <UserContextProvider>
                     <RouterProvider router={router} />
                 </UserContextProvider>
-            </FoodContextProvider>
+            </UtilityContextProvider>
         </div>
     );
 }

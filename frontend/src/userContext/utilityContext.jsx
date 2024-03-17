@@ -1,20 +1,23 @@
 import { createContext, useState } from "react";
 
-export const foodContext = createContext();
+export const utilityContext = createContext();
 
-export function FoodContextProvider({ children }) {
+export function UtilityContextProvider({ children }) {
     const [showToast, setShowToast] = useState(false);
     const [render, setRender] = useState(false);
+    const [modal, setModal] = useState(false);
     return (
-        <foodContext.Provider
+        <utilityContext.Provider
             value={{
                 showToast,
                 setShowToast,
                 render,
                 setRender,
+                modal,
+                setModal,
             }}
         >
             {children}
-        </foodContext.Provider>
+        </utilityContext.Provider>
     );
 }

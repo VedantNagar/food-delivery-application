@@ -6,10 +6,10 @@ import { useState, useEffect, useContext } from "react";
 import { deleteOrderUrl } from "../../../urls/orderUrl";
 import axios from "axios";
 import { RxCross2, RxFontSize } from "react-icons/rx";
-import { foodContext } from "../../userContext/foodContext";
+import { utilityContext } from "../../userContext/utilityContext";
 const OrderCard = ({ fields, orderID }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const { render, setRender } = useContext(foodContext);
+    const { render, setRender } = useContext(utilityContext);
     const cancelOrder = async (orderID) => {
         const response = await axios.patch(deleteOrderUrl, {
             orderId: orderID,

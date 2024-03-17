@@ -11,12 +11,12 @@ import axios from "axios";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import { createOrderUrl } from "../../../urls/orderUrl";
-import { foodContext } from "../../userContext/foodContext";
+import { utilityContext } from "../../userContext/utilityContext";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 const Cart = () => {
     const [open, setOpen] = useState(false);
-    const { render } = useContext(foodContext);
+    const { render } = useContext(utilityContext);
     const [cartItems, setCartItems] = useState([]);
     const { user, isLogin } = useContext(userContext);
     const { isLoading, setIsLoading } = useContext(userContext);
