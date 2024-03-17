@@ -1,28 +1,32 @@
 import { useContext, useState } from "react";
-import { addToCartUrl, deleteCartItemUrl, removeFromCartUrl } from "../../../../urls/cartUrl";
+import {
+    addToCartUrl,
+    deleteCartItemUrl,
+    removeFromCartUrl,
+} from "../../../../urls/cartUrl";
 import classes from "./CartItem.module.css";
 import axios from "axios";
 import { MdOutlineCancel } from "react-icons/md";
-import { foodContext } from "../../../userContext/foodContext";
+import { utilityContext } from "../../../userContext/utilityContext";
 const CartItem = ({ from, title, price, quantity, foodID, totalHandler }) => {
     // Local state to track quantity
     const [localQuantity, setLocalQuantity] = useState(quantity);
     const [disable, setDisable] = useState(false);
-    const {render,setRender} = useContext(foodContext);
+    const { render, setRender } = useContext(utilityContext);
     //delete item from cart
     const deleteItem = async () => {
-    try {
-        const response = await axios.delete(deleteCartItemUrl, {
-            data: {
-                foodID: foodID
-            }
-        });
-        setRender(!render);
-        console.log(response);
-    } catch (error) {
-        console.error(error);
-    }
-};
+        try {
+            const response = await axios.delete(deleteCartItemUrl, {
+                data: {
+                    foodID: foodID,
+                },
+            });
+            setRender(!render);
+            console.log(response);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     // Function to handle increase in quantity
     const increase = async () => {
@@ -69,7 +73,9 @@ const CartItem = ({ from, title, price, quantity, foodID, totalHandler }) => {
             </div>
             <div className={classes.item}>
                 <div className={classes.left}>
-                    <button onClick={deleteItem}><MdOutlineCancel color="#EB5757"/></button>
+                    <button onClick={deleteItem}>
+                        <MdOutlineCancel color="#EB5757" />
+                    </button>
                     <div>
                         <p>{title}</p>
                         <span className={classes.price}>₹{price}</span>

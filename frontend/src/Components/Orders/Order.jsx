@@ -2,13 +2,13 @@ import axios from "axios";
 import OrderCard from "./OrderCard";
 import { getAllOrderUrl } from "../../../urls/orderUrl";
 import { useContext, useEffect, useState } from "react";
-import { foodContext } from "../../userContext/foodContext";
+import { utilityContext } from "../../userContext/utilityContext";
 
 const Order = () => {
     const [orderItem, setOrderItem] = useState([]);
-    const { render, setRender } = useContext(foodContext);
+    const { render, setRender } = useContext(utilityContext);
 
-    const [filter, setFilter] = useState("all");
+    const [filter, setFilter] = useState("preparing");
     const filterOrders = (status) => {
         setFilter(status);
         setRender(!render);
@@ -18,7 +18,7 @@ const Order = () => {
         const allOrders = async () => {
             const response = await axios.get(getAllOrderUrl);
             console.log(response.data);
-            setOrderItem(response.data);
+            setOrderItem(response.data.reverse());
         };
 
         allOrders();
@@ -30,6 +30,16 @@ const Order = () => {
                 <hr />
             </div>
             <div className="flex gap-5">
+            <button
+                    onClick={() => filterOrders("preparing")}
+                    className={`border ${
+                        filter === "preparing"
+                            ? "bg-fudo-red text-white scale-110"
+                            : "border-fudo-red"
+                    } rounded-md p-2 hover:scale-110 transition-transform hover:bg-fudo-red hover:text-white`}
+                >
+                    Preparing
+                </button>
                 <button
                     onClick={() => filterOrders("pending")}
                     className={`border ${
@@ -60,16 +70,7 @@ const Order = () => {
                 >
                     Delivered
                 </button>
-                <button
-                    onClick={() => filterOrders("preparing")}
-                    className={`border ${
-                        filter === "preparing"
-                            ? "bg-fudo-red text-white scale-110"
-                            : "border-fudo-red"
-                    } rounded-md p-2 hover:scale-110 transition-transform hover:bg-fudo-red hover:text-white`}
-                >
-                    Preparing
-                </button>
+                
             </div>
             <div className="rounded-xl min-h-96 my-6 bg-[#FBFBFB]">
                 <div className="py-2 px-4 justify-around grid grid-cols-4 text-center mr-6 font-medium text-xl sm:text-lg iPhone11:text-sm iPhone11:mr-0 sm:mr-0 md:mx-6">
