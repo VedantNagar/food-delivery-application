@@ -9,9 +9,7 @@ const AdminRestaurantForm = () => {
             tabIndex="-1"
             aria-hidden="true"
             className="overflow-y-auto overflow-x-hidden fixed top-1/2 left-1/2 z-[calc(infinity)] justify-center items-center w-screen h-screen max-h-full -translate-x-1/2 -translate-y-1/2 grid place-content-center backdrop-blur-sm backdrop-brightness-50"
-            onClick={() => {
-                setModal(false);
-            }}
+            
         >
             <div className="relative p-4 w-full max-w-md max-h-full">
                 <div className="relative bg-white rounded-lg shadow ">
