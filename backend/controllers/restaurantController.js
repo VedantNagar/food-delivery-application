@@ -114,9 +114,10 @@ const editRestaurant = async (req, res) => {
 
 const createRestaurant = async (req, res) => {
   try {
-    const { name, about, address, phone, opening_hours, owner } = req.body;
-
-    const restaurant = await restaurantModel.create(req.body);
+    const { name, about, address, phone, opening_hours } = req.body;
+    const owner = req.user.id
+    const data = {owner,...req.body}
+    const restaurant = await restaurantModel.create(data);
     // Send the created restaurant object in the response
     res.status(201).json(restaurant);
   } catch (error) {

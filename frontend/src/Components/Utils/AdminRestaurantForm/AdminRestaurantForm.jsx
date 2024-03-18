@@ -1,8 +1,22 @@
 import { useContext } from "react";
 import { utilityContext } from "../../../userContext/utilityContext";
+import axios from "axios";
+import { createRestauranrUrl } from "../../../../urls/restaurantUrl";
 
 const AdminRestaurantForm = () => {
+
     const { setModal } = useContext(utilityContext);
+    const handleClick = async() => {
+       /* const response = await axios.post(createRestauranrUrl,{
+            name:,
+            about:,
+            address:,
+            phone:,
+            opening_hours:,
+            
+
+         })*/
+    }
     return (
         <div
             id="crud-modal"
@@ -142,6 +156,7 @@ const AdminRestaurantForm = () => {
                         <button
                             type="submit"
                             className="text-white inline-flex items-center bg-fudo-red hover:bg-[#e64747] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                            onClick={handleClick}
                         >
                             <svg
                                 className="me-1 -ms-1 w-5 h-5"
