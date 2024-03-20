@@ -1,4 +1,5 @@
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { MdOutlineDeleteForever } from "react-icons/md";
 
 const AdminRestaurantCard = ({ data }) => {
     const imageSrc =
@@ -10,7 +11,7 @@ const AdminRestaurantCard = ({ data }) => {
         "This card element can be used to display a product, post, or any other type of data.";
 
     return (
-        <div className="rounded-lg overflow-hidden border border-neutral-200/60 bg-white text-neutral-700 shadow-sm w-[380px]">
+        <div className="relative rounded-lg border border-neutral-200/60 bg-white text-neutral-700 shadow-sm w-[380px] z-49">
             <div className="relative">
                 <img src={imageSrc} className="w-96 h-64 object-contain" />
             </div>
@@ -25,6 +26,12 @@ const AdminRestaurantCard = ({ data }) => {
                     </button>
                 </Link>
             </div>
+            <button>
+                <MdOutlineDeleteForever
+                    className="text-3xl border border-black rounded-full cursor-pointer absolute top-0 right-0 translate-x-4 -translate-y-2 z-50"
+                    title="Delete restaurant"
+                />
+            </button>
         </div>
     );
 };

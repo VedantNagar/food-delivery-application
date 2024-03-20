@@ -10,6 +10,7 @@ const foodRouter = require('./routes/foodRoutes');
 const orderRouter = require('./routes/orderRoutes');
 const userRouter = require('./routes/userRoutes');
 const cartRouter = require('./routes/cartRoutes');
+const stripeRouter = require('./routes/stripe');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -56,14 +57,14 @@ app.use('/api/v1/food', foodRouter);
 app.use('/api/v1/order', orderRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/cart', cartRouter);
-// app.use('/api/v1/cart',cartRouter)
+app.use('/api/v1/stripe', stripeRouter);
 
 app.get('/*', (req, res) => {
-	res.sendFile(path.join(__dirname, '../frontend/dist/index.html'), (err) => {
-		if (err) {
-			console.error('Error sending file:', err);
-		}
-	});
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'), (err) => {
+    if (err) {
+      console.error('Error sending file:', err);
+    }
+  });
 });
 app.use(errorMiddleware);
 

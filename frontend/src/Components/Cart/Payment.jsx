@@ -1,28 +1,34 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
 import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
 } from '@stripe/react-stripe-js';
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(
   'pk_test_51OsjhaSF6WDxp41UgCqoTMrbpVfqX2XhdpKMxLedRCv3STGjxlWfGoF88tiHh5GjTL0aR8CxuH0HKrGapRH81A5A00bkNfK0tK'
 );
 
-const Payment = () => {
+const Payment = ({ price, cartlength }) => {
   const [clientSecret, setClientSecret] = useState('');
-
+  console.log(price);
   useEffect(() => {
-    // Create a Checkout Session as soon as the page loads
-    fetch('http://localhost:5000/create-checkout-session', {
-      method: 'POST',
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
-  }, []);
+    const fetchClientSecret = async () => {
+      axios
+        .post('http://localhost:8000/api/v1/stripe/create-checkout-session', {
+          price: price,
+        })
+        .then((response) => {
+          setClientSecret(response.data.clientSecret);
+        })
+        .catch((error) => {
+          // Handle errors here
+          console.error('Error fetching client secret:', error);
+        });
+    };
+    if (cartlength > 0) fetchClientSecret();
+  }, [price]); // Add 'price' to dependency array to re-fetch when 'price' changes
 
   const options = { clientSecret };
 
@@ -36,4 +42,5 @@ const Payment = () => {
     </div>
   );
 };
+
 export default Payment;

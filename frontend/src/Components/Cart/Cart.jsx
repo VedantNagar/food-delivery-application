@@ -22,6 +22,7 @@ const Cart = () => {
   const { user, isLogin } = useContext(userContext);
   const { isLoading, setIsLoading } = useContext(userContext);
   const [total, setTotal] = useState();
+  const [stripeTotal, setStripeTotal] = useState();
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -35,6 +36,11 @@ const Cart = () => {
     setTotal(localQuantity);
   };
 
+  useEffect(() => {
+    if (cartItems[0]?.items?.length > 0) {
+      setStripeTotal(cartItems[0]?.total);
+    }
+  }, [cartItems]);
   useEffect(() => {
     const fetchCart = async () => {
       setIsLoading(true);
@@ -146,6 +152,12 @@ const Cart = () => {
                   </span>
                 </div>
                 <div className={classes.btn}>
+                  {cartItems[0]?.items?.length > 0 && stripeTotal && (
+                    <Payment
+                      price={stripeTotal}
+                      cartlength={cartItems[0]?.items?.length}
+                    />
+                  )}
                   <Button title='Proceed To Payment' onClick={createOrder} />
                 </div>
                 <Snackbar
