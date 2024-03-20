@@ -1,9 +1,7 @@
-const restaurantModel = require("../models/restaurant");
-const FoodModal = require("../models/Food");
-const Order = require("../models/Orders");
-const User = require("../models/user");
-
-
+const restaurantModel = require('../models/restaurant');
+const FoodModal = require('../models/Food');
+const Order = require('../models/Orders');
+const User = require('../models/user');
 
 // const getRestaurant = async (req,res) => {
 //     const { id: restaurantID } = req.params;
@@ -20,12 +18,12 @@ const getRestaurant = async (req, res) => {
   try {
     const restaurant = await restaurantModel.findById(restaurantID);
     if (!restaurant) {
-      return res.status(404).json("Restaurant not found");
+      return res.status(404).json('Restaurant not found');
     }
     res.status(200).json({ restaurant });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -36,7 +34,7 @@ const getAllRestaurant = async (req, res) => {
     res.status(200).json({ restaurants });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -49,12 +47,12 @@ const deleteRestaurant = async (req, res) => {
       _id: restaurantID,
     });
     if (!deletedRestaurant) {
-      return res.status(404).json("Restaurant not found");
+      return res.status(404).json('Restaurant not found');
     }
-    res.status(200).json({ message: "Restaurant deleted successfully" });
+    res.status(200).json({ message: 'Restaurant deleted successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -67,7 +65,7 @@ const editRestaurant = async (req, res) => {
     const existingRestaurant = await restaurantModel.findById(restaurantID);
 
     if (!existingRestaurant) {
-      return res.status(404).json("Restaurant not found");
+      return res.status(404).json('Restaurant not found');
     }
     //passing and checking the updated fields
     const updatedFields = {};
@@ -101,12 +99,12 @@ const editRestaurant = async (req, res) => {
     );
 
     if (!updatedRestaurant) {
-      return res.status(404).json("Restaurant not found");
+      return res.status(404).json('Restaurant not found');
     }
     res.status(200).json({ updatedRestaurant });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -115,15 +113,15 @@ const editRestaurant = async (req, res) => {
 const createRestaurant = async (req, res) => {
   try {
     const { name, about, address, phone, opening_hours } = req.body;
-    const owner = req.user.id
-    const data = {owner,...req.body}
+    const owner = req.user.id;
+    const data = { owner, ...req.body };
     const restaurant = await restaurantModel.create(data);
     // Send the created restaurant object in the response
     res.status(201).json(restaurant);
   } catch (error) {
     // Handle errors
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -140,7 +138,7 @@ const addFood = async (req, res) => {
   menuItem.price = items.price;
   const food = await FoodModal.create({ ...menuItem, restaurantID });
   const restaurant = await restaurantModel.findById(restaurantID);
-  menuItem.foodID = food._id
+  menuItem.foodID = food._id;
   restaurant.menu.push(menuItem);
   await restaurant.save();
   res.status(200).json(food);
@@ -160,22 +158,22 @@ const changeOrderStatus = async (req, res) => {
 
   //validating order status
   const possibleOrderStatus = [
-    "preparing",
-    "on the way",
-    "delivered",
-    "cancelled ",
+    'preparing',
+    'on the way',
+    'delivered',
+    'cancelled ',
   ];
 
   //checking possibleOrderStatus with orderStatus
   if (!possibleOrderStatus.includes(orderStatus)) {
-    return res.status(400).json({ error: "Invalid order status" });
+    return res.status(400).json({ error: 'Invalid order status' });
   }
   //find order by id
   const order = await Order.findById(orderId);
 
   //check if order exists
   if (!order) {
-    return res.status(404).json({ error: "Order does not exist" });
+    return res.status(404).json({ error: 'Order does not exist' });
   }
 
   //updating order status
@@ -192,10 +190,10 @@ const changeOrderStatus = async (req, res) => {
 const getorders = async (req, res) => {
   const { id: restId } = req.params;
 
-  const rest = await restaurant.findById(restId);
+  const rest = await restaurantModel.findById(restId);
   if (!rest) {
     return res.status(404).json({
-      msg: "restaurant does not exist",
+      msg: 'restaurant does not exist',
     });
   }
 
@@ -209,7 +207,7 @@ const getorders = async (req, res) => {
 const searchRest = async (req, res) => {
   const { name } = req.query;
   const searchQuery = name;
-  const regexPattern = new RegExp(searchQuery.split(/\s+/).join("|"), "i");
+  const regexPattern = new RegExp(searchQuery.split(/\s+/).join('|'), 'i');
   let result = restaurantModel.find({ name: { $regex: regexPattern } });
   const food = await result;
   res.status(200).json(food);
@@ -220,8 +218,8 @@ const getAllUserRestaurant = async (req, res) => {
   try {
     const userID = req.user.id;
     // console.log(userID);
-    const AllRest = await restaurantModel.find({ owner: userID })
-    
+    const AllRest = await restaurantModel.find({ owner: userID });
+
     res.json(AllRest);
   } catch (error) {
     console.error(error);
@@ -229,16 +227,15 @@ const getAllUserRestaurant = async (req, res) => {
   }
 };
 
-
 module.exports = {
   createRestaurant,
-  getRestaurant,
+  getRestaurant, //button click krke id leni hai frontend se
   getAllRestaurant,
   deleteRestaurant,
   editRestaurant,
-  addFood,
+  addFood, //form
   changeOrderStatus,
-  getorders,
+  getorders, //view restaurant
   searchRest,
-  getAllUserRestaurant
+  getAllUserRestaurant,
 };
