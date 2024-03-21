@@ -2,7 +2,7 @@ import AdminMenuCard from "../AdminMenuCard/AdminMenuCard";
 
 const AdminMenu = () => {
     return (
-        <div>
+        <div className="h-screen">
             <div className="grid grid-cols-2 gap-5">
                 <h1 className="text-3xl font-regular mx-8 my-3">Your Menu</h1>
                 <button
@@ -24,7 +24,12 @@ const AdminMenu = () => {
                     Add new dish
                 </button>
             </div>
-            <div className="outline h-5/6 overflow-y-scroll m-4 rounded-lg flex flex-col gap-3 p-6 shadow-lg">
+            <div className="h-5/6 overflow-y-scroll m-4 rounded-lg flex flex-col gap-3 p-6 shadow-lg">
+                <AdminMenuCard />
+                <AdminMenuCard />
+                <AdminMenuCard />
+                <AdminMenuCard />
+                <AdminMenuCard />
                 <AdminMenuCard />
             </div>
         </div>
