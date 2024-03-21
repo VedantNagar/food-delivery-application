@@ -210,21 +210,7 @@ const Cart = () => {
                                         onClick={createOrder}
                                     />
                                 </div>
-                                {/* <Snackbar
-                                    open={open}
-                                    autoHideDuration={2000}
-                                    onClose={handleClose}
-                                >
-                                    <Alert
-                                        onClose={handleClose}
-                                        severity="success"
-                                        variant="outlined"
-                                        sx={{ width: "100%" }}
-                                    >
-                                        Congratulations, you order is
-                                        successfully placed!!!
-                                    </Alert>
-                                </Snackbar> */}
+                                
                             </div>
                         </div>
                     </div>
