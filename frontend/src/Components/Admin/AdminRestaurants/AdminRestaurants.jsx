@@ -21,7 +21,7 @@ const AdminRestaurants = () => {
                 ) : (
                     restaurantCard?.map((item) => {
                         return (
-                            <AdminRestaurantCard data={item} key={item._id} />
+                            <AdminRestaurantCard data={item} key={item._id} id={item._id}/>
                         );
                     })
                 )}

@@ -53,7 +53,7 @@ const router = createBrowserRouter([
                 element: <AdminRestaurants />,
             },
             {
-                path: "orders",
+                path: "orders/:orderId",
                 element: <RestaurantOrders />,
             },
         ],
