@@ -12,8 +12,8 @@ import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import { createOrderUrl } from "../../../urls/orderUrl";
 import { utilityContext } from "../../userContext/utilityContext";
-
 import Payment from "./Payment";
+
 const Cart = () => {
     const [openModal, setOpenModal] = useState(false);
     const { render } = useContext(utilityContext);
@@ -23,6 +23,7 @@ const Cart = () => {
     const [total, setTotal] = useState();
     const [stripeTotal, setStripeTotal] = useState();
 
+    console.log(cartItems[0]?.items[0]?.food?.name);
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
             return;
@@ -40,6 +41,7 @@ const Cart = () => {
             setStripeTotal(cartItems[0]?.total);
         }
     }, [cartItems]);
+
     useEffect(() => {
         const fetchCart = async () => {
             setIsLoading(true);
@@ -79,6 +81,7 @@ const Cart = () => {
                     <div className="w-full h-full flex justify-center items-center">
                         <div className="w-3/4 bg-white rounded-lg shadow-lg overflow-y-auto">
                             <Payment
+                                // item={}
                                 price={stripeTotal}
                                 cartlength={cartItems[0]?.items?.length}
                             />
@@ -207,21 +210,7 @@ const Cart = () => {
                                         onClick={createOrder}
                                     />
                                 </div>
-                                {/* <Snackbar
-                                    open={open}
-                                    autoHideDuration={2000}
-                                    onClose={handleClose}
-                                >
-                                    <Alert
-                                        onClose={handleClose}
-                                        severity="success"
-                                        variant="outlined"
-                                        sx={{ width: "100%" }}
-                                    >
-                                        Congratulations, you order is
-                                        successfully placed!!!
-                                    </Alert>
-                                </Snackbar> */}
+                                
                             </div>
                         </div>
                     </div>
