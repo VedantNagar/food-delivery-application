@@ -24,8 +24,9 @@ router.post('/create-checkout-session', async (req, res) => {
     mode: 'payment',
     ui_mode: 'embedded',
     return_url: 'http://localhost:5173/homepage/orders',
+
   });
   
-  res.send({ clientSecret: session.client_secret });
+  res.send({msg:"success", clientSecret: session.client_secret });
 });
 module.exports = router;
