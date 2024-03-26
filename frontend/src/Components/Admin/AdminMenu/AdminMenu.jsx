@@ -1,6 +1,7 @@
 import AdminMenuCard from "../AdminMenuCard/AdminMenuCard";
 
-const AdminMenu = () => {
+const AdminMenu = ({data}) => {
+    
     return (
         <div>
             <div className="grid grid-cols-2 gap-5">

@@ -71,7 +71,7 @@ const createOrder = async (req, res) => {
           sum = 0;
       }
   
-      const newOrder = new Order({
+      const newOrder = await  Order.create({
           items: restaurantItems,
           totalAmount: sum,
           paymentMethod,
@@ -80,15 +80,15 @@ const createOrder = async (req, res) => {
           orderDate: new Date(),
           restaurant: restaurantID,
       });
-  
-      const savedOrder = await newOrder.save();
-  
+
+      
+      console.log(newOrder)
       // Add order in restaurant database
       await Restaurant.findByIdAndUpdate(restaurantID, {
-          $push: { orderID: savedOrder._id },
+          $push: { orderID: newOrder._id },
       });
   
-      orders.push(savedOrder);
+      orders.push(newOrder);
   }
   
     //update order in  user
