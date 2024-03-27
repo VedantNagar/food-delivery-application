@@ -36,7 +36,7 @@ router.post('/create', restaurantController.createRestaurant);
 router.post('/addFood/:id', restaurantController.addFood);
 
 //orderStatus
-router.patch('/changeStatus/:id',restaurantController.changeOrderStatus);
+router.put('/changeStatus/:id',restaurantController.changeOrderStatus);
 
 //get all orders
 router.get('/getAllOrders',restaurantController.getorders)
