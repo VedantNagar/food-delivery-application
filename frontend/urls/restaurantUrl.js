@@ -7,3 +7,4 @@ export const getSingleRestaurantUrl = `${url}/getRestaurant`; // use /id for sin
 export const getAllRestaurantUrl = `${url}/getAllRestaurant`;
 export const getSearchRestaurantsUrl = `${url}/getSearchRestaurants`;
 export const createRestauranrUrl = `${url}/create`;
+export const changeStatusUrl = `${url}/changeStatus`

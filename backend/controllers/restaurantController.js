@@ -190,9 +190,14 @@ const changeOrderStatus = async (req, res) => {
 const getorders = async (req, res) => {
   const {restId} = req.query
   console.log(restId)
-  const rest = await restaurantModel.findById(restId).populate(
-    'orderID'
-  )
+  const rest = await restaurantModel.findById(restId).populate({
+    path:'orderID',
+    populate: {
+      path: "user",
+      model: "user",
+      select: "first_name last_name contact address email",
+    },
+  })
   const orders = rest.orderID;
 
   return res.status(200).json(orders); 
