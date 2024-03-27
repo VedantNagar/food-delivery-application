@@ -149,7 +149,6 @@ const addFood = async (req, res) => {
 const changeOrderStatus = async (req, res) => {
   const { id: orderId } = req.params;
   const { orderStatus } = req.body;
-
   //checking user role
   const userId = req.user.Id; //!! CHECK THIS !!
 
@@ -159,9 +158,9 @@ const changeOrderStatus = async (req, res) => {
   //validating order status
   const possibleOrderStatus = [
     'preparing',
-    'on the way',
+    'pending',
     'delivered',
-    'cancelled ',
+    'cancelled',
   ];
 
   //checking possibleOrderStatus with orderStatus
