@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
+
 import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
 } from '@stripe/react-stripe-js';
+import { paymentUrl } from '../../../urls/payment';
 
 const stripePromise = loadStripe(
   'pk_test_51OsjhaSF6WDxp41UgCqoTMrbpVfqX2XhdpKMxLedRCv3STGjxlWfGoF88tiHh5GjTL0aR8CxuH0HKrGapRH81A5A00bkNfK0tK'
@@ -16,13 +18,13 @@ const Payment = ({ price, cartlength }) => {
   useEffect(() => {
     const fetchClientSecret = async () => {
       axios
-        .post('http://localhost:8000/api/v1/stripe/create-checkout-session', {
+        .post(paymentUrl, {
           price: price,
         })
         .then((response) => {
           setClientSecret(response.data.clientSecret);
           if(response.data.msg === 'success'){
-            
+
           }
         })
         .catch((error) => {
