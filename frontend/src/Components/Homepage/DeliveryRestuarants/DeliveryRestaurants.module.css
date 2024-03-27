@@ -6,13 +6,9 @@
     justify-content: center;
 }
 .deliveryItems {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 @media (max-width: 786px) {
-    .deliveryItems {
-        justify-content: center;
-    }
 }

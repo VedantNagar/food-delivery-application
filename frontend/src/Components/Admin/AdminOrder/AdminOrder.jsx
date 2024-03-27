@@ -18,6 +18,7 @@ const AdminOrder = ({id}) => {
         getAllOrder()
     },[])
     return (
+
         <div className="h-5/6 overflow-y-scroll m-4 rounded-lg flex flex-col gap-3 p-6 shadow-lg">
          {data?.length === 0 ? (
                     <h1 className="text-3xl">No Orders</h1>
@@ -29,6 +30,7 @@ const AdminOrder = ({id}) => {
                     })
                 )} 
             
+
         </div>
     );
 };
