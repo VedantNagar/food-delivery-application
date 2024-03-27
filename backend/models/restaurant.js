@@ -71,8 +71,9 @@ const restaurantSchema = new mongoose.Schema({
   orderID: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'orders',
+      ref: 'order',
       required: false,
+      
     },
   ],
 });

@@ -21,6 +21,9 @@ const Payment = ({ price, cartlength }) => {
         })
         .then((response) => {
           setClientSecret(response.data.clientSecret);
+          if(response.data.msg === 'success'){
+            
+          }
         })
         .catch((error) => {
           // Handle errors here

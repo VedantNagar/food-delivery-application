@@ -33,7 +33,7 @@ const getAllRestaurant = async (req, res) => {
     const restaurants = await restaurantModel.find({});
     res.status(200).json({ restaurants });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -188,22 +188,17 @@ const changeOrderStatus = async (req, res) => {
 
 //get all orders from restaurants
 const getorders = async (req, res) => {
-  const { id: restId } = req.params;
-
-  const rest = await restaurantModel.findById(restId);
-  if (!rest) {
-    return res.status(404).json({
-      msg: 'restaurant does not exist',
-    });
-  }
-
+  const {restId} = req.query
+  console.log(restId)
+  const rest = await restaurantModel.findById(restId).populate(
+    'orderID'
+  )
   const orders = rest.orderID;
 
-  return res.status(200).json({ orders });
+  return res.status(200).json(orders); 
 };
 
 //search restaurant
-
 const searchRest = async (req, res) => {
   const { name } = req.query;
   const searchQuery = name;
@@ -227,6 +222,7 @@ const getAllUserRestaurant = async (req, res) => {
   }
 };
 
+
 module.exports = {
   createRestaurant,
   getRestaurant, //button click krke id leni hai frontend se
@@ -238,4 +234,5 @@ module.exports = {
   getorders, //view restaurant
   searchRest,
   getAllUserRestaurant,
+  
 };

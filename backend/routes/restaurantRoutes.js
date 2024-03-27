@@ -39,7 +39,7 @@ router.post('/addFood/:id', restaurantController.addFood);
 router.patch('/changeStatus/:id',restaurantController.changeOrderStatus);
 
 //get all orders
-router.get('/getAllOrders/:id',restaurantController.getorders)
+router.get('/getAllOrders',restaurantController.getorders)
 
 
 module.exports = router;
