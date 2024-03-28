@@ -1,18 +1,18 @@
 import tacos from "../../../../assets/tacos.png";
-const AdminMenuCard = ({data}) => {
+const AdminMenuCard = ({ data }) => {
     // console.log(data)
     return (
         <div className="border border-slate-300 p-2 rounded-lg justify-between gap-4 shadow-md flex">
-            <div className="rounded-lg object-contain w-24 aspect-square">
+            <div className="object-contain w-32 h-32">
                 <img
                     src={data?.image[0]}
                     alt=""
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-lg "
                 />
             </div>
-            <div className="w-1/3">
-                <h1 className="text-lg font-regular">{data?.name}</h1>
-                <p>{data?.about}</p>
+            <div className="w-1/3 flex flex-col justify-center gap-2">
+                <h1 className="text-lg font-bold">{data?.name}</h1>
+                <p className="truncate">{data?.about}</p>
                 <span>${data?.price}</span>
             </div>
 
