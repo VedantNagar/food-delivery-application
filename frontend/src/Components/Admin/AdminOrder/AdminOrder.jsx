@@ -12,7 +12,7 @@ const AdminOrder = ({id}) => {
                     restId:id
                 }
             })
-            console.log(response.data)
+            // console.log(response.data)
             setData(response.data)
         }
         getAllOrder()

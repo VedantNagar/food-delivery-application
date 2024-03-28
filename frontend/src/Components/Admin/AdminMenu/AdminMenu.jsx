@@ -1,7 +1,7 @@
 import AdminMenuCard from "../AdminMenuCard/AdminMenuCard";
 
 const AdminMenu = ({data}) => {
-    
+    // console.log(data)
     return (
         <div className="h-screen">
             <div className="grid grid-cols-2 gap-5">
@@ -26,12 +26,15 @@ const AdminMenu = ({data}) => {
                 </button>
             </div>
             <div className="h-5/6 overflow-y-scroll m-4 rounded-lg flex flex-col gap-3 p-6 shadow-lg">
-                <AdminMenuCard />
-                <AdminMenuCard />
-                <AdminMenuCard />
-                <AdminMenuCard />
-                <AdminMenuCard />
-                <AdminMenuCard />
+            {data?.length === 0 ? (
+                    <h1 className="text-3xl">No Menu</h1>
+                ) : (
+                    data?.map((item) => {
+                        return (
+                            <AdminMenuCard data={item} key={item._id} />
+                        );
+                    })
+                )} 
             </div>
         </div>
     );

@@ -20,6 +20,7 @@ const restaurantSchema = new mongoose.Schema({
   },
   image: {
     type: [String],
+    required:false
   },
   cft: {
     type: String,
@@ -28,6 +29,7 @@ const restaurantSchema = new mongoose.Schema({
   discount: {
     type: Number,
     required: false,
+    default:'5%'
   },
   menu: {
     type: [
@@ -61,7 +63,7 @@ const restaurantSchema = new mongoose.Schema({
   },
   opening_hours: {
     type: String,
-    default: '',
+    default: '10am',
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

@@ -8,7 +8,7 @@ const AdminOrderCard = ({data,id}) => {
     useEffect(() => {
         const changeStatus = async() => {
             console.log(status)
-            const response = await axios.put(`${changeStatusUrl}/${id}`,{
+            const response = await axios.patch(`${changeStatusUrl}/${id}`,{
                 orderStatus:status
             })
         }

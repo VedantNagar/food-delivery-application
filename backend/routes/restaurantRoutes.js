@@ -36,10 +36,15 @@ router.post('/create', restaurantController.createRestaurant);
 router.post('/addFood/:id', restaurantController.addFood);
 
 //orderStatus
-router.put('/changeStatus/:id',restaurantController.changeOrderStatus);
+router.patch('/changeStatus/:id',restaurantController.changeOrderStatus);
 
 //get all orders
 router.get('/getAllOrders',restaurantController.getorders)
 
+//delete food
+router.delete('/deleteFood/:id',restaurantController.deleteFood)
+
+//edit food(food id)
+router.patch('/editFood/:id',restaurantController.editFood)
 
 module.exports = router;

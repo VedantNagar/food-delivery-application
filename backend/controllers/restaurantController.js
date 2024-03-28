@@ -109,10 +109,10 @@ const editRestaurant = async (req, res) => {
 };
 
 //create restaurant
-
+//opening hours (default), cost for two ,image (rest)
 const createRestaurant = async (req, res) => {
   try {
-    const { name, about, address, phone, opening_hours } = req.body;
+    const { name, about, address, phone,discount,cft,image} = req.body;
     const owner = req.user.id;
     const data = { owner, ...req.body };
     const restaurant = await restaurantModel.create(data);
@@ -226,6 +226,13 @@ const getAllUserRestaurant = async (req, res) => {
   }
 };
 
+const editFood = async(req,res) => {
+
+}
+
+const deleteFood = async(req,res) => {
+
+}
 
 module.exports = {
   createRestaurant,
@@ -238,5 +245,6 @@ module.exports = {
   getorders, //view restaurant
   searchRest,
   getAllUserRestaurant,
-  
+  editFood,
+  deleteFood
 };

@@ -6,7 +6,16 @@ import { createRestauranrUrl } from '../../../../urls/restaurantUrl';
 const AdminRestaurantForm = () => {
   const { setModal } = useContext(utilityContext);
   const handleClick = async () => {
-   
+  //  const response = await axios.post(createRestauranrUrl,{
+  //   name:,
+  //   about:,
+  //   address:,
+  //   phone:,
+  //   discount:,
+  //   cft:,
+  //   image:
+  //  })
+  //  console.log(response)
   };
   return (
     <div
