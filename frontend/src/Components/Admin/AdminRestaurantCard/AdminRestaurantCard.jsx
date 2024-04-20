@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import { deleteRestaurantUrl } from "../../../../urls/restaurantUrl";
+import { useEffect } from "react";
+import axios from "axios";
 
 const AdminRestaurantCard = ({ data, id }) => {
+
+    const deleteRest = async() => {
+        const response = await axios.delete(`${deleteRestaurantUrl}/${id}`)
+        console.log(response)
+    }
+
     const imageSrc =
         data?.image ??
         "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80";
@@ -26,7 +35,7 @@ const AdminRestaurantCard = ({ data, id }) => {
                     </button>
                 </Link>
             </div>
-            <button>
+            <button onClick={deleteRest}>
                 <MdOutlineDeleteForever
                     className="text-3xl border border-black rounded-full cursor-pointer absolute top-0 right-0 translate-x-4 -translate-y-2 z-50"
                     title="Delete restaurant"

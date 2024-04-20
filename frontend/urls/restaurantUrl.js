@@ -8,6 +8,7 @@ export const getAllRestaurantUrl = `${url}/getAllRestaurant`;
 export const getSearchRestaurantsUrl = `${url}/getSearchRestaurants`;
 export const createRestauranrUrl = `${url}/create`;
 export const changeStatusUrl = `${url}/changeStatus`
+export const deleteRestaurantUrl = `${url}/deleteRestaurant`
 
 //foodId(params) - putrequest
 export const editFoodUrl = `${url}/editFood`

@@ -4,6 +4,7 @@ const Order = require('../models/Orders');
 const User = require('../models/user');
 const cloudinary = require('../utils/fileUpload/cloudinary')
 const path = require("path");
+const cartModel = require('../models/cart')
 
 // const getRestaurant = async (req,res) => {
 //     const { id: restaurantID } = req.params;
@@ -45,6 +46,29 @@ const getAllRestaurant = async (req, res) => {
 const deleteRestaurant = async (req, res) => {
   const { id: restaurantID } = req.params;
   try {
+    const rest = await restaurantModel.findById(restaurantID)
+    if (!rest) {
+      return res.status(404).json('Restaurant not found');
+    }
+    const userId = req.user.id;
+    const ownerId = rest.owner;
+    // console.log(userId)
+    // console.log(rest.owner)
+
+    if(ownerId != userId){
+      return res.status(400).json("restaurant owner does not match")
+    }
+
+    await FoodModal.deleteMany({ restaurantID });
+
+    await Order.deleteMany({ restaurantID });
+
+    await cartModel.updateMany(
+      { 'items.food': { $in: rest.food } },
+      { $pull: { items: { food: { $in: rest.food } } } }
+    );
+
+
     const deletedRestaurant = await restaurantModel.findOneAndDelete({
       _id: restaurantID,
     });
