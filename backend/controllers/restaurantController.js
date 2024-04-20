@@ -2,6 +2,8 @@ const restaurantModel = require('../models/restaurant');
 const FoodModal = require('../models/Food');
 const Order = require('../models/Orders');
 const User = require('../models/user');
+const cloudinary = require('../utils/fileUpload/cloudinary')
+const path = require("path");
 
 // const getRestaurant = async (req,res) => {
 //     const { id: restaurantID } = req.params;
@@ -112,18 +114,26 @@ const editRestaurant = async (req, res) => {
 //opening hours (default), cost for two ,image (rest)
 const createRestaurant = async (req, res) => {
   try {
-    const { name, about, address, phone,discount,cft,image} = req.body;
+    const { name, about, address, phone, discount, cft } = req.body;
+    
+    // Check if a file was uploaded
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+    // console.log(req.file)
+    const imageUrl = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`);
+    // console.log(imageUrl)
     const owner = req.user.id;
-    const data = { owner, ...req.body };
+    const data = { owner, image: imageUrl.secure_url, name, about, address, phone, discount, cft };
     const restaurant = await restaurantModel.create(data);
-    // Send the created restaurant object in the response
     res.status(201).json(restaurant);
   } catch (error) {
-    // Handle errors
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+
 
 // add food in menu and update in food model
 const addFood = async (req, res) => {

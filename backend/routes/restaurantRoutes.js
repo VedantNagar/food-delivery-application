@@ -2,7 +2,7 @@ const express = require('express');
 const restaurantController = require('../controllers/restaurantController');
 const router = express.Router();
 const authMiddleware = require('../middleware/roleAuthMiddleware');
-
+const upload = require('../utils/fileUpload/multer')
 // CRUD operations for restaurants
 
 //get rest(id)
@@ -30,10 +30,23 @@ router.delete('/deleteRestaurant/:id', restaurantController.deleteRestaurant);
 router.patch('/editRestaurant/:id', restaurantController.editRestaurant);
 
 //create rest(register -> if(role == owner) -> createRestaurant)
-router.post('/create', restaurantController.createRestaurant);
+
+// router.post('/create',(req,res,next) => {
+//     console.log("shivam bhai")
+//     // res.send("shivam bhai")
+//     next()
+// },upload.single("image"), (req,res) => {
+//     console.log(req.file)
+//     res.send("shivam bhai")
+// }); 
+
+router.post('/create',upload.single("image"), restaurantController.createRestaurant);
 
 // add food
 router.post('/addFood/:id', restaurantController.addFood);
+
+
+
 
 //orderStatus
 router.patch('/changeStatus/:id',restaurantController.changeOrderStatus);

@@ -4,6 +4,9 @@ const connectDB = require('./database/connect');
 const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
+
+require('dotenv').config();
+
 //routes
 const restRouter = require('./routes/restaurantRoutes');
 const foodRouter = require('./routes/foodRoutes');
@@ -12,12 +15,13 @@ const userRouter = require('./routes/userRoutes');
 const cartRouter = require('./routes/cartRoutes');
 const stripeRouter = require('./routes/stripe');
 
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const errorMiddleware = require('./middleware/errorMiddleware');
 require('express-async-errors');
-require('dotenv').config();
+
+// console.log(process.env)
 
 const app = express();
 app.use(morgan('combined'));
@@ -25,7 +29,10 @@ app.use(morgan('combined'));
 //   res.send('hello world');
 // });
 
-app.use(bodyParser.json());
+
+
+// app.use(bodyParser.json());
+app.use(express.json())
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 const allowedOrigins = [
