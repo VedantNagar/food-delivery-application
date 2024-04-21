@@ -37,6 +37,7 @@ const AdminRestaurantForm = () => {
         },
       });
       console.log(response);
+      setModal(false);
     } catch (error) {
       console.error(error);
     }

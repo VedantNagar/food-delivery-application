@@ -11,7 +11,7 @@ const AdminRestaurants = () => {
             // console.log(response.data);
         };
         getAllRest();
-    }, []);
+    }, [restaurantCard]);
     return (
         <div className="w-screen h-screen p-6">
             <h1 className="text-3xl font-poppins mb-4">Your restaurants</h1>
