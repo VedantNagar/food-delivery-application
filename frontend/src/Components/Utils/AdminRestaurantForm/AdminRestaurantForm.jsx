@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { utilityContext } from "../../../userContext/utilityContext";
 import axios from "axios";
 import { createRestauranrUrl } from "../../../../urls/restaurantUrl";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const AdminRestaurantForm = () => {
   const { setModal } = useContext(utilityContext);
@@ -37,9 +39,11 @@ const AdminRestaurantForm = () => {
         },
       });
       console.log(response);
+      
       setModal(false);
     } catch (error) {
       console.error(error);
+      toast.error("please provide complete imformation")
     }
   };
 
@@ -113,7 +117,7 @@ const AdminRestaurantForm = () => {
                   id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="Type restaurant name"
-                  required=""
+                  required
                   onChange={(e) =>
                     setData({
                       ...data,
@@ -135,6 +139,7 @@ const AdminRestaurantForm = () => {
                   id="about"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="Type about your restaurant"
+                  required
                   onChange={(e) =>
                     setData({
                       ...data,
@@ -198,6 +203,7 @@ const AdminRestaurantForm = () => {
                   name="file"
                   id="contact"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  required
                   onChange={(e) => handleFileUpload(e)}
                 />
               </div>
@@ -234,6 +240,7 @@ const AdminRestaurantForm = () => {
                   rows="4"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Write restaurant description here"
+                  required
                   onChange={(e) =>
                     setData({
                       ...data,
@@ -262,6 +269,7 @@ const AdminRestaurantForm = () => {
               </svg>
               Add new restaurant
             </button>
+            <ToastContainer position="top-right"/>
           </form>
         </div>
       </div>
