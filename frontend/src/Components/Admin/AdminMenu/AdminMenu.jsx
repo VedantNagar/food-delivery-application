@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import AdminMenuCard from "../AdminMenuCard/AdminMenuCard";
+import { utilityContext } from "../../../userContext/utilityContext";
 
-const AdminMenu = ({data}) => {
+const AdminMenu = ({ data }) => {
+    const { setAdminMenuModal } = useContext(utilityContext);
     // console.log(data)
     return (
         <div className="h-screen">
@@ -9,6 +12,9 @@ const AdminMenu = ({data}) => {
                 <button
                     type="submit"
                     className="text-white inline-flex items-center bg-fudo-red hover:bg-[#e64747] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-52 h-12 my-auto"
+                    onClick={() => {
+                        setAdminMenuModal(true);
+                    }}
                 >
                     <svg
                         className="me-1 -ms-1 w-5 h-5"
@@ -25,16 +31,15 @@ const AdminMenu = ({data}) => {
                     Add new dish
                 </button>
             </div>
+            <hr />
             <div className="h-5/6 overflow-y-scroll m-4 rounded-lg flex flex-col gap-3 p-6 shadow-lg">
-            {data?.length === 0 ? (
+                {data?.length === 0 ? (
                     <h1 className="text-3xl">No Menu</h1>
                 ) : (
                     data?.map((item) => {
-                        return (
-                            <AdminMenuCard data={item} key={item._id} />
-                        );
+                        return <AdminMenuCard data={item} key={item._id} />;
                     })
-                )} 
+                )}
             </div>
         </div>
     );

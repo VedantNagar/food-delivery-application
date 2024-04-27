@@ -20,6 +20,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AdminRestaurantForm from "../Utils/AdminRestaurantForm/AdminRestaurantForm";
 import { utilityContext } from "../../userContext/utilityContext";
 import { SlLogout } from "react-icons/sl";
+import AdminMenuForm from "./AdminMenu/AdminMenuForm";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -92,6 +93,7 @@ const AdminRoot = () => {
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     const { modal, setModal } = useContext(utilityContext);
+    const { adminMenuModal } = useContext(utilityContext);
 
     const handleDrawerClose = () => {
         setOpen(!open);
@@ -127,7 +129,7 @@ const AdminRoot = () => {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {["Create restaurant"].map((text, index) => (
+                    {["Create restaurant"].map((text) => (
                         <ListItem
                             key={text}
                             disablePadding
@@ -197,6 +199,7 @@ const AdminRoot = () => {
             </Drawer>
 
             {modal && <AdminRestaurantForm />}
+            {adminMenuModal && <AdminMenuForm />}
 
             <Outlet />
         </Box>
