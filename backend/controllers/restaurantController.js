@@ -141,8 +141,11 @@ const createRestaurant = async (req, res) => {
     const { name, about, address, phone, discount, cft } = req.body;
     
     // Check if a file was uploaded
+    if(!name || !address || !about){
+      return res.status(400).json({error:"please provide complete imformation"})
+    }
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({ error: 'please upload image'});
     }
     // console.log(req.file)
     const imageUrl = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`);
@@ -152,7 +155,8 @@ const createRestaurant = async (req, res) => {
     const restaurant = await restaurantModel.create(data);
     res.status(201).json(restaurant);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    console.log(error)
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -163,7 +167,7 @@ const createRestaurant = async (req, res) => {
 const addFood = async (req, res) => {
   const { id: restaurantID } = req.params;
   const items = req.body;
-
+  
   const menuItem = {};
   menuItem.name = items.name;
   menuItem.about = items.about;
