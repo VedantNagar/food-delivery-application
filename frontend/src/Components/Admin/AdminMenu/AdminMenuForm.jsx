@@ -6,10 +6,9 @@ const AdminMenuForm = () => {
     const [data, setData] = useState({
         name: "",
         about: "",
-        cft: "",
-        number: "",
+        price: "",
         image: "",
-        discount: "",
+        category: "",
     });
     const handleClick = async (e) => {
         e.preventDefault();
@@ -26,7 +25,7 @@ const AdminMenuForm = () => {
             aria-hidden="true"
             className="overflow-y-auto overflow-x-hidden fixed top-1/2 left-1/2 z-[calc(infinity)] justify-center items-center w-screen h-screen max-h-full -translate-x-1/2 -translate-y-1/2 grid place-content-center backdrop-blur-sm backdrop-brightness-50"
         >
-            <div className="relative p-4 w-full max-w-md max-h-full">
+            <div className="relative p-4 w-96 max-h-full">
                 <div className="relative bg-white rounded-lg shadow ">
                     <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
                         <h3 className="text-lg font-semibold text-gray-900">
@@ -104,12 +103,12 @@ const AdminMenuForm = () => {
                                     }
                                 />
                             </div>
-                            <div className="col-span-2 sm:col-span-1">
+                            <div className="col-span-2">
                                 <label
                                     htmlFor="cft"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                    Cost for two
+                                    Price
                                 </label>
                                 <input
                                     type="number"
@@ -120,32 +119,12 @@ const AdminMenuForm = () => {
                                     onChange={(e) =>
                                         setData({
                                             ...data,
-                                            cft: e.target.value,
+                                            price: e.target.value,
                                         })
                                     }
                                 />
                             </div>
-                            <div className="col-span-2 sm:col-span-1">
-                                <label
-                                    htmlFor="category"
-                                    className="block mb-2 text-sm font-medium text-gray-900 "
-                                >
-                                    Contact number
-                                </label>
-                                <input
-                                    type="number"
-                                    name="contact"
-                                    id="contact"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                    placeholder="+91"
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            number: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
+
                             <div className="col-span-2">
                                 <label
                                     htmlFor="category"
@@ -167,41 +146,22 @@ const AdminMenuForm = () => {
                                     htmlFor="name"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                    Discount
+                                    Category
                                 </label>
-                                <input
-                                    type="number"
-                                    name="discount"
-                                    id="discount"
+                                <select
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                    placeholder="Type restaurant discount"
+                                    t
+                                    value={data.role}
                                     onChange={(e) =>
                                         setData({
                                             ...data,
-                                            discount: e.target.value,
+                                            category: e.target.value,
                                         })
                                     }
-                                />
-                            </div>
-                            <div className="col-span-2">
-                                <label
-                                    htmlFor="description"
-                                    className="block mb-2 text-sm font-medium text-gray-900 "
                                 >
-                                    Restaurant Address
-                                </label>
-                                <textarea
-                                    id="description"
-                                    rows="4"
-                                    className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                                    placeholder="Write restaurant description here"
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            address: e.target.value,
-                                        })
-                                    }
-                                ></textarea>
+                                    <option defaultValue>Veg</option>
+                                    <option>Non-veg</option>
+                                </select>
                             </div>
                         </div>
                         <button
