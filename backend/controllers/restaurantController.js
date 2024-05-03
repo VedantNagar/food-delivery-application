@@ -168,14 +168,25 @@ const addFood = async (req, res) => {
   const { id: restaurantID } = req.params;
   const items = req.body;
   
+  if (!req.file) {
+    return res.status(400).json({ error: 'please upload image'});
+  }
+  // console.log(req.file)
+  const imageUrl = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`);
+
   const menuItem = {};
   menuItem.name = items.name;
   menuItem.about = items.about;
-  menuItem.image = items.image;
+  menuItem.image = imageUrl.secure_url
   menuItem.category = items.category;
   menuItem.price = items.price;
-  const food = await FoodModal.create({ ...menuItem, restaurantID });
   const restaurant = await restaurantModel.findById(restaurantID);
+  if(!restaurant){
+    return res.status(404).json({
+      msg:"incorrect restaurant"
+    })
+  }
+  const food = await FoodModal.create({ ...menuItem, restaurantID });
   menuItem.foodID = food._id;
   restaurant.menu.push(menuItem);
   await restaurant.save();

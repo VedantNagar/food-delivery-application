@@ -29,7 +29,7 @@ const restaurantSchema = new mongoose.Schema({
   discount: {
     type: Number,
     required: false,
-    default:'5%'
+    default:5
   },
   menu: {
     type: [

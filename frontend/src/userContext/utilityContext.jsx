@@ -7,6 +7,8 @@ export function UtilityContextProvider({ children }) {
     const [render, setRender] = useState(false);
     const [modal, setModal] = useState(false);
     const [adminMenuModal, setAdminMenuModal] = useState(false);
+    const [restId, setRestId] = useState();
+    
     return (
         <utilityContext.Provider
             value={{
@@ -18,6 +20,8 @@ export function UtilityContextProvider({ children }) {
                 setModal,
                 adminMenuModal,
                 setAdminMenuModal,
+                restId,
+                setRestId
             }}
         >
             {children}

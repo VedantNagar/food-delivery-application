@@ -43,7 +43,7 @@ router.patch('/editRestaurant/:id', restaurantController.editRestaurant);
 router.post('/create',upload.single("image"), restaurantController.createRestaurant);
 
 // add food
-router.post('/addFood/:id', restaurantController.addFood);
+router.post('/addFood/:id',upload.single("image"), restaurantController.addFood);
 
 
 

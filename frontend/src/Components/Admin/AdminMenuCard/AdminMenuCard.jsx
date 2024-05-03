@@ -1,6 +1,9 @@
+
 import tacos from "../../../../assets/tacos.png";
+
 const AdminMenuCard = ({ data }) => {
     // console.log(data)
+    
     return (
         <div className="border border-slate-300 p-2 rounded-lg justify-between gap-4 shadow-md flex">
             <div className="object-contain w-32 h-32">

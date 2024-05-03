@@ -10,6 +10,10 @@ export const createRestauranrUrl = `${url}/create`;
 export const changeStatusUrl = `${url}/changeStatus`
 export const deleteRestaurantUrl = `${url}/deleteRestaurant`
 
+//restID in params
+export const addFoodRestaurant = `${url}/addFood`
+
+
 //foodId(params) - putrequest
 export const editFoodUrl = `${url}/editFood`
 
