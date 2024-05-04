@@ -29,16 +29,14 @@ app.use(morgan('combined'));
 //   res.send('hello world');
 // });
 
-
-
 // app.use(bodyParser.json());
-app.use(express.json())
+app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:8000',
-  'https://food-delivery-application-rtu9.onrender.com',
+  'https://food-delivery-application-x68l.onrender.com',
   'https://kshitij-fudo-app.onrender.com',
 ];
 
