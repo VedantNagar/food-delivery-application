@@ -4,6 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../../userContext/context";
+import toast from "react-hot-toast"
 export default function DropdownMenu() {
   const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -17,6 +18,7 @@ export default function DropdownMenu() {
         e.preventDefault();
         logOut();
         navigate("/");
+        toast.success("Logged out successfully")
         setAnchorEl(null);
     };
     const handleClose = (e) => {

@@ -1,7 +1,6 @@
 .searchBar {
   background-color: #e57777;
   height: 4.75rem;
-  border-radius: 1rem;
   position: absolute;
   top: 16rem;
   display: flex;
@@ -23,7 +22,6 @@
   margin-right: 0.125rem;
   background-color: transparent;
   color: white;
-  border-radius: 1rem;
   font-size: 1rem;
   padding: 0.5rem;
 }

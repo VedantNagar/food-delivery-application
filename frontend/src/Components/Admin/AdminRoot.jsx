@@ -21,6 +21,7 @@ import AdminRestaurantForm from "../Utils/AdminRestaurantForm/AdminRestaurantFor
 import { utilityContext } from "../../userContext/utilityContext";
 import { SlLogout } from "react-icons/sl";
 import AdminMenuForm from "./AdminMenu/AdminMenuForm";
+import toast from "react-hot-toast"
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -103,6 +104,7 @@ const AdminRoot = () => {
         e.preventDefault();
         logOut();
         navigate("/");
+        toast.success("You logged out!")
         // console.log("User logged out");
     };
     return (

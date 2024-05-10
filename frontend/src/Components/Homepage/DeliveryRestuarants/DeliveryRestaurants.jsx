@@ -8,7 +8,7 @@ const DeliveryRestaurants = ({ list }) => {
     return (
         <div className="my-16 flex flex-col flex-wrap justify-center">
             <ScrollRestoration />
-            <h2 className="font-poppins text-xl font-medium">
+            <h2 className="font-poppins text-xl font-medium" id="menu">
                 Delivery Restaurants in Delhi NCR
             </h2>
             <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-16 mx-auto">
