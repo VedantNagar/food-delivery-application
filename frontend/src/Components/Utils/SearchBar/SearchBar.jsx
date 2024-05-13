@@ -18,9 +18,10 @@ const SearchBar = () => {
         }
     };
     return (
-        <div className={classes.searchBar}>
+        <div className={`${classes.searchBar} rounded-xl`}>
             <form action="#">
                 <input
+                className="rounded-lg"
                     type="text"
                     placeholder="Search for restaurant, cuisine or a dish"
                     value={name}

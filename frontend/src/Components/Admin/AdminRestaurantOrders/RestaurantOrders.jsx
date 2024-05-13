@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
 import AdminMenu from "../AdminMenu/AdminMenu";
 import AdminOrder from "../AdminOrder/AdminOrder";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getSingleRestaurantUrl } from "../../../../urls/restaurantUrl";
 import axios from "axios";
+import { utilityContext } from "../../../userContext/utilityContext";
 const RestaurantOrders = () => {
     const params = useParams();
     const [rest, setRest] = useState([]);
+    const {render} = useContext(utilityContext)
     useEffect(() => {
         const getRest = async () => {
             const response = await axios.get(
@@ -15,7 +17,7 @@ const RestaurantOrders = () => {
             setRest(response.data);
         };
         getRest();
-    }, []);
+    }, [render]);
     return (
         <div className="grid md:grid-cols-2 gap-8 w-full">
             <div className="h-screen mt-6">

@@ -30,20 +30,13 @@ const Navbar = ({ list }) => {
         setIsMenuOpen(!isMenuOpen);
     };
     const { isLogin } = useContext(userContext);
-    const [open, setOpen] = useState(false);
-    const handleClose = () => setOpen(false);
-    const menuHandler = () => {
-        if (!isLogin) {
-            setOpen(true);
-        }
-    };
+    
     const scrollHandler = (servicesRef) => {
         window.scrollTo({
             top: servicesRef.current.offsetTop,
             behavior: "smooth",
         });
     };
-    const goto = isLogin ? "/homepage" : "#";
     const { servicesRef } = useContext(userContext);
 
     return (
@@ -94,44 +87,13 @@ const Navbar = ({ list }) => {
                             );
                         })}
                         
-                        {!isLogin && (
-                            <li>
-                                <NavLink to={goto} onClick={menuHandler}>
+
+                           {!isLogin && <li>
+                                <a href="/homepage#menu" >
                                     Menu
-                                </NavLink>
-                                <Modal
-                                    aria-labelledby="transition-modal-title"
-                                    aria-describedby="transition-modal-description"
-                                    open={open}
-                                    onClose={handleClose}
-                                    closeAfterTransition
-                                    slots={{ backdrop: Backdrop }}
-                                    slotProps={{
-                                        backdrop: {
-                                            timeout: 500,
-                                        },
-                                    }}
-                                >
-                                    <Fade in={open}>
-                                        <Box sx={style}>
-                                            <Typography
-                                                id="transition-modal-title"
-                                                variant="h6"
-                                                component="h2"
-                                            >
-                                                Log in to continue
-                                            </Typography>
-                                            <Typography
-                                                id="transition-modal-description"
-                                                sx={{ mt: 2 }}
-                                            >
-                                                To view the menu, please log in!
-                                            </Typography>
-                                        </Box>
-                                    </Fade>
-                                </Modal>
-                            </li>
-                        )}
+                                </a>
+                            </li>}
+
                         
                     </ul>
                 </div>
