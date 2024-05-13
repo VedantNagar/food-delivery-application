@@ -46,7 +46,7 @@ const Cart = () => {
         const fetchCart = async () => {
             setIsLoading(true);
             const response = await axios.get(getAllFoodCartUrl);
-            // console.log(response?.data?.newUserCart);
+            console.log(response)
             setIsLoading(false);
             setCartItems(response?.data?.newUserCart);
         };

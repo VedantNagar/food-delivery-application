@@ -54,7 +54,7 @@ router.patch('/changeStatus/:id',restaurantController.changeOrderStatus);
 //get all orders
 router.get('/getAllOrders',restaurantController.getorders)
 
-//delete food
+//delete food(menu id)
 router.delete('/deleteFood/:id',restaurantController.deleteFood)
 
 //edit food(food id)

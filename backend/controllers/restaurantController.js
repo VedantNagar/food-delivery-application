@@ -5,6 +5,7 @@ const User = require('../models/user');
 const cloudinary = require('../utils/fileUpload/cloudinary')
 const path = require("path");
 const cartModel = require('../models/cart')
+const mongoose = require('mongoose')
 
 // const getRestaurant = async (req,res) => {
 //     const { id: restaurantID } = req.params;
@@ -279,9 +280,48 @@ const editFood = async(req,res) => {
 
 }
 
-const deleteFood = async(req,res) => {
 
-}
+const deleteFood = async (req, res) => {
+  try {
+    const { id: menuItemId } = req.params;
+
+    console.log(menuItemId);
+
+    // Check if menuItemId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(menuItemId)) {
+      return res.status(400).json({ status: "failure", msg: "Invalid menuItemId" });
+    }
+
+    const restaurant = await restaurantModel.findOne({ 'menu._id': menuItemId });
+
+    if (!restaurant) {
+      return res.status(400).json({ status: "failure", msg: "Restaurant not found" });
+    }
+
+    const menuItemIndex = restaurant.menu.findIndex((item) => item._id.toString() === menuItemId);
+
+    if (menuItemIndex === -1) {
+      return res.status(400).json({ status: "failure", msg: "Menu item not found" });
+    }
+
+    const foodId = restaurant.menu[menuItemIndex].foodID;
+    restaurant.menu.splice(menuItemIndex, 1);
+
+    const foodResponse = await FoodModal.findByIdAndDelete(foodId);
+
+    if (!foodResponse) {
+      return res.status(400).json({ status: "failure", msg: "Food item not found" });
+    }
+
+    await restaurant.save(); // Save the updated restaurant document
+
+    res.status(200).json({ status: "success", msg: "Item deleted successfully" });
+  } catch (error) {
+    console.error('Error deleting menu item and food:', error);
+    return res.status(500).json({ status: 'error', msg: 'Internal server error' });
+  }
+};
+
 
 module.exports = {
   createRestaurant,
