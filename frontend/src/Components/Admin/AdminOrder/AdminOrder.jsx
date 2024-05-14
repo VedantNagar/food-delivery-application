@@ -26,7 +26,6 @@ const AdminOrder = ({id}) => {
                     return(<>
                     <button key={index} className="text-white inline-flex items-center bg-fudo-red hover:bg-[#e64747] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center h-12 mr-5 my-auto">{status}</button>
                     </>)
-                    
                 })} 
             </div>
          {data?.length === 0 ? (
