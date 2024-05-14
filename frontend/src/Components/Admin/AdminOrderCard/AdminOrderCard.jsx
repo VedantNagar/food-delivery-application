@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { changeStatusUrl } from "../../../../urls/restaurantUrl";
 
 const AdminOrderCard = ({ data, id }) => {
-    const [status, setStatus] = useState(data?.orderStatus);
+    const [status, setStatus] = useState('Select Status');
     useEffect(() => {
         const changeStatus = async () => {
             const response = await axios.patch(`${changeStatusUrl}/${id}`, {
