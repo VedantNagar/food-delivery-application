@@ -3,13 +3,12 @@ import { useState } from "react";
 import { changeStatusUrl } from "../../../../urls/restaurantUrl";
 
 const AdminOrderCard = ({ data, id }) => {
-    const [status, setStatus] = useState(data?.orderStatus);
+    const [status, setStatus] = useState("Select Status");
 
-    const changeStatus = async (statusChange) => {
+    const changeStatus = async () => {
         const response = await axios.patch(`${changeStatusUrl}/${id}`, {
-            orderStatus: statusChange,
+            orderStatus: status,
         });
-        console.log(response);
     };
 
     return (
@@ -52,4 +51,3 @@ const AdminOrderCard = ({ data, id }) => {
     );
 };
 export default AdminOrderCard;
-
