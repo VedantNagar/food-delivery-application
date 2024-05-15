@@ -33,7 +33,7 @@ const AdminOrder = ({id}) => {
         }
     }
 
-    const statuses = ['Preparing', 'Pending', 'Cancelled', 'Delivered'];
+    const statuses = ['preparing', 'pending', 'cancelled', 'delivered'];
     return (
 
         <div className="h-5/6 overflow-y-scroll m-4 rounded-lg flex flex-col gap-3 p-6 shadow-lg">
@@ -60,3 +60,5 @@ const AdminOrder = ({id}) => {
     );
 };
 export default AdminOrder;
+
+
