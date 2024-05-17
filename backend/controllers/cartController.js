@@ -50,6 +50,7 @@ const getCart = async (req, res) => {
       },
     });
 
+      console.log(userCart)
     //checking if the cart exists
     if (!userCart) {
       return res.json({
@@ -59,7 +60,7 @@ const getCart = async (req, res) => {
     // console.log(userCart.items)
     let discount = 0;
     const promises = userCart.items.map(async (item) => {
-      const restID = item.food.restaurantID._id;
+      const restID = item.food.restaurantID;
       const rest = await restaurant.findById(restID);
       const disc = rest.discount;
 
@@ -69,6 +70,7 @@ const getCart = async (req, res) => {
       const value = disc * 0.01 * item.food.price * item.quantity;
       console.log("The discounted price is", value);
       return value;
+      console.log(item)
     });
 
     Promise.all(promises)
@@ -102,6 +104,9 @@ const addToCart = async (req, res) => {
     const userID = req.user.id;
     console.log(foodID)
     //checking userID
+    if(!foodID){
+      return res.json({error:"not a food id"})
+    }
     if (!userID) {
       return res.json({ error: "Provide userID" });
     }

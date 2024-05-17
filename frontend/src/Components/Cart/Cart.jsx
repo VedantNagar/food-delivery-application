@@ -61,13 +61,15 @@ const Cart = () => {
             items: cartItems[0]?.items,
             totalAmount: cartItems[0].total,
         });
-        console.log(response);
+        // console.log(response);
     };
 
-    if (!cartItems) {
-        return <h1>Cart is empty</h1>;
-    }
+    // if (cartItems[0]?.items.length == 0) {
+    //     return <h1>Cart is empty</h1>;
+    // }
     const userID = cartItems[0]?.userID;
+
+    console.log(cartItems[0]?.items)
 
     return (
         <>
@@ -205,7 +207,8 @@ const Cart = () => {
                                     </span>
                                 </div>
                                 <div className={classes.btn}>
-                                    <Button
+                                <Button
+                                        disabled={!!cartItems[0]?.items}
                                         title="Proceed To Payment"
                                         onClick={createOrder}
                                     />
