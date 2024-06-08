@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { changeStatusUrl } from "../../../../urls/restaurantUrl";
 
-const AdminOrderCard = ({ data, id }) => {
+const AdminOrderCard = ({data, id }) => {
     const [status, setStatus] = useState(data.orderStatus);
     useEffect(() => {
         const changeStatus = async () => {
