@@ -238,8 +238,8 @@ const changeOrderStatus = async (req, res) => {
   }
 
   //updating order status
-  order.orderStatus = orderStatus;
-  await order.save();
+  const responce = await Order.findByIdAndUpdate(orderId, { orderStatus }, { new: true })
+  console.log(responce)
 
   //displaying successful
   res.status(200).json({

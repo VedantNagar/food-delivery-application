@@ -1,15 +1,20 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { changeStatusUrl } from "../../../../urls/restaurantUrl";
 
-const AdminOrderCard = ({ data, id }) => {
-    const [status, setStatus] = useState("Select Status");
+const AdminOrderCard = ({data, id }) => {
+    const [status, setStatus] = useState(data.orderStatus);
+    useEffect(() => {
+        const changeStatus = async () => {
+            const response = await axios.patch(`${changeStatusUrl}/${id}`, {
+                orderStatus: status,
+            });
+            console.log(response.data);
+        };
+        changeStatus();
+    }, [status]);
 
-    const changeStatus = async () => {
-        const response = await axios.patch(`${changeStatusUrl}/${id}`, {
-            orderStatus: status,
-        });
-    };
+
 
     return (
         <div className="border border-slate-300 p-2 rounded-lg flex justify-between gap-4 shadow-md">
@@ -36,15 +41,16 @@ const AdminOrderCard = ({ data, id }) => {
                     id="category"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
                     onChange={(e) => {
-                        changeStatus(e.target.value);
+                        // changeStatus(e.target.value);
                         setStatus(e.target.value);
                     }}
                 >
                     <option defaultValue="">{status}</option>
-                    <option value="preparing">Preparing</option>
-                    <option value="pending">Pending</option>
-                    <option value="cancelled">Cancelled</option>
-                    <option value="delivered">Delivered</option>
+                    
+                    {status !== "preparing" && <option value="preparing">Preparing</option>}
+                    {status !== "pending" && <option value="pending">Pending</option>}
+                    {status !== "cancelled" && <option value="cancelled">Cancelled</option>}
+                    {status !== "delivered" && <option value="delivered">Delivered</option>}
                 </select>
             </div>
         </div>
