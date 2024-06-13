@@ -1,11 +1,11 @@
-const restaurantModel = require('../models/restaurant');
-const FoodModal = require('../models/Food');
-const Order = require('../models/Orders');
-const User = require('../models/user');
-const cloudinary = require('../utils/fileUpload/cloudinary')
+const restaurantModel = require("../models/restaurant");
+const FoodModal = require("../models/Food");
+const Order = require("../models/Orders");
+const User = require("../models/user");
+const cloudinary = require("../utils/fileUpload/cloudinary");
 const path = require("path");
-const cartModel = require('../models/cart')
-const mongoose = require('mongoose')
+const cartModel = require("../models/cart");
+const mongoose = require("mongoose");
 
 // const getRestaurant = async (req,res) => {
 //     const { id: restaurantID } = req.params;
@@ -22,12 +22,12 @@ const getRestaurant = async (req, res) => {
   try {
     const restaurant = await restaurantModel.findById(restaurantID);
     if (!restaurant) {
-      return res.status(404).json('Restaurant not found');
+      return res.status(404).json("Restaurant not found");
     }
     res.status(200).json({ restaurant });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -38,7 +38,7 @@ const getAllRestaurant = async (req, res) => {
     res.status(200).json({ restaurants });
   } catch (error) {
     // console.log(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -47,17 +47,17 @@ const getAllRestaurant = async (req, res) => {
 const deleteRestaurant = async (req, res) => {
   const { id: restaurantID } = req.params;
   try {
-    const rest = await restaurantModel.findById(restaurantID)
+    const rest = await restaurantModel.findById(restaurantID);
     if (!rest) {
-      return res.status(404).json('Restaurant not found');
+      return res.status(404).json("Restaurant not found");
     }
     const userId = req.user.id;
     const ownerId = rest.owner;
     // console.log(userId)
     // console.log(rest.owner)
 
-    if(ownerId != userId){
-      return res.status(400).json("restaurant owner does not match")
+    if (ownerId != userId) {
+      return res.status(400).json("restaurant owner does not match");
     }
 
     await FoodModal.deleteMany({ restaurantID });
@@ -65,21 +65,20 @@ const deleteRestaurant = async (req, res) => {
     await Order.deleteMany({ restaurantID });
 
     await cartModel.updateMany(
-      { 'items.food': { $in: rest.food } },
+      { "items.food": { $in: rest.food } },
       { $pull: { items: { food: { $in: rest.food } } } }
     );
-
 
     const deletedRestaurant = await restaurantModel.findOneAndDelete({
       _id: restaurantID,
     });
     if (!deletedRestaurant) {
-      return res.status(404).json('Restaurant not found');
+      return res.status(404).json("Restaurant not found");
     }
-    res.status(200).json({ message: 'Restaurant deleted successfully' });
+    res.status(200).json({ message: "Restaurant deleted successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -92,7 +91,7 @@ const editRestaurant = async (req, res) => {
     const existingRestaurant = await restaurantModel.findById(restaurantID);
 
     if (!existingRestaurant) {
-      return res.status(404).json('Restaurant not found');
+      return res.status(404).json("Restaurant not found");
     }
     //passing and checking the updated fields
     const updatedFields = {};
@@ -126,12 +125,12 @@ const editRestaurant = async (req, res) => {
     );
 
     if (!updatedRestaurant) {
-      return res.status(404).json('Restaurant not found');
+      return res.status(404).json("Restaurant not found");
     }
     res.status(200).json({ updatedRestaurant });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -140,52 +139,65 @@ const editRestaurant = async (req, res) => {
 const createRestaurant = async (req, res) => {
   try {
     const { name, about, address, phone, discount, cft } = req.body;
-    
+
     // Check if a file was uploaded
-    if(!name || !address || !about){
-      return res.status(400).json({error:"please provide complete imformation"})
+    if (!name || !address || !about) {
+      return res
+        .status(400)
+        .json({ error: "please provide complete imformation" });
     }
     if (!req.file) {
-      return res.status(400).json({ error: 'please upload image'});
+      return res.status(400).json({ error: "please upload image" });
     }
     // console.log(req.file)
-    const imageUrl = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`);
+    const imageUrl = await cloudinary.uploader.upload(
+      `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`
+    );
     // console.log(imageUrl)
     const owner = req.user.id;
-    const data = { owner, image: imageUrl.secure_url, name, about, address, phone, discount, cft };
+    const data = {
+      owner,
+      image: imageUrl.secure_url,
+      name,
+      about,
+      address,
+      phone,
+      discount,
+      cft,
+    };
     const restaurant = await restaurantModel.create(data);
     res.status(201).json(restaurant);
   } catch (error) {
     // console.error(error);
-    console.log(error)
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-
 
 // add food in menu and update in food model
 const addFood = async (req, res) => {
   const { id: restaurantID } = req.params;
   const items = req.body;
-  
+
   if (!req.file) {
-    return res.status(400).json({ error: 'please upload image'});
+    return res.status(400).json({ error: "please upload image" });
   }
   // console.log(req.file)
-  const imageUrl = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`);
+  const imageUrl = await cloudinary.uploader.upload(
+    `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`
+  );
 
   const menuItem = {};
   menuItem.name = items.name;
   menuItem.about = items.about;
-  menuItem.image = imageUrl.secure_url
+  menuItem.image = imageUrl.secure_url;
   menuItem.category = items.category;
   menuItem.price = items.price;
   const restaurant = await restaurantModel.findById(restaurantID);
-  if(!restaurant){
+  if (!restaurant) {
     return res.status(404).json({
-      msg:"incorrect restaurant"
-    })
+      msg: "incorrect restaurant",
+    });
   }
   const food = await FoodModal.create({ ...menuItem, restaurantID });
   menuItem.foodID = food._id;
@@ -207,22 +219,22 @@ const changeOrderStatus = async (req, res) => {
 
   //validating order status
   const possibleOrderStatus = [
-    'preparing',
-    'pending',
-    'delivered',
-    'cancelled',
+    "preparing",
+    "pending",
+    "delivered",
+    "cancelled",
   ];
 
   //checking possibleOrderStatus with orderStatus
   if (!possibleOrderStatus.includes(orderStatus)) {
-    return res.status(400).json({ error: 'Invalid order status' });
+    return res.status(400).json({ error: "Invalid order status" });
   }
   //find order by id
   const order = await Order.findById(orderId);
 
   //check if order exists
   if (!order) {
-    return res.status(404).json({ error: 'Order does not exist' });
+    return res.status(404).json({ error: "Order does not exist" });
   }
 
   //updating order status
@@ -237,26 +249,26 @@ const changeOrderStatus = async (req, res) => {
 
 //get all orders from restaurants
 const getorders = async (req, res) => {
-  const {restId} = req.query
-  console.log(restId)
+  const { restId } = req.query;
+  console.log(restId);
   const rest = await restaurantModel.findById(restId).populate({
-    path:'orderID',
+    path: "orderID",
     populate: {
       path: "user",
       model: "user",
       select: "first_name last_name contact address email",
     },
-  })
-  const orders = rest.orderID;
+  });
+  const orders = rest?.orderID;
 
-  return res.status(200).json(orders); 
+  return res.status(200).json(orders);
 };
 
 //search restaurant
 const searchRest = async (req, res) => {
   const { name } = req.query;
   const searchQuery = name;
-  const regexPattern = new RegExp(searchQuery.split(/\s+/).join('|'), 'i');
+  const regexPattern = new RegExp(searchQuery.split(/\s+/).join("|"), "i");
   let result = restaurantModel.find({ name: { $regex: regexPattern } });
   const food = await result;
   res.status(200).json(food);
@@ -272,14 +284,11 @@ const getAllUserRestaurant = async (req, res) => {
     res.json(AllRest);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
-const editFood = async(req,res) => {
-
-}
-
+const editFood = async (req, res) => {};
 
 const deleteFood = async (req, res) => {
   try {
@@ -289,19 +298,29 @@ const deleteFood = async (req, res) => {
 
     // Check if menuItemId is a valid ObjectId
     if (!mongoose.Types.ObjectId.isValid(menuItemId)) {
-      return res.status(400).json({ status: "failure", msg: "Invalid menuItemId" });
+      return res
+        .status(400)
+        .json({ status: "failure", msg: "Invalid menuItemId" });
     }
 
-    const restaurant = await restaurantModel.findOne({ 'menu._id': menuItemId });
+    const restaurant = await restaurantModel.findOne({
+      "menu._id": menuItemId,
+    });
 
     if (!restaurant) {
-      return res.status(400).json({ status: "failure", msg: "Restaurant not found" });
+      return res
+        .status(400)
+        .json({ status: "failure", msg: "Restaurant not found" });
     }
 
-    const menuItemIndex = restaurant.menu.findIndex((item) => item._id.toString() === menuItemId);
+    const menuItemIndex = restaurant.menu.findIndex(
+      (item) => item._id.toString() === menuItemId
+    );
 
     if (menuItemIndex === -1) {
-      return res.status(400).json({ status: "failure", msg: "Menu item not found" });
+      return res
+        .status(400)
+        .json({ status: "failure", msg: "Menu item not found" });
     }
 
     const foodId = restaurant.menu[menuItemIndex].foodID;
@@ -310,18 +329,23 @@ const deleteFood = async (req, res) => {
     const foodResponse = await FoodModal.findByIdAndDelete(foodId);
 
     if (!foodResponse) {
-      return res.status(400).json({ status: "failure", msg: "Food item not found" });
+      return res
+        .status(400)
+        .json({ status: "failure", msg: "Food item not found" });
     }
 
     await restaurant.save(); // Save the updated restaurant document
 
-    res.status(200).json({ status: "success", msg: "Item deleted successfully" });
+    res
+      .status(200)
+      .json({ status: "success", msg: "Item deleted successfully" });
   } catch (error) {
-    console.error('Error deleting menu item and food:', error);
-    return res.status(500).json({ status: 'error', msg: 'Internal server error' });
+    console.error("Error deleting menu item and food:", error);
+    return res
+      .status(500)
+      .json({ status: "error", msg: "Internal server error" });
   }
 };
-
 
 module.exports = {
   createRestaurant,
@@ -335,5 +359,5 @@ module.exports = {
   searchRest,
   getAllUserRestaurant,
   editFood,
-  deleteFood
+  deleteFood,
 };
