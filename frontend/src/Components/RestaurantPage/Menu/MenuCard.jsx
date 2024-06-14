@@ -54,7 +54,7 @@ const MenuCard = ({ item, onAddCart }) => {
             <div className={classes.info}>
                 <h4 className={classes.head}>
                     <span>{head}</span>
-                    {category === "veg" ? (
+                    {category === "" ? (
                         <img src={veg} alt="" />
                     ) : (
                         <img src={nonVeg} alt="" />
