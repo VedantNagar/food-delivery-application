@@ -1,6 +1,6 @@
 const url =
   import.meta.env.PROD === true
-    ? '/api/v1/cart'
+    ? '/api/v1/restaurant'
     : 'http://localhost:8000/api/v1/restaurant';
 
 
