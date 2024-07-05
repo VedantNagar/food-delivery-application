@@ -14,14 +14,14 @@ const Register = () => {
         last_name: "",
         address: "",
         contact: "",
-        role: "",
+        role: "customer",
         email: "",
         password: "",
     });
-    // console.log(data);
+    
     const registerUser = async (e) => {
         e.preventDefault();
-        console.log(data);
+        
         const {
             first_name,
             last_name,
@@ -47,18 +47,25 @@ const Register = () => {
                     duration: 6000,
                 });
             } else {
+                let role = data.role;
                 setData({
                     first_name: "",
                     last_name: "",
                     address: "",
                     contact: "",
-                    role: "",
+                    role: "customer",
                     email: "",
                     password: "",
                 });
                 toast.success("Login Successful. Welcome!");
                 setIsLogin(true);
-                navigate("/homepage");
+                console.log(role);  
+                if(role === "owner"){
+                    navigate("/admin");   
+                }
+                else{
+                    navigate("/homepage");
+                }
             }
         } catch (error) {
             console.log(error);
@@ -120,8 +127,8 @@ const Register = () => {
                     value={data.role}
                     onChange={(e) => setData({ ...data, role: e.target.value })}
                 >
-                    <option defaultValue>Customer</option>
-                    <option>Owner</option>
+                    <option defaultValue value="customer">Customer</option>
+                    <option value="owner">Owner</option>
                 </select>
             </div>
             <div className={classes.input}>

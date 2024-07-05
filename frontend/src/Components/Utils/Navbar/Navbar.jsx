@@ -76,7 +76,7 @@ const Navbar = ({ list }) => {
                         {list.map((item) => {
                             return (
                                 <li key={item.key}>
-                                    <NavLink to={`/${item.to || "#"}`}>
+                                    <NavLink className="flex gap-2" to={`/${item.to || "#"}`}>
                                         {item.title && (
                                             <p href="#">{item.title}</p>
                                         )}

@@ -6,6 +6,8 @@ import axios from "axios";
 import { addToCartUrl } from "../../../../urls/cartUrl";
 import { useContext } from "react";
 import { userContext } from "../../../userContext/context";
+// import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const MenuCard = ({ item, onAddCart }) => {
     const { user } = useContext(userContext);
@@ -38,7 +40,12 @@ const MenuCard = ({ item, onAddCart }) => {
                 },
             }
         );
-        onAddCart();
+        if (!result.error) {
+            toast.success("Item Added to the card", {
+                duration: 2000,
+            });
+          }
+        // onAddCart();
         console.log(result);
     };
 

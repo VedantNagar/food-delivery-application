@@ -33,7 +33,7 @@ const Root = () => {
     return (
         <div>
             <ScrollRestoration />
-            <div className="w-customVW h-full mx-auto overflow-hidden">
+            <div className="w-customVW h-full  mx-auto overflow-hidden">
                 <Navbar list={navItems} />
             </div>
             <Outlet />

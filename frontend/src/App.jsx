@@ -13,6 +13,7 @@ import Order from "./Components/Orders/Order.jsx";
 import AdminRoot from "./Components/Admin/AdminRoot.jsx";
 import AdminRestaurants from "./Components/Admin/AdminRestaurants/AdminRestaurants.jsx";
 import RestaurantOrders from "./Components/Admin/AdminRestaurantOrders/RestaurantOrders.jsx";
+import { ToastContainer } from "react-toastify";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -62,13 +63,28 @@ const router = createBrowserRouter([
 function App() {
     axios.defaults.withCredentials = true;
     return (
+        
         <div className="wrapper">
             <UtilityContextProvider>
                 <UserContextProvider>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss={false}
+                    draggable
+                    pauseOnHover
+                    toastClassName="bg-white text-gray-800 dark:bg-gray-800 dark:text-white"
+                />
                     <RouterProvider router={router} />
                 </UserContextProvider>
             </UtilityContextProvider>
         </div>
+        
+        
     );
 }
 

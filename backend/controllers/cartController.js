@@ -178,7 +178,7 @@ const addToCart = async (req, res) => {
     await userCart.save();
 
    
-    res.json(userCart);
+    res.json({userCart,msg:"Item added to cart"});
   } catch (error) {
     console.error(error);
     res.json({ error: "Internal server error" });
