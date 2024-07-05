@@ -68,6 +68,11 @@ const RestaurantPage = () => {
                 <h1 className="font-poppins text-3xl ml-4 mt-4">Menu</h1>
             </div>
             <div className={`${classes.wrapper} ${classes.scrollMenu}`}>
+                {fetchedData?.menu?.length === 0 && (
+                    <h1 className="font-poppins text-3xl ml-4 mt-4 text-center ">
+                        No items available <br /> <span className="text-[#EB5757]">Please check back later :)</span>
+                    </h1>
+                )}
                 {fetchedData?.menu?.length != 0 &&
                     fetchedData?.menu?.map((item) => (
                         <MenuCard

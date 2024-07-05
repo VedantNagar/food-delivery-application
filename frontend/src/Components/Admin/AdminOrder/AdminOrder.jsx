@@ -7,8 +7,6 @@ const AdminOrder = ({ id }) => {
   const [data, setData] = useState([]);
   const [filterValue, setFilterValue] = useState(null);
   const [filterData, setFilteredData] = useState([]);
-  // const [status, setStatus] = useState(null);
-  
   useEffect(() => {
     const getAllOrder = async () => {
       const response = await axios.get(getAllRestOrder, {
@@ -19,7 +17,6 @@ const AdminOrder = ({ id }) => {
       console.log(response.data);
       setData(response.data);
       setFilterValue(response.data[0].orderStatus)
-      // setStatus(response.data[0].orderStatus)
       setFilteredData(response.data);
     };
     getAllOrder();
@@ -64,7 +61,7 @@ const AdminOrder = ({ id }) => {
         <h1 className="text-3xl">No Orders</h1>
       ) : (
         filterData?.map((item) => {
-          return <AdminOrderCard   data={item} key={item._id} id={item._id} />;
+          return <AdminOrderCard data={item} key={item._id} id={item._id} />;
         })
       )}
     </div>
