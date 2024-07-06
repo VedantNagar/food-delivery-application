@@ -22,17 +22,7 @@ const Menu = () => {
                 <br /> Makes You Fall In Love
             </h1>
             <div className={classes.innerContainer}>
-                <div className={classes.left}>
-                    {btnItem.map((item) => {
-                        return (
-                            <MenuBtn
-                                img={item.img}
-                                title={item.title}
-                                key={item.title}
-                            />
-                        );
-                    })}
-                </div>
+                
                 <div className={classes.right}>
                     <Carousel />
                 </div>
